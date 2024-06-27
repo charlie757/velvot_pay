@@ -10,7 +10,7 @@ AppBar appBar({required String title, Function()? onTap}) {
     elevation: 0.0,
     scrolledUnderElevation: 0.0,
     backgroundColor: AppColor.whiteColor,
-    leading: InkWell(
+    leading: GestureDetector(
       onTap: onTap,
       child: Container(
         height: 24,

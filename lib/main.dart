@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:velvot_pay/provider/dashboard_provider.dart';
 import 'package:velvot_pay/provider/splash_provider.dart';
 import 'package:velvot_pay/screens/splash_screen.dart';
 import 'package:provider/provider.dart';
@@ -21,7 +22,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [ChangeNotifierProvider(create: (_) => SplashProvider())],
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => SplashProvider(),
+        ),
+        ChangeNotifierProvider(create: (_) => DashboardProvider())
+      ],
       child: MaterialApp(
           navigatorKey: navigatorKey,
           title: 'Velvot Pay',

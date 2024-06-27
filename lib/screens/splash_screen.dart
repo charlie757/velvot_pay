@@ -37,7 +37,10 @@ class _SplashScreenState extends State<SplashScreen> {
             const Spacer(),
             Stack(
               children: [
-                SvgPicture.asset(Images.splashBottomLogo),
+                SvgPicture.asset(
+                  Images.splashBottomLogo,
+                  fit: BoxFit.cover,
+                ),
                 Positioned(
                     bottom: 0 + 40,
                     right: MediaQuery.of(context).size.width / 2.5,

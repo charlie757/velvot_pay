@@ -142,6 +142,7 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
           } else if (val.length < 6) {
             return 'Enter otp shoulb be valid';
           }
+          return null;
         },
       ),
     );

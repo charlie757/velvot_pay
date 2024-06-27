@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:velvot_pay/helper/images.dart';
 
 import '../utils/constants.dart';
 import 'app_color.dart';
 
-class CustomTextField extends StatefulWidget {
+class CustomSearchBar extends StatelessWidget {
   final String hintText;
   final TextEditingController? controller;
   final TextInputType textInputType;
@@ -18,7 +20,8 @@ class CustomTextField extends StatefulWidget {
   Widget? suffixWidget;
   FocusNode? focusNode;
   Color? fillColor;
-  CustomTextField(
+  Function()? onTap;
+  CustomSearchBar(
       {required this.hintText,
       this.controller,
       this.textInputType = TextInputType.text,
@@ -31,44 +34,41 @@ class CustomTextField extends StatefulWidget {
       this.textCapitalization = TextCapitalization.none,
       this.textColor = const Color(0xff0E0E0E),
       this.focusNode,
-      this.fillColor});
+      this.fillColor,
+      this.onTap});
 
-  @override
-  State<CustomTextField> createState() => _CustomTextFieldState();
-}
-
-class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       // focusNode: widget.focusNode,
-      readOnly: widget.isReadOnly,
-      keyboardType: widget.textInputType,
-      textInputAction: widget.textInputAction,
-      textCapitalization: widget.textCapitalization,
-      inputFormatters: widget.inputFormatters,
-      controller: widget.controller,
+      onTap: onTap,
+      readOnly: isReadOnly,
+      textInputAction: TextInputAction.done,
+      controller: controller,
       autofocus: false,
       style: TextStyle(
           fontWeight: FontWeight.w400,
           fontSize: 12,
-          color: widget.textColor,
+          color: textColor,
           fontFamily: Constants.poppinsRegular),
       cursorColor: AppColor.blackColor,
       decoration: InputDecoration(
-        fillColor: widget.fillColor ?? AppColor.lightAppColor,
-        suffixIcon: widget.suffixWidget ??
-            Container(
-              height: 0,
-              width: 0,
-            ),
+        fillColor: fillColor ?? AppColor.lightAppColor,
+        prefixIcon: Container(
+          height: 20,
+          width: 20,
+          alignment: Alignment.center,
+          child: SvgPicture.asset(
+            Images.searchIcon,
+          ),
+        ),
         // isDense: true,
         filled: true,
         border: OutlineInputBorder(
-            borderSide: BorderSide(color: AppColor.lightAppColor, width: 1),
+            borderSide: BorderSide(color: AppColor.hintTextColor, width: 1),
             borderRadius: BorderRadius.circular(5)),
         enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: AppColor.lightAppColor, width: 1),
+            borderSide: BorderSide(color: AppColor.hintTextColor, width: 1),
             borderRadius: BorderRadius.circular(5)),
         focusedErrorBorder: OutlineInputBorder(
             borderSide: BorderSide(color: AppColor.redColor, width: 1),
@@ -77,9 +77,9 @@ class _CustomTextFieldState extends State<CustomTextField> {
             borderSide: BorderSide(color: AppColor.redColor, width: 1),
             borderRadius: BorderRadius.circular(5)),
         focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: AppColor.lightAppColor, width: 1),
+            borderSide: BorderSide(color: AppColor.hintTextColor, width: 1),
             borderRadius: BorderRadius.circular(5)),
-        hintText: widget.hintText,
+        hintText: hintText,
         errorStyle: TextStyle(
           color: AppColor.redColor,
         ),
@@ -89,8 +89,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
             color: AppColor.hintTextColor,
             fontFamily: Constants.poppinsRegular),
       ),
-      validator: widget.validator,
-      onChanged: widget.onChanged,
+      onChanged: onChanged,
     );
+    ;
   }
 }
