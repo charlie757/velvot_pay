@@ -1,4 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:velvot_pay/apiconfig/api_service.dart';
+import 'package:velvot_pay/apiconfig/api_url.dart';
 import 'package:velvot_pay/screens/auth/profile_screen.dart';
 
 import '../screens/dashboard/history/history_screen.dart';
@@ -7,9 +11,9 @@ import '../screens/dashboard/home/home_screen.dart';
 class DashboardProvider extends ChangeNotifier {
   int currentIndex = 1;
   List screenList = [
-    HistoryScreen(),
-    HomeScreen(),
-    ProfileScreen(
+    const HistoryScreen(),
+    const HomeScreen(),
+    const ProfileScreen(
       route: '',
     )
   ];

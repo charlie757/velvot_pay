@@ -5,6 +5,7 @@ import 'package:velvot_pay/helper/getText.dart';
 import 'package:velvot_pay/helper/images.dart';
 import 'package:velvot_pay/helper/screen_size.dart';
 import 'package:velvot_pay/provider/dashboard_provider.dart';
+import 'package:velvot_pay/provider/profile_provider.dart';
 import 'package:velvot_pay/utils/constants.dart';
 import 'package:provider/provider.dart';
 
@@ -17,6 +18,20 @@ class DashboardScreen extends StatefulWidget {
 
 class _DashboardScreenState extends State<DashboardScreen> {
   @override
+  void initState() {
+    callIniFunction();
+    super.initState();
+  }
+
+  callIniFunction() {
+    final profileProvider =
+        Provider.of<ProfileProvider>(context, listen: false);
+    Future.delayed(Duration.zero, () {
+      profileProvider.getProfileApiFunction();
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Consumer<DashboardProvider>(builder: (context, myProvider, child) {
       return Scaffold(
@@ -24,18 +39,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
         body: Stack(
           children: [
             myProvider.screenList[myProvider.currentIndex],
-            myProvider.currentIndex == 1
-                ? Container(
-                    height: 0,
-                  )
-                : Align(
-                    alignment: Alignment.bottomCenter,
-                    child: SvgPicture.asset(
-                      Images.bottomImage,
-                      fit: BoxFit.cover,
-                      // height: 250,
-                      // width: double.infinity,
-                    )),
             Align(
               alignment: Alignment.bottomCenter,
               child: Container(

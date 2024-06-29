@@ -40,7 +40,7 @@ class ApiService {
 
           request.body = body;
           request.headers['Content-Type'] = 'application/json';
-          request.headers['Authorization'] = "Bearer ${SessionManager.token}";
+          request.headers['x-access-token'] = SessionManager.token;
           final client = http.Client();
           final streamedResponse = await client.send(request);
           final response = await http.Response.fromStream(streamedResponse);

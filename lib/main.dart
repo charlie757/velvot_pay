@@ -5,9 +5,7 @@ import 'package:velvot_pay/provider/dashboard_provider.dart';
 import 'package:velvot_pay/provider/login_provider.dart';
 import 'package:velvot_pay/provider/profile_provider.dart';
 import 'package:velvot_pay/provider/splash_provider.dart';
-import 'package:velvot_pay/screens/dashboard/myprofile/contact_us_screen.dart';
-import 'package:velvot_pay/screens/dashboard/myprofile/faq_screen.dart';
-import 'package:velvot_pay/screens/dashboard/myprofile/privacy_policy_screen.dart';
+import 'package:velvot_pay/provider/verify_otp_provider.dart';
 import 'package:velvot_pay/screens/splash_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:velvot_pay/utils/utils.dart';
@@ -34,6 +32,7 @@ class MyApp extends StatelessWidget {
           create: (_) => SplashProvider(),
         ),
         ChangeNotifierProvider(create: (_) => LoginProvider()),
+        ChangeNotifierProvider(create: (_) => VerifyOtpProvider()),
         ChangeNotifierProvider(create: (_) => ProfileProvider()),
         ChangeNotifierProvider(create: (_) => DashboardProvider()),
       ],

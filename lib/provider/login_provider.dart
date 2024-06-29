@@ -1,11 +1,11 @@
 import 'dart:convert';
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:velvot_pay/apiconfig/api_service.dart';
 import 'package:velvot_pay/apiconfig/api_url.dart';
 import 'package:velvot_pay/approutes/app_routes.dart';
 import 'package:velvot_pay/screens/auth/profile_screen.dart';
+import 'package:velvot_pay/screens/auth/veriy_otp_screen.dart';
+import 'package:velvot_pay/utils/utils.dart';
 
 class LoginProvider extends ChangeNotifier {
   final formKey = GlobalKey<FormState>();
@@ -32,6 +32,11 @@ class LoginProvider extends ChangeNotifier {
         method: checkApiMethod(httpMethod.post));
     upateLoading(false);
     if (response != null) {
+      Utils.showToast(response['data']['otp'].toString());
+      AppRoutes.pushNavigation(VerifyOtpScreen(
+        route: 'login',
+        number: phoneController.text,
+      ));
     } else {
       AppRoutes.pushNavigation(ProfileScreen(
         route: 'initial',

@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:velvot_pay/approutes/app_routes.dart';
 import 'package:velvot_pay/helper/app_color.dart';
 import 'package:velvot_pay/helper/custom_textfield.dart';
 import 'package:velvot_pay/helper/getText.dart';
-import 'package:velvot_pay/helper/images.dart';
 import 'package:velvot_pay/helper/screen_size.dart';
 import 'package:velvot_pay/screens/dashboard/home/pay_screen.dart';
 import 'package:velvot_pay/utils/constants.dart';

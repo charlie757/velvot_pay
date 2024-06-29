@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:velvot_pay/approutes/app_routes.dart';
 import 'package:velvot_pay/helper/app_color.dart';
 import 'package:velvot_pay/helper/session_manager.dart';
@@ -12,6 +13,16 @@ class Utils {
 
   static hideTextField() {
     FocusManager.instance.primaryFocus?.unfocus();
+  }
+
+  static showToast(String title) {
+    Fluttertoast.showToast(
+      msg: title,
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.CENTER,
+      backgroundColor: AppColor.blackColor,
+      textColor: Colors.white,
+    );
   }
 
   static successSnackBar(

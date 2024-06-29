@@ -16,9 +16,13 @@ class SessionManager {
     sharedPrefs.setString(Constants.TOKEN, value);
   }
 
-  static String get fcmToken =>
-      sharedPrefs.getString(Constants.FCM_TOKEN) ?? "";
+  static String get userId => sharedPrefs.getString(Constants.FCM_TOKEN) ?? "";
   static set setFcmToken(String value) {
     sharedPrefs.setString(Constants.FCM_TOKEN, value);
+  }
+
+  static String get fcmToken => sharedPrefs.getString(Constants.USER_ID) ?? "";
+  static set setUserId(String value) {
+    sharedPrefs.setString(Constants.USER_ID, value);
   }
 }

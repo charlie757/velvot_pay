@@ -1,4 +1,18 @@
+import 'dart:convert';
+import 'dart:developer';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:velvot_pay/apiconfig/api_service.dart';
+import 'package:velvot_pay/apiconfig/api_url.dart';
+import 'package:velvot_pay/approutes/app_routes.dart';
+import 'package:velvot_pay/helper/session_manager.dart';
+import 'package:http/http.dart' as http;
+import 'package:velvot_pay/model/profile_model.dart';
+import 'package:velvot_pay/screens/auth/veriy_otp_screen.dart';
+import 'package:velvot_pay/utils/show_loader.dart';
+import 'package:velvot_pay/utils/utils.dart';
 
 class ProfileProvider extends ChangeNotifier {
   final numberController = TextEditingController();
@@ -6,10 +20,100 @@ class ProfileProvider extends ChangeNotifier {
   final nameController = TextEditingController();
   final addressController = TextEditingController();
   final formKey = GlobalKey<FormState>();
+  bool isLoading = false;
+  bool isPhotoError = false;
+  File? file;
+  ProfileModel? model;
 
-  checkValidation() {
-    if (formKey.currentState!.validate()) {}
+  resetValues() {
+    file = null;
+    isLoading = false;
+    isPhotoError = false;
+    nameController.text = '';
+    emailController.text = '';
+    addressController.text = '';
   }
 
-  callApiFunction() {}
+  updateIndex(bool value) {
+    isLoading = value;
+    notifyListeners();
+  }
+
+  updatePhotoError(bool value) {
+    isPhotoError = value;
+    notifyListeners();
+  }
+
+  checkValidation() {
+    if (formKey.currentState!.validate() && file != null) {
+      updatePhotoError(false);
+      callApiFunction();
+    }
+    if (file == null) {
+      updatePhotoError(true);
+    } else {
+      updatePhotoError(false);
+    }
+  }
+
+  void imagePicker(ImageSource source) async {
+    final ImagePicker picker = ImagePicker();
+    final XFile? img = await picker.pickImage(
+      source: source,
+    );
+    if (img == null) return;
+
+    file = File(img.path);
+    notifyListeners();
+  }
+
+  callApiFunction() async {
+    updateIndex(true);
+    Map<String, String> headers = {"Authorization": SessionManager.token};
+
+    var request = http.MultipartRequest('POST', Uri.parse(ApiUrl.registerUrl));
+    request.headers.addAll(headers);
+    request.fields['name'] = nameController.text;
+    request.fields['mobile_number'] = numberController.text;
+    request.fields['email'] = emailController.text;
+    request.fields['address'] = addressController.text;
+    if (file != null) {
+      final file = await http.MultipartFile.fromPath(
+        'image', this.file!.path,
+        // contentType: mime.MediaType("image", "jpg")
+      );
+      request.files.add(file);
+    }
+
+    var res = await request.send();
+    var vb = await http.Response.fromStream(res);
+    updateIndex(false);
+    log(vb.body);
+    if (vb.statusCode == 200) {
+      var dataAll = json.decode(vb.body);
+      Utils.showToast(dataAll['data']['otp'].toString());
+      AppRoutes.pushReplacementNavigation(VerifyOtpScreen(
+        number: numberController.text,
+        route: 'register',
+      ));
+    } else {
+      var dataAll = json.decode(vb.body);
+      Utils.errorSnackBar(dataAll['message'], navigatorKey.currentContext!);
+    }
+  }
+
+  getProfileApiFunction() async {
+    showLoader(navigatorKey.currentContext!);
+    var body = json.encode({});
+    final response = await ApiService.apiMethod(
+        url: ApiUrl.getProfileUrl,
+        body: body,
+        method: checkApiMethod(httpMethod.get));
+    Navigator.pop(navigatorKey.currentContext!);
+    if (response != null) {
+      model = ProfileModel.fromJson(response);
+    } else {
+      model = null;
+    }
+  }
 }

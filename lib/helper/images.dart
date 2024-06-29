@@ -26,4 +26,5 @@ class Images {
   static String arrowUpIcon = 'assets/svg/arrow_up_icon.svg';
   static String transferIcon = 'assets/svg/transfer_icon.svg';
   static String creditIcon = 'assets/icons/credit_icon.png';
+  static String menuIcon = 'assets/icons/menu.png';
 }

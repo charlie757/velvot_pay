@@ -1,7 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
-import 'package:velvot_pay/approutes/app_routes.dart';
 import 'package:velvot_pay/helper/app_color.dart';
 import 'package:velvot_pay/helper/custom_btn.dart';
 import 'package:velvot_pay/helper/custom_textfield.dart';
@@ -9,10 +11,8 @@ import 'package:velvot_pay/helper/getText.dart';
 import 'package:velvot_pay/helper/images.dart';
 import 'package:velvot_pay/helper/screen_size.dart';
 import 'package:velvot_pay/provider/profile_provider.dart';
-import 'package:velvot_pay/screens/dashboard/dashboard_screen.dart';
 import 'package:velvot_pay/utils/utils.dart';
 import 'package:velvot_pay/widget/appBar.dart';
-import 'package:velvot_pay/widget/bottom_image_button_widget.dart';
 
 import '../../utils/constants.dart';
 
@@ -35,7 +35,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
   callInitFunction() {
     final profileProvider =
         Provider.of<ProfileProvider>(context, listen: false);
-    profileProvider.numberController.text = widget.number;
+    if (widget.route == 'inital') {
+      profileProvider.resetValues();
+      profileProvider.numberController.text = widget.number;
+    } else {
+      Future.delayed(Duration.zero, () {
+        profileProvider.getProfileApiFunction();
+      });
+    }
   }
 
   @override
@@ -58,7 +65,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               children: [
                 Align(
                   alignment: Alignment.center,
-                  child: profileWidget(),
+                  child: profileWidget(myProvider),
                 ),
                 ScreenSize.height(30),
                 getText(
@@ -69,6 +76,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     fontWeight: FontWeight.w500),
                 ScreenSize.height(10),
                 CustomTextField(
+                  isReadOnly: myProvider.isLoading,
                   hintText: 'Full Name',
                   textInputAction: TextInputAction.next,
                   controller: myProvider.nameController,
@@ -87,6 +95,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     fontWeight: FontWeight.w500),
                 ScreenSize.height(10),
                 CustomTextField(
+                  isReadOnly: myProvider.isLoading,
                   hintText: 'Email Address',
                   textInputAction: TextInputAction.next,
                   controller: myProvider.emailController,
@@ -135,6 +144,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 addressTextField(myProvider),
                 ScreenSize.height(20),
                 CustomBtn(
+                    isLoading: myProvider.isLoading,
                     title: widget.route == 'initial' ? "Continue" : 'Save',
                     onTap: () {
                       myProvider.checkValidation();
@@ -147,35 +157,62 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  profileWidget() {
-    return Stack(
+  profileWidget(ProfileProvider provider) {
+    return Column(
       children: [
-        Container(
-          height: 96,
-          width: 96,
-          decoration: BoxDecoration(
-              border: Border.all(color: AppColor.darkBlackColor, width: 3),
-              borderRadius: BorderRadius.circular(50)),
-          child: Image.asset('assets/icons/Mask.png'),
-        ),
-        Positioned(
-          bottom: 0,
-          right: 0,
-          child: Container(
-            height: 30,
-            width: 30,
-            decoration: BoxDecoration(
-                color: AppColor.whiteColor,
-                borderRadius: BorderRadius.circular(15),
-                border: Border.all(color: AppColor.darkBlackColor, width: 2)),
-            alignment: Alignment.center,
-            child: Image.asset(
-              Images.cameraIcon,
-              height: 11,
-              width: 11,
+        Stack(
+          children: [
+            Container(
+              height: 96,
+              width: 96,
+              decoration: BoxDecoration(
+                  border: Border.all(color: AppColor.darkBlackColor, width: 3),
+                  borderRadius: BorderRadius.circular(50)),
+              child: provider.file != null
+                  ? ClipRRect(
+                      borderRadius: BorderRadius.circular(50),
+                      child: Image.file(
+                        File(provider.file!.path),
+                        width: double.infinity,
+                        height: double.infinity,
+                      ))
+                  : Image.asset('assets/icons/Mask.png'),
             ),
-          ),
-        )
+            Positioned(
+              bottom: 0,
+              right: 0,
+              child: GestureDetector(
+                onTap: () {
+                  imagePickerBottomSheet(provider);
+                },
+                child: Container(
+                  height: 30,
+                  width: 30,
+                  decoration: BoxDecoration(
+                      color: AppColor.whiteColor,
+                      borderRadius: BorderRadius.circular(15),
+                      border:
+                          Border.all(color: AppColor.darkBlackColor, width: 2)),
+                  alignment: Alignment.center,
+                  child: Image.asset(
+                    Images.cameraIcon,
+                    height: 11,
+                    width: 11,
+                  ),
+                ),
+              ),
+            )
+          ],
+        ),
+        ScreenSize.height(6),
+        provider.isPhotoError
+            ? getText(
+                title: 'Select photo',
+                size: 13,
+                fontFamily: Constants.poppinsRegular,
+                color: AppColor.redColor,
+                fontWeight: FontWeight.w400)
+            : Container()
       ],
     );
   }
@@ -185,10 +222,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
       autofocus: false,
       maxLines: 4,
       controller: provider.addressController,
+      textInputAction: TextInputAction.done,
+      readOnly: provider.isLoading,
       style: TextStyle(
           fontWeight: FontWeight.w400,
           fontSize: 12,
-          color: AppColor.whiteColor,
+          color: Color(0xff0E0E0E),
           fontFamily: Constants.poppinsRegular),
       cursorColor: AppColor.blackColor,
       decoration: InputDecoration(
@@ -224,6 +263,82 @@ class _ProfileScreenState extends State<ProfileScreen> {
           return "Enter your address";
         }
       },
+    );
+  }
+
+  imagePickerBottomSheet(ProfileProvider profileProvider) {
+    showModalBottomSheet(
+        context: context,
+        builder: (context) {
+          return Container(
+            padding:
+                const EdgeInsets.only(top: 20, left: 15, right: 15, bottom: 30),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    getText(
+                        title: 'Profile Photo',
+                        size: 17,
+                        fontFamily: Constants.poppinsMedium,
+                        color: AppColor.blackColor,
+                        fontWeight: FontWeight.w500),
+                    GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: Icon(Icons.close))
+                  ],
+                ),
+                ScreenSize.height(25),
+                Row(
+                  children: [
+                    imagePickType(Icons.camera_alt_outlined, "Camera", () {
+                      Navigator.pop(context);
+                      profileProvider.imagePicker(ImageSource.camera);
+                    }),
+                    ScreenSize.width(30),
+                    imagePickType(Icons.image_outlined, "Gallery", () {
+                      Navigator.pop(context);
+                      profileProvider.imagePicker(ImageSource.gallery);
+                    }),
+                  ],
+                )
+              ],
+            ),
+          );
+        });
+  }
+
+  imagePickType(icon, String title, Function() onTap) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Column(
+        // crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            height: 50,
+            width: 50,
+            decoration: BoxDecoration(
+              color: AppColor.hintTextColor,
+              shape: BoxShape.circle,
+            ),
+            child: Icon(
+              icon,
+              color: AppColor.lightAppColor,
+            ),
+          ),
+          ScreenSize.height(5),
+          getText(
+              title: title,
+              size: 14,
+              fontFamily: Constants.poppinsRegular,
+              color: AppColor.blackColor,
+              fontWeight: FontWeight.w400)
+        ],
+      ),
     );
   }
 }
