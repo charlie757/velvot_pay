@@ -5,7 +5,7 @@ import 'package:velvot_pay/helper/app_color.dart';
 import 'package:velvot_pay/helper/getText.dart';
 import 'package:velvot_pay/helper/images.dart';
 import 'package:velvot_pay/helper/screen_size.dart';
-import 'package:velvot_pay/screens/operator_screen.dart';
+import 'package:velvot_pay/screens/dashboard/home/operator_screen.dart';
 import 'package:velvot_pay/utils/constants.dart';
 import 'package:velvot_pay/widget/slider_widget.dart';
 

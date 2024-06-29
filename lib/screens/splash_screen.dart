@@ -31,8 +31,12 @@ class _SplashScreenState extends State<SplashScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             const Spacer(),
-            SvgPicture.asset(
-              Images.splashLogo,
+            SizedBox(
+              height: 282,
+              width: 262,
+              child: Image.asset(
+                Images.splashLogo,
+              ),
             ),
             const Spacer(),
             Stack(

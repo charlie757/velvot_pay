@@ -35,8 +35,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Align(
-                        alignment: Alignment.center,
-                        child: SvgPicture.asset(Images.appVerticleLogo)),
+                      alignment: Alignment.center,
+                      child: Container(
+                          width: 185,
+                          alignment: Alignment.center,
+                          child: Image.asset(Images.appHorizontalLogo)),
+                    ),
                     ScreenSize.height(61),
                     getText(
                         title: 'Enter Your Mobile Number',

@@ -15,4 +15,5 @@ class AppColor {
   static Color tvSubcriptionColor = Color(0xffFFE4FC);
   static Color insuranceColor = Color(0xffBEFFE0);
   static Color e1Color = Color(0xffE1E1E1);
+  static Color eeeColor = Color(0xffEEEEEE);
 }

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:velvot_pay/approutes/app_routes.dart';
 import 'package:velvot_pay/helper/app_color.dart';
 import 'package:velvot_pay/helper/custom_search_bar.dart';
 import 'package:velvot_pay/helper/getText.dart';
 import 'package:velvot_pay/helper/screen_size.dart';
+import 'package:velvot_pay/screens/dashboard/home/search_number_screen.dart';
 import 'package:velvot_pay/util/constaints.dart';
 import 'package:velvot_pay/widget/appBar.dart';
 import 'package:velvot_pay/widget/custom_divider.dart';
@@ -98,59 +100,68 @@ class _DataSubscriptionScreenState extends State<DataSubscriptionScreen> {
         padding:
             const EdgeInsets.only(left: 30, right: 20, top: 20, bottom: 30),
         itemBuilder: (context, index) {
-          return Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(right: 7),
-                child: Row(
-                  children: [
-                    Container(
-                      height: 47,
-                      width: 47,
-                      decoration: BoxDecoration(
-                          color: Color(
-                              int.parse(numberList[index]['color'].toString())),
-                          border: Border.all(color: AppColor.e1Color),
-                          borderRadius: BorderRadius.circular(25)),
-                      alignment: Alignment.center,
-                      child: getText(
-                          title: numberList[index]['sn'],
-                          size: 18,
-                          fontFamily: Constaints.poppinsMedium,
-                          color: AppColor.whiteColor,
-                          fontWeight: FontWeight.w600),
-                    ),
-                    ScreenSize.width(14),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            numberList[index]['name'],
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                                fontSize: 14,
-                                fontFamily: Constaints.poppinsMedium,
-                                color: AppColor.hintTextColor,
-                                fontWeight: FontWeight.w500),
-                          ),
-                          ScreenSize.height(5),
-                          getText(
-                              title: numberList[index]['number'],
-                              size: 14,
+          return GestureDetector(
+            onTap: () {
+              print('object');
+              AppRoutes.pushNavigation(SearchNumberScreen());
+            },
+            child: Container(
+              color: AppColor.whiteColor,
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(right: 7),
+                    child: Row(
+                      children: [
+                        Container(
+                          height: 47,
+                          width: 47,
+                          decoration: BoxDecoration(
+                              color: Color(int.parse(
+                                  numberList[index]['color'].toString())),
+                              border: Border.all(color: AppColor.e1Color),
+                              borderRadius: BorderRadius.circular(25)),
+                          alignment: Alignment.center,
+                          child: getText(
+                              title: numberList[index]['sn'],
+                              size: 18,
                               fontFamily: Constaints.poppinsMedium,
-                              color: AppColor.darkBlackColor,
-                              fontWeight: FontWeight.w500)
-                        ],
-                      ),
+                              color: AppColor.whiteColor,
+                              fontWeight: FontWeight.w600),
+                        ),
+                        ScreenSize.width(14),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                numberList[index]['name'],
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                    fontSize: 14,
+                                    fontFamily: Constaints.poppinsMedium,
+                                    color: AppColor.hintTextColor,
+                                    fontWeight: FontWeight.w500),
+                              ),
+                              ScreenSize.height(5),
+                              getText(
+                                  title: numberList[index]['number'],
+                                  size: 14,
+                                  fontFamily: Constaints.poppinsMedium,
+                                  color: AppColor.darkBlackColor,
+                                  fontWeight: FontWeight.w500)
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                  ScreenSize.height(12),
+                  customDivider(60)
+                ],
               ),
-              ScreenSize.height(12),
-              customDivider(60)
-            ],
+            ),
           );
         });
   }

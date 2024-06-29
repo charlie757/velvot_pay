@@ -32,7 +32,13 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SvgPicture.asset(Images.appVerticleLogo),
+                Align(
+                  alignment: Alignment.center,
+                  child: Container(
+                      width: 185,
+                      alignment: Alignment.center,
+                      child: Image.asset(Images.appHorizontalLogo)),
+                ),
                 ScreenSize.height(60),
                 Text.rich(TextSpan(
                     text: 'Enter the 6 digit',

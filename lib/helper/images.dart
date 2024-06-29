@@ -1,7 +1,8 @@
 class Images {
-  static String splashLogo = 'assets/svg/splash_logo.svg';
+  static String appIcon = 'assets/svg/app_icon.svg';
+  static String splashLogo = 'assets/icons/splash_logo.png';
   static String splashBottomLogo = 'assets/svg/splash_bottom.svg';
-  static String appVerticleLogo = 'assets/svg/logo_verticle.svg';
+  static String appHorizontalLogo = 'assets/icons/horizontal_logo.png';
   static String bottomImage = 'assets/svg/bottom_image.svg';
   static String arrowBackImage = 'assets/svg/back.svg';
   static String cameraIcon = 'assets/icons/camera.png';
@@ -19,4 +20,9 @@ class Images {
   static String airtelIcon = 'assets/icons/airtel_icon.png';
   static String searchIcon = 'assets/svg/search_icon.svg';
   static String keyboardArrowRightIcon = 'assets/svg/keyboard_arrow_right.svg';
+  static String planArrowIcon = 'assets/svg/plan_arrow_icon.svg';
+  static String arrowDownIcon = 'assets/svg/arrow-down.svg';
+  static String arrowRightIcon = 'assets/svg/arrow_right_icon.svg';
+  static String arrowUpIcon = 'assets/svg/arrow_up_icon.svg';
+  static String transferIcon = 'assets/svg/transfer_icon.svg';
 }

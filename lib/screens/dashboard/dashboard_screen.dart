@@ -22,7 +22,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
       return Scaffold(
         body: myProvider.screenList[myProvider.currentIndex],
         bottomNavigationBar: Container(
-          height: myProvider.currentIndex == 1 ? 0 : 200,
+          height: 200,
+          //  myProvider.currentIndex == 1 ? 0 : 200,
           alignment: Alignment.bottomCenter,
           child: Stack(
             children: [

@@ -6,7 +6,7 @@ import 'package:velvot_pay/helper/custom_search_bar.dart';
 import 'package:velvot_pay/helper/getText.dart';
 import 'package:velvot_pay/helper/images.dart';
 import 'package:velvot_pay/helper/screen_size.dart';
-import 'package:velvot_pay/screens/dashboard/data_subscription_screen.dart';
+import 'package:velvot_pay/screens/dashboard/home/data_subscription_screen.dart';
 import 'package:velvot_pay/util/constaints.dart';
 import 'package:velvot_pay/widget/appBar.dart';
 import 'package:velvot_pay/widget/slider_widget.dart';

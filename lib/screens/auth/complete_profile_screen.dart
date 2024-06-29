@@ -25,13 +25,13 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: appBar(title: 'Complete Profile'),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        body: Stack(
           children: [
-            Expanded(
-                child: SingleChildScrollView(
-              padding: const EdgeInsets.only(left: 20, right: 20, top: 30),
+            SingleChildScrollView(
+              padding: const EdgeInsets.only(
+                  left: 20, right: 20, top: 30, bottom: 230),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -47,7 +47,10 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                       color: AppColor.darkBlackColor,
                       fontWeight: FontWeight.w500),
                   ScreenSize.height(10),
-                  CustomTextField(hintText: 'Full Name'),
+                  CustomTextField(
+                    hintText: 'Full Name',
+                    textInputAction: TextInputAction.next,
+                  ),
                   ScreenSize.height(30),
                   getText(
                       title: 'Email Address',
@@ -58,6 +61,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                   ScreenSize.height(10),
                   CustomTextField(
                     hintText: 'Email Address',
+                    textInputAction: TextInputAction.next,
                     suffixWidget: Container(
                       height: 20,
                       width: 20,
@@ -77,8 +81,10 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                   ScreenSize.height(10),
                   CustomTextField(
                     hintText: 'Mobile Number',
+                    isReadOnly: true,
                     fillColor: AppColor.hintTextColor,
                     controller: numberController,
+                    textInputAction: TextInputAction.next,
                     textColor: AppColor.whiteColor,
                   ),
                   ScreenSize.height(30),
@@ -92,12 +98,15 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                   addressTextField(),
                 ],
               ),
-            )),
-            bottomImageButtonWidget(
-                onTap: () {
-                  AppRoutes.pushNavigation(DashboardScreen());
-                },
-                btnText: 'Continue')
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: bottomImageButtonWidget(
+                  onTap: () {
+                    AppRoutes.pushNavigation(const DashboardScreen());
+                  },
+                  btnText: 'Continue'),
+            )
           ],
         ));
   }
@@ -173,9 +182,6 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
             color: AppColor.hintTextColor,
             fontFamily: Constants.poppinsRegular),
       ),
-      // validator: (val){
-
-      // },
     );
   }
 }

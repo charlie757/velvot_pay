@@ -5,8 +5,9 @@ import 'package:velvot_pay/helper/images.dart';
 
 Widget bottomImageButtonWidget(
     {required Function() onTap, required String btnText}) {
-  return SizedBox(
-    height: 200,
+  return Container(
+    // color: Colors.red,
+    height: 240,
     child: Stack(
       children: [
         SvgPicture.asset(
@@ -16,7 +17,7 @@ Widget bottomImageButtonWidget(
         Align(
           alignment: Alignment.center,
           child: Padding(
-            padding: const EdgeInsets.only(left: 20, right: 20, top: 100),
+            padding: const EdgeInsets.only(left: 20, right: 20, top: 125),
             child: CustomBtn(title: btnText, onTap: onTap),
           ),
         )
