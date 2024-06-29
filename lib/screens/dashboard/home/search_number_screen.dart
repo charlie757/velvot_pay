@@ -19,6 +19,7 @@ class _SearchNumberScreenState extends State<SearchNumberScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Stack(
           children: [
@@ -34,8 +35,8 @@ class _SearchNumberScreenState extends State<SearchNumberScreen> {
                 child: SvgPicture.asset(
                   Images.bottomImage,
                   fit: BoxFit.cover,
-                  height: 250,
-                  width: double.infinity,
+                  // height: 250,
+                  // width: double.infinity,
                 ))
           ],
         ),

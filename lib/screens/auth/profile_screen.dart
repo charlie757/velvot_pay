@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:velvot_pay/approutes/app_routes.dart';
 import 'package:velvot_pay/helper/app_color.dart';
+import 'package:velvot_pay/helper/custom_btn.dart';
 import 'package:velvot_pay/helper/custom_textfield.dart';
 import 'package:velvot_pay/helper/getText.dart';
 import 'package:velvot_pay/helper/images.dart';
@@ -12,26 +13,29 @@ import 'package:velvot_pay/widget/bottom_image_button_widget.dart';
 
 import '../../utils/constants.dart';
 
-class CompleteProfileScreen extends StatefulWidget {
-  const CompleteProfileScreen({super.key});
+class ProfileScreen extends StatefulWidget {
+  final String route;
+  const ProfileScreen({required this.route});
 
   @override
-  State<CompleteProfileScreen> createState() => _CompleteProfileScreenState();
+  State<ProfileScreen> createState() => _ProfileScreenState();
 }
 
-class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
+class _ProfileScreenState extends State<ProfileScreen> {
   final numberController = TextEditingController(text: '3292349089');
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomInset: false,
-        appBar: appBar(title: 'Complete Profile'),
+        appBar: appBar(
+            title: widget.route == 'otp' ? 'Complete Profile' : "Profile",
+            isShowArrow: widget.route == 'otp' ? true : false),
         body: Stack(
           children: [
             SingleChildScrollView(
               padding: const EdgeInsets.only(
-                  left: 20, right: 20, top: 30, bottom: 230),
+                  left: 20, right: 20, top: 30, bottom: 240),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -96,17 +100,21 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                       fontWeight: FontWeight.w500),
                   ScreenSize.height(10),
                   addressTextField(),
+                  ScreenSize.height(20),
+                  CustomBtn(title: 'Save', onTap: () {})
                 ],
               ),
             ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: bottomImageButtonWidget(
-                  onTap: () {
-                    AppRoutes.pushNavigation(const DashboardScreen());
-                  },
-                  btnText: 'Continue'),
-            )
+            widget.route == 'otp'
+                ? Align(
+                    alignment: Alignment.bottomCenter,
+                    child: bottomImageButtonWidget(
+                        onTap: () {
+                          AppRoutes.pushNavigation(const DashboardScreen());
+                        },
+                        btnText: 'Continue'),
+                  )
+                : Container()
           ],
         ));
   }

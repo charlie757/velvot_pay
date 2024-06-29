@@ -34,7 +34,7 @@ class _ChoosePlanScreenState extends State<ChoosePlanScreen> {
               },
               itemCount: 6,
               padding: const EdgeInsets.only(
-                  left: 10, right: 10, top: 10, bottom: 220),
+                  left: 10, right: 10, top: 10, bottom: 240),
               shrinkWrap: true,
               itemBuilder: (context, index) {
                 return planWidget();
@@ -44,8 +44,8 @@ class _ChoosePlanScreenState extends State<ChoosePlanScreen> {
               child: SvgPicture.asset(
                 Images.bottomImage,
                 fit: BoxFit.cover,
-                height: 250,
-                width: double.infinity,
+                // height: 250,
+                // width: double.infinity,
               ))
         ],
       ),
@@ -55,7 +55,9 @@ class _ChoosePlanScreenState extends State<ChoosePlanScreen> {
   planWidget() {
     return GestureDetector(
       onTap: () {
-        AppRoutes.pushNavigation(const PayScreen());
+        AppRoutes.pushNavigation(PayScreen(
+          index: 0,
+        ));
       },
       child: Container(
         decoration: BoxDecoration(

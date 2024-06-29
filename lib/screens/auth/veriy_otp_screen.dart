@@ -6,7 +6,7 @@ import 'package:velvot_pay/approutes/app_routes.dart';
 import 'package:velvot_pay/helper/app_color.dart';
 import 'package:velvot_pay/helper/images.dart';
 import 'package:velvot_pay/helper/screen_size.dart';
-import 'package:velvot_pay/screens/auth/complete_profile_screen.dart';
+import 'package:velvot_pay/screens/auth/profile_screen.dart';
 import 'package:velvot_pay/util/constaints.dart';
 import 'package:velvot_pay/widget/bottom_image_button_widget.dart';
 
@@ -98,7 +98,9 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
           bottomImageButtonWidget(
             btnText: 'Continue',
             onTap: () {
-              AppRoutes.pushNavigation(const CompleteProfileScreen());
+              AppRoutes.pushNavigation(const ProfileScreen(
+                route: 'otp',
+              ));
             },
           )
         ],

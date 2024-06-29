@@ -5,23 +5,25 @@ import 'package:velvot_pay/helper/getText.dart';
 import 'package:velvot_pay/helper/images.dart';
 import 'package:velvot_pay/util/constaints.dart';
 
-AppBar appBar({required String title, Function()? onTap}) {
+AppBar appBar({required String title, Function()? onTap, isShowArrow = true}) {
   return AppBar(
     elevation: 0.0,
     scrolledUnderElevation: 0.0,
     backgroundColor: AppColor.whiteColor,
-    leading: GestureDetector(
-      onTap: onTap,
-      child: Container(
-        height: 24,
-        alignment: Alignment.center,
-        child: SvgPicture.asset(
-          Images.arrowBackImage,
-          height: 24,
-          width: 24,
-        ),
-      ),
-    ),
+    leading: isShowArrow
+        ? GestureDetector(
+            onTap: onTap,
+            child: Container(
+              height: 24,
+              alignment: Alignment.center,
+              child: SvgPicture.asset(
+                Images.arrowBackImage,
+                height: 24,
+                width: 24,
+              ),
+            ),
+          )
+        : Container(),
     title: getText(
         title: title,
         size: 16,

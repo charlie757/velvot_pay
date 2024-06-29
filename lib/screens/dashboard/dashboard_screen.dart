@@ -20,57 +20,109 @@ class _DashboardScreenState extends State<DashboardScreen> {
   Widget build(BuildContext context) {
     return Consumer<DashboardProvider>(builder: (context, myProvider, child) {
       return Scaffold(
-        body: myProvider.screenList[myProvider.currentIndex],
-        bottomNavigationBar: Container(
-          height: 200,
-          //  myProvider.currentIndex == 1 ? 0 : 200,
-          alignment: Alignment.bottomCenter,
-          child: Stack(
-            children: [
-              SvgPicture.asset(
-                Images.bottomImage,
-                fit: BoxFit.cover,
-              ),
-              Align(
+        resizeToAvoidBottomInset: false,
+        body: Stack(
+          children: [
+            myProvider.screenList[myProvider.currentIndex],
+            myProvider.currentIndex == 1
+                ? Container(
+                    height: 0,
+                  )
+                : Align(
+                    alignment: Alignment.bottomCenter,
+                    child: SvgPicture.asset(
+                      Images.bottomImage,
+                      fit: BoxFit.cover,
+                      // height: 250,
+                      // width: double.infinity,
+                    )),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                height: 90,
                 alignment: Alignment.bottomCenter,
-                child: Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Container(
-                    height: 79,
-                    width: double.infinity,
-                    decoration: BoxDecoration(color: AppColor.darkBlackColor),
-                    padding: const EdgeInsets.only(left: 29, right: 29),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        bottomColumnWidget(Images.historyIcon, 'History', () {
-                          myProvider.updateIndex(0);
-                        }),
-                        bottomColumnWidget(Images.profileIcon, 'My Profile',
-                            () {
-                          myProvider.updateIndex(2);
-                        }),
-                      ],
+                child: Stack(
+                  children: [
+                    Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Container(
+                        height: 79,
+                        width: double.infinity,
+                        decoration:
+                            BoxDecoration(color: AppColor.darkBlackColor),
+                        padding: const EdgeInsets.only(left: 29, right: 29),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            myProvider.currentIndex == 0
+                                ? const Spacer()
+                                : Container(),
+                            myProvider.currentIndex != 0
+                                ? bottomColumnWidget(
+                                    Images.historyIcon, 'History', () {
+                                    myProvider.updateIndex(0);
+                                  })
+                                : Flexible(
+                                    child: Container(
+                                    width: 0,
+                                  )),
+                            const Spacer(),
+                            myProvider.currentIndex != 1
+                                ? bottomColumnWidget(Images.homeIcon, 'Home',
+                                    () {
+                                    myProvider.updateIndex(1);
+                                  })
+                                : Container(),
+                            const Spacer(),
+                            myProvider.currentIndex != 2
+                                ? bottomColumnWidget(
+                                    Images.profileIcon, 'My Profile', () {
+                                    myProvider.updateIndex(2);
+                                  })
+                                : Container(),
+                            myProvider.currentIndex == 2
+                                ? const Spacer()
+                                : Container(),
+                          ],
+                        ),
+                      ),
                     ),
-                  ),
+                    Container(
+                      margin: EdgeInsets.only(
+                          bottom: 20,
+                          left: myProvider.currentIndex == 1
+                              ? 0
+                              : myProvider.currentIndex == 0
+                                  ? 20
+                                  : 0,
+                          right: myProvider.currentIndex == 2 ? 20 : 0),
+                      alignment: myProvider.currentIndex == 1
+                          ? Alignment.center
+                          : myProvider.currentIndex == 0
+                              ? Alignment.centerLeft
+                              : Alignment.centerRight,
+                      child: myProvider.currentIndex == 1
+                          ? centerBottomWidget(myProvider, Images.homeIcon, 1)
+                          : myProvider.currentIndex == 2
+                              ? centerBottomWidget(
+                                  myProvider, Images.profileIcon, 2)
+                              : centerBottomWidget(
+                                  myProvider, Images.historyIcon, 0),
+                    )
+                  ],
                 ),
               ),
-              Container(
-                margin: const EdgeInsets.only(bottom: 20),
-                alignment: Alignment.bottomCenter,
-                child: centerHomeWidget(myProvider),
-              )
-            ],
-          ),
+            ),
+          ],
         ),
       );
     });
   }
 
-  centerHomeWidget(DashboardProvider provider) {
+  centerBottomWidget(DashboardProvider provider, String img, int index) {
     return InkWell(
       onTap: () {
-        provider.updateIndex(1);
+        provider.updateIndex(index);
       },
       child: Container(
         height: 72,
@@ -93,8 +145,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
               color: AppColor.purpleColor,
               borderRadius: BorderRadius.circular(30)),
           child: Image.asset(
-            Images.homeIcon,
-            height: 45,
+            img,
+            height: 21,
             width: 21,
           ),
         ),
@@ -105,22 +157,24 @@ class _DashboardScreenState extends State<DashboardScreen> {
   bottomColumnWidget(String img, String title, Function() onTap) {
     return InkWell(
       onTap: onTap,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.asset(
-            img,
-            height: 24,
-            width: 24,
-          ),
-          ScreenSize.height(5),
-          getText(
-              title: title,
-              size: 16,
-              fontFamily: Constants.poppinsRegular,
-              color: AppColor.whiteColor.withOpacity(.9),
-              fontWeight: FontWeight.w400)
-        ],
+      child: SizedBox(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              img,
+              height: 24,
+              width: 24,
+            ),
+            ScreenSize.height(5),
+            getText(
+                title: title,
+                size: 16,
+                fontFamily: Constants.poppinsRegular,
+                color: AppColor.whiteColor.withOpacity(.9),
+                fontWeight: FontWeight.w400)
+          ],
+        ),
       ),
     );
   }

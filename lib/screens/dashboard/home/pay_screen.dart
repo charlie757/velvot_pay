@@ -10,7 +10,8 @@ import 'package:velvot_pay/widget/appBar.dart';
 import 'package:velvot_pay/widget/bottom_image_button_widget.dart';
 
 class PayScreen extends StatefulWidget {
-  const PayScreen({super.key});
+  final int index;
+  const PayScreen({required this.index});
 
   @override
   State<PayScreen> createState() => _PayScreenState();
@@ -21,17 +22,17 @@ class _PayScreenState extends State<PayScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: appBar(
-            title: 'Pay',
+            title: widget.index == 0 ? 'Pay' : "Electricity Bill Details",
             onTap: () {
               Navigator.pop(context);
             }),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            payWidget(),
+            widget.index == 0 ? payWidget() : electiricityBillWidget(),
             bottomImageButtonWidget(
                 onTap: () {
-                  AppRoutes.pushNavigation(SuccessfullyPaymentScreen());
+                  AppRoutes.pushNavigation(const SuccessfullyPaymentScreen());
                 },
                 btnText: "Proceed to Pay")
           ],
@@ -200,5 +201,145 @@ class _PayScreenState extends State<PayScreen> {
         ],
       ),
     );
+  }
+
+  electiricityBillWidget() {
+    return Container(
+      padding: const EdgeInsets.only(top: 20, left: 15, right: 15, bottom: 20),
+      decoration: BoxDecoration(
+          color: AppColor.lightAppColor,
+          borderRadius: BorderRadius.circular(5)),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Container(
+                height: 47,
+                width: 47,
+                decoration: BoxDecoration(
+                    border: Border.all(color: AppColor.e1Color),
+                    borderRadius: BorderRadius.circular(25)),
+                alignment: Alignment.center,
+                child: ClipRRect(
+                    borderRadius: BorderRadius.circular(100),
+                    child: Image.asset('assets/icons/jaipur_image.png')),
+              ),
+              ScreenSize.width(14),
+              Expanded(
+                child: Text(
+                  'Jaipur Vidyut Vitaran Nigam Ltd',
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontFamily: Constaints.poppinsSemiBold,
+                      color: AppColor.darkBlackColor,
+                      fontWeight: FontWeight.w500),
+                ),
+              ),
+            ],
+          ),
+          ScreenSize.height(15),
+          Container(
+            decoration: BoxDecoration(
+              color: AppColor.hintTextColor,
+              borderRadius: BorderRadius.circular(5),
+            ),
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 18),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                customRowWidget(
+                    'Bill Amount',
+                    '\$2958',
+                    16,
+                    AppColor.darkBlackColor,
+                    FontWeight.w600,
+                    Constaints.poppinsSemiBold),
+                ScreenSize.height(16),
+                customRowWidget(
+                    'Name',
+                    'Sunil Kumar Saini',
+                    14,
+                    AppColor.darkBlackColor,
+                    FontWeight.w400,
+                    Constaints.poppinsRegular),
+                ScreenSize.height(16),
+                customRowWidget(
+                    'Customer ID',
+                    '216530004812',
+                    14,
+                    AppColor.darkBlackColor,
+                    FontWeight.w400,
+                    Constaints.poppinsRegular),
+                ScreenSize.height(16),
+                customRowWidget('Status', 'Unpaid', 12, AppColor.redColor,
+                    FontWeight.w400, Constaints.poppinsRegular),
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  customRowWidget(String title, String subTitle, double fontSize, Color color,
+      FontWeight fontWeight, String fontFamily) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        getText(
+            title: '$title :',
+            size: 12,
+            fontFamily: Constaints.poppinsMedium,
+            color: AppColor.whiteColor,
+            fontWeight: FontWeight.w400),
+        getText(
+            title: subTitle,
+            size: fontSize,
+            fontFamily: fontFamily,
+            color: color,
+            fontWeight: fontWeight)
+      ],
+    );
+  }
+
+  totalAmountPayableBottomSheet() {
+    showModalBottomSheet(
+        context: context,
+        backgroundColor: AppColor.whiteColor,
+        shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(20), topRight: Radius.circular(20))),
+        builder: (context) {
+          return Container(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    getText(
+                        title: 'Total Payable',
+                        size: 18,
+                        fontFamily: Constaints.poppinsSemiBold,
+                        color: AppColor.darkBlackColor,
+                        fontWeight: FontWeight.w600),
+                    const Spacer(),
+                    getText(
+                        title: '\$500',
+                        size: 20,
+                        fontFamily: Constaints.poppinsSemiBold,
+                        color: AppColor.darkBlackColor,
+                        fontWeight: FontWeight.w600),
+                    ScreenSize.width(25),
+                    const Icon(Icons.close),
+                  ],
+                ),
+              ],
+            ),
+          );
+        });
   }
 }

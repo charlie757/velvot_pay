@@ -6,19 +6,41 @@ import 'package:velvot_pay/helper/custom_search_bar.dart';
 import 'package:velvot_pay/helper/getText.dart';
 import 'package:velvot_pay/helper/images.dart';
 import 'package:velvot_pay/helper/screen_size.dart';
+import 'package:velvot_pay/screens/dashboard/home/bill_number_screen.dart';
 import 'package:velvot_pay/screens/dashboard/home/data_subscription_screen.dart';
 import 'package:velvot_pay/util/constaints.dart';
 import 'package:velvot_pay/widget/appBar.dart';
 import 'package:velvot_pay/widget/slider_widget.dart';
 
 class OperatorScreen extends StatefulWidget {
-  const OperatorScreen({super.key});
+  final String title;
+  final int index;
+  const OperatorScreen({required this.title, required this.index});
 
   @override
   State<OperatorScreen> createState() => _OperatorScreenState();
 }
 
 class _OperatorScreenState extends State<OperatorScreen> {
+  List electiricyList = [
+    {
+      'img': 'assets/icons/vidyat_icon.png',
+      'text': 'Ajmer Vidyut Vitaran Nigam Ltd',
+    },
+    {
+      'img': 'assets/icons/besl_image.png',
+      'text': 'BESL Bharatpur Electricity Service Ltd',
+    },
+    {
+      'img': 'assets/icons/jaipur_image.png',
+      'text': 'Jaipur Vidyut Vitaran Nigam Ltd',
+    },
+    {
+      'img': 'assets/icons/vidyat_icon.png',
+      'text': 'Ajmer Vidyut Vitaran Nigam Ltd',
+    },
+  ];
+
   List operatorList = [
     {
       'img': Images.airtelIcon,
@@ -45,11 +67,12 @@ class _OperatorScreenState extends State<OperatorScreen> {
       'text': 'Jip Prepaid',
     },
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBar(
-          title: 'Select Operator',
+          title: widget.title,
           onTap: () {
             Navigator.pop(context);
           }),
@@ -77,21 +100,22 @@ class _OperatorScreenState extends State<OperatorScreen> {
                   color: AppColor.darkBlackColor,
                   fontWeight: FontWeight.w600),
             ),
-            operatorTypesWidget()
+            operatorTypesWidget(
+                widget.index == 0 ? operatorList : electiricyList)
           ],
         ),
       ),
     );
   }
 
-  operatorTypesWidget() {
+  operatorTypesWidget(List list) {
     return ListView.separated(
         separatorBuilder: (context, sp) {
           return ScreenSize.height(15);
         },
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
-        itemCount: operatorList.length,
+        itemCount: list.length,
         padding:
             const EdgeInsets.only(left: 30, right: 20, top: 20, bottom: 30),
         itemBuilder: (context, index) {
@@ -100,7 +124,11 @@ class _OperatorScreenState extends State<OperatorScreen> {
             focusColor: AppColor.hintTextColor.withOpacity(.1),
             highlightColor: AppColor.hintTextColor.withOpacity(.1),
             onTap: () {
-              AppRoutes.pushNavigation(const DataSubscriptionScreen());
+              widget.index == 0
+                  ? AppRoutes.pushNavigation(const DataSubscriptionScreen())
+                  : AppRoutes.pushNavigation(BillNumberScreen(
+                      index: widget.index,
+                    ));
             },
             child: Column(
               children: [
@@ -115,12 +143,14 @@ class _OperatorScreenState extends State<OperatorScreen> {
                             border: Border.all(color: AppColor.e1Color),
                             borderRadius: BorderRadius.circular(25)),
                         alignment: Alignment.center,
-                        child: Image.asset(operatorList[index]['img']),
+                        child: ClipRRect(
+                            borderRadius: BorderRadius.circular(50),
+                            child: Image.asset(list[index]['img'])),
                       ),
                       ScreenSize.width(14),
                       Expanded(
                         child: Text(
-                          operatorList[index]['text'],
+                          list[index]['text'],
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
@@ -130,6 +160,7 @@ class _OperatorScreenState extends State<OperatorScreen> {
                               fontWeight: FontWeight.w500),
                         ),
                       ),
+                      ScreenSize.width(4),
                       SvgPicture.asset(Images.keyboardArrowRightIcon)
                     ],
                   ),

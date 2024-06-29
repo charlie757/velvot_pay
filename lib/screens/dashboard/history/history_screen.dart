@@ -60,7 +60,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar(title: 'Transactions History'),
+      appBar: appBar(title: 'Transactions History', isShowArrow: false),
       body: transcationWidget(),
     );
   }
@@ -72,7 +72,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
         },
         itemCount: historyList.length,
         padding:
-            const EdgeInsets.only(left: 14, right: 14, top: 16, bottom: 20),
+            const EdgeInsets.only(left: 14, right: 14, top: 16, bottom: 240),
         shrinkWrap: true,
         itemBuilder: (context, index) {
           return Column(

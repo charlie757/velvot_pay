@@ -22,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.only(top: 20, bottom: 30),
+          padding: const EdgeInsets.only(top: 20, bottom: 100),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -35,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     getText(
                         title: 'Utility Services',
                         size: 16,
-                        fontFamily: Constants.poppinsMedium,
+                        fontFamily: Constants.poppinsSemiBold,
                         color: AppColor.darkBlackColor,
                         fontWeight: FontWeight.w600),
                     ScreenSize.height(20),
@@ -63,18 +63,31 @@ class _HomeScreenState extends State<HomeScreen> {
                       Images.dataSubscriptionIcon,
                       'Data Subscription',
                       150, () {
-                    AppRoutes.pushNavigation(const OperatorScreen());
+                    AppRoutes.pushNavigation(const OperatorScreen(
+                      title: 'Select Operator',
+                      index: 0,
+                    ));
                   }),
                   ScreenSize.height(16),
                   customTypesContainer(AppColor.electricityColor,
-                      Images.electricityIcon, 'Electricity Payment', 150, () {})
+                      Images.electricityIcon, 'Electricity Payment', 150, () {
+                    AppRoutes.pushNavigation(const OperatorScreen(
+                      title: 'Choose Electricity Bill Operator',
+                      index: 1,
+                    ));
+                  })
                 ],
               ),
             ),
             ScreenSize.width(15),
             Expanded(
                 child: customTypesContainer(AppColor.educationColor,
-                    Images.educationIcon, 'Educational\nPayment', 320, () {}))
+                    Images.educationIcon, 'Educational\nPayment', 320, () {
+              AppRoutes.pushNavigation(const OperatorScreen(
+                title: 'Choose Educational Bill Operator',
+                index: 2,
+              ));
+            }))
           ],
         ),
         ScreenSize.height(15),
@@ -82,11 +95,21 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             Expanded(
                 child: customTypesContainer(AppColor.tvSubcriptionColor,
-                    Images.tvSubscriptionIcon, 'TV Subscription', 150, () {})),
+                    Images.tvSubscriptionIcon, 'TV Subscription', 150, () {
+              AppRoutes.pushNavigation(const OperatorScreen(
+                title: 'Choose TV Subcription Operator',
+                index: 3,
+              ));
+            })),
             ScreenSize.width(15),
             Expanded(
                 child: customTypesContainer(AppColor.insuranceColor,
-                    Images.insuranceIcon, 'Insurance\nPayment', 150, () {}))
+                    Images.insuranceIcon, 'Insurance\nPayment', 150, () {
+              AppRoutes.pushNavigation(const OperatorScreen(
+                title: 'Choose Insurance Bill Operator',
+                index: 4,
+              ));
+            }))
           ],
         )
       ],

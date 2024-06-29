@@ -53,6 +53,7 @@ class _DataSubscriptionScreenState extends State<DataSubscriptionScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: appBar(
           title: 'Data Subscription',
           onTap: () {

@@ -19,16 +19,44 @@ class _TranscationHistoryScreenState extends State<TranscationHistoryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: _appBar(),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      body: Stack(
         children: [
-          Container(
-            height: 50,
-            color: AppColor.darkBlackColor,
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                height: 50,
+                color: AppColor.darkBlackColor,
+              ),
+              headerWidget(),
+              Expanded(
+                  child: SingleChildScrollView(
+                padding: const EdgeInsets.only(bottom: 250),
+                child: Column(
+                  children: [
+                    rechargeDetailsWidget(),
+                    ScreenSize.height(20),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: Image.asset(
+                        'assets/icons/slider_image.png',
+                        width: double.infinity,
+                        fit: BoxFit.cover,
+                      ),
+                    )
+                  ],
+                ),
+              ))
+            ],
           ),
-          headerWidget(),
-          rechargeDetailsWidget()
+          Align(
+              alignment: Alignment.bottomCenter,
+              child: SvgPicture.asset(
+                Images.bottomImage,
+                fit: BoxFit.cover,
+                // height: 250,
+                // width: double.infinity,
+              ))
         ],
       ),
     );
@@ -44,9 +72,14 @@ class _TranscationHistoryScreenState extends State<TranscationHistoryScreen> {
       padding: const EdgeInsets.only(left: 17),
       child: Row(
         children: [
-          SvgPicture.asset(
-            Images.arrowBackImage,
-            color: AppColor.whiteColor,
+          InkWell(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: SvgPicture.asset(
+              Images.arrowBackImage,
+              color: AppColor.whiteColor,
+            ),
           ),
           ScreenSize.width(8),
           Column(
@@ -74,7 +107,13 @@ class _TranscationHistoryScreenState extends State<TranscationHistoryScreen> {
 
   rechargeDetailsWidget() {
     return Container(
-      padding: const EdgeInsets.only(top: 33, left: 20, right: 20),
+      padding: const EdgeInsets.only(top: 33, left: 20, right: 20, bottom: 30),
+      decoration: BoxDecoration(color: AppColor.whiteColor, boxShadow: [
+        BoxShadow(
+            offset: const Offset(0, -1),
+            color: AppColor.blackColor.withOpacity(.2),
+            blurRadius: 4)
+      ]),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -137,7 +176,78 @@ class _TranscationHistoryScreenState extends State<TranscationHistoryScreen> {
             ],
           ),
           ScreenSize.height(25),
-          customDivider(0)
+          customDivider(0),
+          ScreenSize.height(26),
+          Row(
+            children: [
+              SvgPicture.asset(Images.transferIcon),
+              ScreenSize.width(10),
+              getText(
+                  title: 'Transfer Details',
+                  size: 14,
+                  fontFamily: Constaints.poppinsMedium,
+                  color: const Color(0xff484848),
+                  fontWeight: FontWeight.w400),
+              const Spacer(),
+              SvgPicture.asset(
+                Images.arrowUpIcon,
+                color: const Color(0xff484848),
+              )
+            ],
+          ),
+          ScreenSize.height(16),
+          getText(
+              title: 'Transaction ID',
+              size: 14,
+              fontFamily: Constaints.poppinsRegular,
+              color: AppColor.hintTextColor,
+              fontWeight: FontWeight.w300),
+          getText(
+              title: 'T2265688966465465465498898',
+              size: 12,
+              fontFamily: Constaints.poppinsMedium,
+              color: AppColor.darkBlackColor,
+              fontWeight: FontWeight.w400),
+          ScreenSize.height(15),
+          getText(
+              title: 'Credited to',
+              size: 14,
+              fontFamily: Constaints.poppinsRegular,
+              color: AppColor.darkBlackColor,
+              fontWeight: FontWeight.w300),
+          ScreenSize.height(15),
+          Row(
+            children: [
+              Image.asset(
+                Images.creditIcon,
+                height: 23,
+                width: 23,
+              ),
+              ScreenSize.width(4),
+              getText(
+                  title: '**************58',
+                  size: 14,
+                  fontFamily: Constaints.poppinsMedium,
+                  color: AppColor.hintTextColor,
+                  fontWeight: FontWeight.w400),
+              const Spacer(),
+              getText(
+                  title: '\$500',
+                  size: 16,
+                  fontFamily: Constaints.poppinsSemiBold,
+                  color: AppColor.purpleColor,
+                  fontWeight: FontWeight.w600)
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 28),
+            child: getText(
+                title: 'UTR: 987412548753',
+                size: 13,
+                fontFamily: Constaints.poppinsMedium,
+                color: AppColor.hintTextColor,
+                fontWeight: FontWeight.w400),
+          )
         ],
       ),
     );
