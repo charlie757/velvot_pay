@@ -5,7 +5,7 @@ import 'package:velvot_pay/helper/getText.dart';
 import 'package:velvot_pay/helper/images.dart';
 import 'package:velvot_pay/helper/screen_size.dart';
 import 'package:velvot_pay/screens/dashboard/home/successfully_payment_screen.dart';
-import 'package:velvot_pay/util/constaints.dart';
+import 'package:velvot_pay/utils/Constants.dart';
 import 'package:velvot_pay/widget/appBar.dart';
 import 'package:velvot_pay/widget/bottom_image_button_widget.dart';
 
@@ -67,13 +67,13 @@ class _PayScreenState extends State<PayScreen> {
                   getText(
                       title: '+234 9876543210',
                       size: 14,
-                      fontFamily: Constaints.poppinsSemiBold,
+                      fontFamily: Constants.poppinsSemiBold,
                       color: AppColor.darkBlackColor,
                       fontWeight: FontWeight.w500),
                   getText(
                       title: 'Airtel Prepaid',
                       size: 14,
-                      fontFamily: Constaints.poppinsSemiBold,
+                      fontFamily: Constants.poppinsSemiBold,
                       color: AppColor.hintTextColor,
                       fontWeight: FontWeight.w500)
                 ],
@@ -110,7 +110,7 @@ class _PayScreenState extends State<PayScreen> {
               getText(
                   title: '\$499',
                   size: 25,
-                  fontFamily: Constaints.poppinsSemiBold,
+                  fontFamily: Constants.poppinsSemiBold,
                   color: AppColor.darkBlackColor,
                   fontWeight: FontWeight.w600),
               Container(
@@ -123,7 +123,7 @@ class _PayScreenState extends State<PayScreen> {
                 child: getText(
                     title: 'Change Plan',
                     size: 12,
-                    fontFamily: Constaints.poppinsMedium,
+                    fontFamily: Constants.poppinsMedium,
                     color: AppColor.whiteColor,
                     fontWeight: FontWeight.w500),
               )
@@ -135,14 +135,14 @@ class _PayScreenState extends State<PayScreen> {
               getText(
                   title: 'Data :',
                   size: 12,
-                  fontFamily: Constaints.poppinsMedium,
+                  fontFamily: Constants.poppinsMedium,
                   color: AppColor.whiteColor,
                   fontWeight: FontWeight.w400),
               ScreenSize.width(7),
               getText(
                   title: '60.0 GB Per PAck',
                   size: 14,
-                  fontFamily: Constaints.poppinsSemiBold,
+                  fontFamily: Constants.poppinsSemiBold,
                   color: AppColor.darkBlackColor,
                   fontWeight: FontWeight.w600),
               // ScreenSize.width(28),
@@ -150,14 +150,14 @@ class _PayScreenState extends State<PayScreen> {
               getText(
                   title: 'Validity :',
                   size: 12,
-                  fontFamily: Constaints.poppinsMedium,
+                  fontFamily: Constants.poppinsMedium,
                   color: AppColor.whiteColor,
                   fontWeight: FontWeight.w400),
               ScreenSize.width(7),
               getText(
                   title: '28 Days',
                   size: 14,
-                  fontFamily: Constaints.poppinsSemiBold,
+                  fontFamily: Constants.poppinsSemiBold,
                   color: AppColor.darkBlackColor,
                   fontWeight: FontWeight.w600),
             ],
@@ -168,14 +168,14 @@ class _PayScreenState extends State<PayScreen> {
               getText(
                   title: 'Data :',
                   size: 12,
-                  fontFamily: Constaints.poppinsMedium,
+                  fontFamily: Constants.poppinsMedium,
                   color: AppColor.whiteColor,
                   fontWeight: FontWeight.w400),
               ScreenSize.width(7),
               getText(
                   title: '60 GB',
                   size: 12,
-                  fontFamily: Constaints.poppinsSemiBold,
+                  fontFamily: Constants.poppinsSemiBold,
                   color: AppColor.whiteColor,
                   fontWeight: FontWeight.w700),
             ],
@@ -186,14 +186,14 @@ class _PayScreenState extends State<PayScreen> {
               getText(
                   title: 'Data :',
                   size: 12,
-                  fontFamily: Constaints.poppinsMedium,
+                  fontFamily: Constants.poppinsMedium,
                   color: AppColor.whiteColor,
                   fontWeight: FontWeight.w400),
               ScreenSize.width(7),
               getText(
                   title: 'Till Your Existing Pack',
                   size: 12,
-                  fontFamily: Constaints.poppinsSemiBold,
+                  fontFamily: Constants.poppinsSemiBold,
                   color: AppColor.whiteColor,
                   fontWeight: FontWeight.w700),
             ],
@@ -233,7 +233,7 @@ class _PayScreenState extends State<PayScreen> {
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                       fontSize: 16,
-                      fontFamily: Constaints.poppinsSemiBold,
+                      fontFamily: Constants.poppinsSemiBold,
                       color: AppColor.darkBlackColor,
                       fontWeight: FontWeight.w500),
                 ),
@@ -256,7 +256,7 @@ class _PayScreenState extends State<PayScreen> {
                     16,
                     AppColor.darkBlackColor,
                     FontWeight.w600,
-                    Constaints.poppinsSemiBold),
+                    Constants.poppinsSemiBold),
                 ScreenSize.height(16),
                 customRowWidget(
                     'Name',
@@ -264,7 +264,7 @@ class _PayScreenState extends State<PayScreen> {
                     14,
                     AppColor.darkBlackColor,
                     FontWeight.w400,
-                    Constaints.poppinsRegular),
+                    Constants.poppinsRegular),
                 ScreenSize.height(16),
                 customRowWidget(
                     'Customer ID',
@@ -272,10 +272,10 @@ class _PayScreenState extends State<PayScreen> {
                     14,
                     AppColor.darkBlackColor,
                     FontWeight.w400,
-                    Constaints.poppinsRegular),
+                    Constants.poppinsRegular),
                 ScreenSize.height(16),
                 customRowWidget('Status', 'Unpaid', 12, AppColor.redColor,
-                    FontWeight.w400, Constaints.poppinsRegular),
+                    FontWeight.w400, Constants.poppinsRegular),
               ],
             ),
           )
@@ -292,7 +292,7 @@ class _PayScreenState extends State<PayScreen> {
         getText(
             title: '$title :',
             size: 12,
-            fontFamily: Constaints.poppinsMedium,
+            fontFamily: Constants.poppinsMedium,
             color: AppColor.whiteColor,
             fontWeight: FontWeight.w400),
         getText(
@@ -323,14 +323,14 @@ class _PayScreenState extends State<PayScreen> {
                     getText(
                         title: 'Total Payable',
                         size: 18,
-                        fontFamily: Constaints.poppinsSemiBold,
+                        fontFamily: Constants.poppinsSemiBold,
                         color: AppColor.darkBlackColor,
                         fontWeight: FontWeight.w600),
                     const Spacer(),
                     getText(
                         title: '\$500',
                         size: 20,
-                        fontFamily: Constaints.poppinsSemiBold,
+                        fontFamily: Constants.poppinsSemiBold,
                         color: AppColor.darkBlackColor,
                         fontWeight: FontWeight.w600),
                     ScreenSize.width(25),

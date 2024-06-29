@@ -3,7 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:velvot_pay/helper/app_color.dart';
 import 'package:velvot_pay/helper/getText.dart';
 import 'package:velvot_pay/helper/images.dart';
-import 'package:velvot_pay/util/constaints.dart';
+import 'package:velvot_pay/utils/constants.dart';
 
 AppBar appBar({required String title, Function()? onTap, isShowArrow = true}) {
   return AppBar(
@@ -27,7 +27,7 @@ AppBar appBar({required String title, Function()? onTap, isShowArrow = true}) {
     title: getText(
         title: title,
         size: 16,
-        fontFamily: Constaints.poppinsMedium,
+        fontFamily: Constants.poppinsMedium,
         color: AppColor.blackColor,
         fontWeight: FontWeight.w500),
   );

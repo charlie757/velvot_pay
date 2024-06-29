@@ -3,7 +3,7 @@ import 'package:velvot_pay/helper/app_color.dart';
 import 'package:velvot_pay/helper/getText.dart';
 import 'package:velvot_pay/helper/images.dart';
 import 'package:velvot_pay/helper/screen_size.dart';
-import 'package:velvot_pay/util/constaints.dart';
+import 'package:velvot_pay/utils/constants.dart';
 import 'package:velvot_pay/widget/appBar.dart';
 import 'package:velvot_pay/widget/custom_divider.dart';
 
@@ -100,7 +100,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                               fontSize: 16,
-                              fontFamily: Constaints.poppinsMedium,
+                              fontFamily: Constants.poppinsMedium,
                               color: AppColor.darkBlackColor,
                               fontWeight: FontWeight.w500),
                         ),
@@ -111,7 +111,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                               fontSize: 13,
-                              fontFamily: Constaints.poppinsMedium,
+                              fontFamily: Constants.poppinsMedium,
                               color: AppColor.hintTextColor,
                               fontWeight: FontWeight.w400),
                         ),
@@ -124,13 +124,13 @@ class _HistoryScreenState extends State<HistoryScreen> {
                       getText(
                           title: '\$500',
                           size: 20,
-                          fontFamily: Constaints.poppinsSemiBold,
+                          fontFamily: Constants.poppinsSemiBold,
                           color: AppColor.btnColor,
                           fontWeight: FontWeight.w600),
                       getText(
                           title: '15 hours ago',
                           size: 12,
-                          fontFamily: Constaints.poppinsRegular,
+                          fontFamily: Constants.poppinsRegular,
                           color: AppColor.darkBlackColor,
                           fontWeight: FontWeight.w300),
                     ],

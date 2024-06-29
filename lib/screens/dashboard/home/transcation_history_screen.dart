@@ -4,7 +4,7 @@ import 'package:velvot_pay/helper/app_color.dart';
 import 'package:velvot_pay/helper/getText.dart';
 import 'package:velvot_pay/helper/images.dart';
 import 'package:velvot_pay/helper/screen_size.dart';
-import 'package:velvot_pay/util/constaints.dart';
+import 'package:velvot_pay/utils/Constants.dart';
 import 'package:velvot_pay/widget/custom_divider.dart';
 
 class TranscationHistoryScreen extends StatefulWidget {
@@ -89,13 +89,13 @@ class _TranscationHistoryScreenState extends State<TranscationHistoryScreen> {
               getText(
                   title: 'Transaction Successful',
                   size: 16,
-                  fontFamily: Constaints.poppinsMedium,
+                  fontFamily: Constants.poppinsMedium,
                   color: AppColor.whiteColor,
                   fontWeight: FontWeight.w600),
               getText(
                   title: '11:34pm on 16 Jul 2020',
                   size: 12,
-                  fontFamily: Constaints.poppinsRegular,
+                  fontFamily: Constants.poppinsRegular,
                   color: AppColor.whiteColor,
                   fontWeight: FontWeight.w300),
             ],
@@ -120,7 +120,7 @@ class _TranscationHistoryScreenState extends State<TranscationHistoryScreen> {
           getText(
               title: 'Recharge on',
               size: 18,
-              fontFamily: Constaints.poppinsSemiBold,
+              fontFamily: Constants.poppinsSemiBold,
               color: AppColor.darkBlackColor,
               fontWeight: FontWeight.w600),
           ScreenSize.height(21),
@@ -138,7 +138,7 @@ class _TranscationHistoryScreenState extends State<TranscationHistoryScreen> {
                 child: getText(
                     title: 'DR',
                     size: 18,
-                    fontFamily: Constaints.poppinsMedium,
+                    fontFamily: Constants.poppinsMedium,
                     color: AppColor.whiteColor,
                     fontWeight: FontWeight.w600),
               ),
@@ -153,7 +153,7 @@ class _TranscationHistoryScreenState extends State<TranscationHistoryScreen> {
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                           fontSize: 16,
-                          fontFamily: Constaints.poppinsMedium,
+                          fontFamily: Constants.poppinsMedium,
                           color: AppColor.darkBlackColor,
                           fontWeight: FontWeight.w500),
                     ),
@@ -161,7 +161,7 @@ class _TranscationHistoryScreenState extends State<TranscationHistoryScreen> {
                     getText(
                         title: '9876543210',
                         size: 14,
-                        fontFamily: Constaints.poppinsRegular,
+                        fontFamily: Constants.poppinsRegular,
                         color: const Color(0xff747474),
                         fontWeight: FontWeight.w300)
                   ],
@@ -170,7 +170,7 @@ class _TranscationHistoryScreenState extends State<TranscationHistoryScreen> {
               getText(
                   title: '\$500',
                   size: 16,
-                  fontFamily: Constaints.poppinsSemiBold,
+                  fontFamily: Constants.poppinsSemiBold,
                   color: AppColor.purpleColor,
                   fontWeight: FontWeight.w600)
             ],
@@ -185,7 +185,7 @@ class _TranscationHistoryScreenState extends State<TranscationHistoryScreen> {
               getText(
                   title: 'Transfer Details',
                   size: 14,
-                  fontFamily: Constaints.poppinsMedium,
+                  fontFamily: Constants.poppinsMedium,
                   color: const Color(0xff484848),
                   fontWeight: FontWeight.w400),
               const Spacer(),
@@ -199,20 +199,20 @@ class _TranscationHistoryScreenState extends State<TranscationHistoryScreen> {
           getText(
               title: 'Transaction ID',
               size: 14,
-              fontFamily: Constaints.poppinsRegular,
+              fontFamily: Constants.poppinsRegular,
               color: AppColor.hintTextColor,
               fontWeight: FontWeight.w300),
           getText(
               title: 'T2265688966465465465498898',
               size: 12,
-              fontFamily: Constaints.poppinsMedium,
+              fontFamily: Constants.poppinsMedium,
               color: AppColor.darkBlackColor,
               fontWeight: FontWeight.w400),
           ScreenSize.height(15),
           getText(
               title: 'Credited to',
               size: 14,
-              fontFamily: Constaints.poppinsRegular,
+              fontFamily: Constants.poppinsRegular,
               color: AppColor.darkBlackColor,
               fontWeight: FontWeight.w300),
           ScreenSize.height(15),
@@ -227,14 +227,14 @@ class _TranscationHistoryScreenState extends State<TranscationHistoryScreen> {
               getText(
                   title: '**************58',
                   size: 14,
-                  fontFamily: Constaints.poppinsMedium,
+                  fontFamily: Constants.poppinsMedium,
                   color: AppColor.hintTextColor,
                   fontWeight: FontWeight.w400),
               const Spacer(),
               getText(
                   title: '\$500',
                   size: 16,
-                  fontFamily: Constaints.poppinsSemiBold,
+                  fontFamily: Constants.poppinsSemiBold,
                   color: AppColor.purpleColor,
                   fontWeight: FontWeight.w600)
             ],
@@ -244,7 +244,7 @@ class _TranscationHistoryScreenState extends State<TranscationHistoryScreen> {
             child: getText(
                 title: 'UTR: 987412548753',
                 size: 13,
-                fontFamily: Constaints.poppinsMedium,
+                fontFamily: Constants.poppinsMedium,
                 color: AppColor.hintTextColor,
                 fontWeight: FontWeight.w400),
           )

@@ -7,7 +7,7 @@ import 'package:velvot_pay/helper/getText.dart';
 import 'package:velvot_pay/helper/images.dart';
 import 'package:velvot_pay/helper/screen_size.dart';
 import 'package:velvot_pay/screens/dashboard/home/pay_screen.dart';
-import 'package:velvot_pay/util/constaints.dart';
+import 'package:velvot_pay/utils/constants.dart';
 import 'package:velvot_pay/widget/appBar.dart';
 import 'package:velvot_pay/widget/bottom_image_button_widget.dart';
 
@@ -91,7 +91,7 @@ class _BillNumberScreenState extends State<BillNumberScreen> {
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                       fontSize: 16,
-                      fontFamily: Constaints.poppinsSemiBold,
+                      fontFamily: Constants.poppinsSemiBold,
                       color: AppColor.darkBlackColor,
                       fontWeight: FontWeight.w500),
                 ),
@@ -123,7 +123,7 @@ class _BillNumberScreenState extends State<BillNumberScreen> {
           getText(
               title: 'Please enter a valid 12 digit Meter Number',
               size: 11,
-              fontFamily: Constaints.poppinsRegular,
+              fontFamily: Constants.poppinsRegular,
               color: AppColor.whiteColor,
               fontWeight: FontWeight.w400),
           ScreenSize.height(12),
@@ -204,7 +204,7 @@ class _BillNumberScreenState extends State<BillNumberScreen> {
           title:
               'Pay ${widget.index == 1 ? "electricity bill" : widget.index == 3 ? "TV Subscription bill" : "Insurance bill"} safely, conveniently & easily. You can pay anytime and anyere!',
           size: 14,
-          fontFamily: Constaints.poppinsRegular,
+          fontFamily: Constants.poppinsRegular,
           color: AppColor.darkBlackColor,
           fontWeight: FontWeight.w400),
     );

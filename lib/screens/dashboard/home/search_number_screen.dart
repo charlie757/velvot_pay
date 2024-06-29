@@ -6,7 +6,7 @@ import 'package:velvot_pay/helper/getText.dart';
 import 'package:velvot_pay/helper/images.dart';
 import 'package:velvot_pay/helper/screen_size.dart';
 import 'package:velvot_pay/screens/dashboard/home/choose_plan_screen.dart';
-import 'package:velvot_pay/util/constaints.dart';
+import 'package:velvot_pay/utils/Constants.dart';
 
 class SearchNumberScreen extends StatefulWidget {
   const SearchNumberScreen({super.key});
@@ -53,7 +53,7 @@ class _SearchNumberScreenState extends State<SearchNumberScreen> {
           getText(
               title: 'Search Results',
               size: 16,
-              fontFamily: Constaints.poppinsSemiBold,
+              fontFamily: Constants.poppinsSemiBold,
               color: AppColor.darkBlackColor,
               fontWeight: FontWeight.w600),
           ScreenSize.height(20),
@@ -76,7 +76,7 @@ class _SearchNumberScreenState extends State<SearchNumberScreen> {
                     child: getText(
                         title: '98',
                         size: 18,
-                        fontFamily: Constaints.poppinsMedium,
+                        fontFamily: Constants.poppinsMedium,
                         color: AppColor.whiteColor,
                         fontWeight: FontWeight.w600),
                   ),
@@ -91,7 +91,7 @@ class _SearchNumberScreenState extends State<SearchNumberScreen> {
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                               fontSize: 14,
-                              fontFamily: Constaints.poppinsMedium,
+                              fontFamily: Constants.poppinsMedium,
                               color: AppColor.darkBlackColor,
                               fontWeight: FontWeight.w500),
                         ),
@@ -99,7 +99,7 @@ class _SearchNumberScreenState extends State<SearchNumberScreen> {
                         getText(
                             title: 'Tap to recharge this number',
                             size: 14,
-                            fontFamily: Constaints.poppinsMedium,
+                            fontFamily: Constants.poppinsMedium,
                             color: AppColor.purpleColor,
                             fontWeight: FontWeight.w500)
                       ],
@@ -134,7 +134,7 @@ class _SearchNumberScreenState extends State<SearchNumberScreen> {
                 color: AppColor.darkBlackColor,
                 fontSize: 14,
                 fontWeight: FontWeight.w500,
-                fontFamily: Constaints.poppinsMedium),
+                fontFamily: Constants.poppinsMedium),
             decoration: const InputDecoration(border: InputBorder.none),
           ))
         ],

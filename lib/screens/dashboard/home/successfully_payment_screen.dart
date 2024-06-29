@@ -4,7 +4,7 @@ import 'package:velvot_pay/helper/app_color.dart';
 import 'package:velvot_pay/helper/getText.dart';
 import 'package:velvot_pay/helper/screen_size.dart';
 import 'package:velvot_pay/screens/dashboard/home/transcation_history_screen.dart';
-import 'package:velvot_pay/util/constaints.dart';
+import 'package:velvot_pay/utils/Constants.dart';
 import 'package:velvot_pay/widget/bottom_image_button_widget.dart';
 
 class SuccessfullyPaymentScreen extends StatefulWidget {
@@ -29,7 +29,7 @@ class _SuccessfullyPaymentScreenState extends State<SuccessfullyPaymentScreen> {
                   getText(
                     title: 'Your Airtel recharge of\n\$500 is successfull',
                     size: 20,
-                    fontFamily: Constaints.poppinsSemiBold,
+                    fontFamily: Constants.poppinsSemiBold,
                     color: AppColor.darkBlackColor,
                     fontWeight: FontWeight.w600,
                     textAlign: TextAlign.center,
@@ -38,7 +38,7 @@ class _SuccessfullyPaymentScreenState extends State<SuccessfullyPaymentScreen> {
                   getText(
                     title: 'Your recharge will be applied by\n3:30pm today',
                     size: 16,
-                    fontFamily: Constaints.poppinsRegular,
+                    fontFamily: Constants.poppinsRegular,
                     color: AppColor.darkBlackColor,
                     fontWeight: FontWeight.w400,
                     textAlign: TextAlign.center,
@@ -57,7 +57,7 @@ class _SuccessfullyPaymentScreenState extends State<SuccessfullyPaymentScreen> {
                     child: getText(
                         title: 'View Details',
                         size: 16,
-                        fontFamily: Constaints.poppinsMedium,
+                        fontFamily: Constants.poppinsMedium,
                         color: AppColor.darkBlackColor,
                         fontWeight: FontWeight.w500),
                   ),

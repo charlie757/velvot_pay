@@ -5,7 +5,6 @@ import 'package:velvot_pay/helper/custom_textfield.dart';
 import 'package:velvot_pay/helper/getText.dart';
 import 'package:velvot_pay/helper/images.dart';
 import 'package:velvot_pay/helper/screen_size.dart';
-import 'package:velvot_pay/util/constaints.dart';
 import 'package:velvot_pay/utils/constants.dart';
 import 'package:velvot_pay/widget/appBar.dart';
 import 'package:velvot_pay/widget/bottom_image_button_widget.dart';
@@ -37,7 +36,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                 getText(
                     title: 'Name',
                     size: 16,
-                    fontFamily: Constaints.poppinsSemiBold,
+                    fontFamily: Constants.poppinsSemiBold,
                     color: AppColor.darkBlackColor,
                     fontWeight: FontWeight.w500),
                 ScreenSize.height(10),
@@ -49,7 +48,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                 getText(
                     title: 'Email Address',
                     size: 16,
-                    fontFamily: Constaints.poppinsSemiBold,
+                    fontFamily: Constants.poppinsSemiBold,
                     color: AppColor.darkBlackColor,
                     fontWeight: FontWeight.w500),
                 ScreenSize.height(10),
@@ -61,7 +60,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                 getText(
                     title: 'Mobile Number',
                     size: 16,
-                    fontFamily: Constaints.poppinsSemiBold,
+                    fontFamily: Constants.poppinsSemiBold,
                     color: AppColor.darkBlackColor,
                     fontWeight: FontWeight.w500),
                 ScreenSize.height(10),
@@ -73,7 +72,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                 getText(
                     title: 'How May help You?',
                     size: 16,
-                    fontFamily: Constaints.poppinsSemiBold,
+                    fontFamily: Constants.poppinsSemiBold,
                     color: AppColor.darkBlackColor,
                     fontWeight: FontWeight.w500),
                 ScreenSize.height(10),
@@ -90,7 +89,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                 getText(
                     title: 'Write more about your concern',
                     size: 16,
-                    fontFamily: Constaints.poppinsSemiBold,
+                    fontFamily: Constants.poppinsSemiBold,
                     color: AppColor.darkBlackColor,
                     fontWeight: FontWeight.w500),
                 ScreenSize.height(10),

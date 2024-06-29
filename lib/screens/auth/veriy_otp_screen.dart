@@ -7,7 +7,7 @@ import 'package:velvot_pay/helper/app_color.dart';
 import 'package:velvot_pay/helper/images.dart';
 import 'package:velvot_pay/helper/screen_size.dart';
 import 'package:velvot_pay/screens/auth/profile_screen.dart';
-import 'package:velvot_pay/util/constaints.dart';
+import 'package:velvot_pay/utils/Constants.dart';
 import 'package:velvot_pay/widget/bottom_image_button_widget.dart';
 
 class VerifyOtpScreen extends StatefulWidget {
@@ -46,7 +46,7 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
                         fontSize: 22,
                         fontWeight: FontWeight.w600,
                         color: AppColor.hintTextColor,
-                        fontFamily: Constaints.poppinsMedium),
+                        fontFamily: Constants.poppinsMedium),
                     children: [
                       TextSpan(
                           text: ' OTP',
@@ -54,7 +54,7 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
                               fontSize: 22,
                               fontWeight: FontWeight.w700,
                               color: AppColor.darkBlackColor,
-                              fontFamily: Constaints.poppinsBold))
+                              fontFamily: Constants.poppinsBold))
                     ])),
                 ScreenSize.height(20),
                 Text.rich(TextSpan(
@@ -63,7 +63,7 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
                         color: AppColor.hintTextColor,
-                        fontFamily: Constaints.poppinsMedium),
+                        fontFamily: Constants.poppinsMedium),
                     children: [
                       TextSpan(
                           text: ' +1-987-654-3210',
@@ -71,7 +71,7 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
                               fontSize: 14,
                               fontWeight: FontWeight.w500,
                               color: AppColor.darkBlackColor,
-                              fontFamily: Constaints.poppinsBold))
+                              fontFamily: Constants.poppinsBold))
                     ])),
                 ScreenSize.height(12),
                 otpField(context),
@@ -82,7 +82,7 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
                         color: AppColor.hintTextColor,
-                        fontFamily: Constaints.poppinsMedium),
+                        fontFamily: Constants.poppinsMedium),
                     children: [
                       TextSpan(
                           text: '  0:30',
@@ -90,7 +90,7 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
                               fontSize: 14,
                               fontWeight: FontWeight.w500,
                               color: AppColor.darkBlackColor,
-                              fontFamily: Constaints.poppinsBold))
+                              fontFamily: Constants.poppinsBold))
                     ])),
               ],
             ),
@@ -140,7 +140,7 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
         appContext: context,
         keyboardType: TextInputType.number,
         textStyle: TextStyle(
-            color: AppColor.blackColor, fontFamily: Constaints.poppinsRegular),
+            color: AppColor.blackColor, fontFamily: Constants.poppinsRegular),
         enableActiveFill: true,
         onChanged: (val) {},
         onCompleted: (result) {},

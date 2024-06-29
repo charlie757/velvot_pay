@@ -8,7 +8,7 @@ import 'package:velvot_pay/helper/images.dart';
 import 'package:velvot_pay/helper/screen_size.dart';
 import 'package:velvot_pay/screens/dashboard/home/bill_number_screen.dart';
 import 'package:velvot_pay/screens/dashboard/home/data_subscription_screen.dart';
-import 'package:velvot_pay/util/constaints.dart';
+import 'package:velvot_pay/utils/Constants.dart';
 import 'package:velvot_pay/widget/appBar.dart';
 import 'package:velvot_pay/widget/slider_widget.dart';
 
@@ -96,7 +96,7 @@ class _OperatorScreenState extends State<OperatorScreen> {
               child: getText(
                   title: 'Choose your Operator',
                   size: 16,
-                  fontFamily: Constaints.poppinsSemiBold,
+                  fontFamily: Constants.poppinsSemiBold,
                   color: AppColor.darkBlackColor,
                   fontWeight: FontWeight.w600),
             ),
@@ -155,7 +155,7 @@ class _OperatorScreenState extends State<OperatorScreen> {
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                               fontSize: 18,
-                              fontFamily: Constaints.poppinsMedium,
+                              fontFamily: Constants.poppinsMedium,
                               color: const Color(0xff484848),
                               fontWeight: FontWeight.w500),
                         ),

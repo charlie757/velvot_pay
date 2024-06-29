@@ -5,7 +5,7 @@ import 'package:velvot_pay/helper/custom_search_bar.dart';
 import 'package:velvot_pay/helper/getText.dart';
 import 'package:velvot_pay/helper/screen_size.dart';
 import 'package:velvot_pay/screens/dashboard/home/search_number_screen.dart';
-import 'package:velvot_pay/util/constaints.dart';
+import 'package:velvot_pay/utils/Constants.dart';
 import 'package:velvot_pay/widget/appBar.dart';
 import 'package:velvot_pay/widget/custom_divider.dart';
 import 'package:velvot_pay/widget/slider_widget.dart';
@@ -79,7 +79,7 @@ class _DataSubscriptionScreenState extends State<DataSubscriptionScreen> {
               child: getText(
                   title: 'All Contacts',
                   size: 16,
-                  fontFamily: Constaints.poppinsSemiBold,
+                  fontFamily: Constants.poppinsSemiBold,
                   color: AppColor.darkBlackColor,
                   fontWeight: FontWeight.w600),
             ),
@@ -126,7 +126,7 @@ class _DataSubscriptionScreenState extends State<DataSubscriptionScreen> {
                           child: getText(
                               title: numberList[index]['sn'],
                               size: 18,
-                              fontFamily: Constaints.poppinsMedium,
+                              fontFamily: Constants.poppinsMedium,
                               color: AppColor.whiteColor,
                               fontWeight: FontWeight.w600),
                         ),
@@ -141,7 +141,7 @@ class _DataSubscriptionScreenState extends State<DataSubscriptionScreen> {
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
                                     fontSize: 14,
-                                    fontFamily: Constaints.poppinsMedium,
+                                    fontFamily: Constants.poppinsMedium,
                                     color: AppColor.hintTextColor,
                                     fontWeight: FontWeight.w500),
                               ),
@@ -149,7 +149,7 @@ class _DataSubscriptionScreenState extends State<DataSubscriptionScreen> {
                               getText(
                                   title: numberList[index]['number'],
                                   size: 14,
-                                  fontFamily: Constaints.poppinsMedium,
+                                  fontFamily: Constants.poppinsMedium,
                                   color: AppColor.darkBlackColor,
                                   fontWeight: FontWeight.w500)
                             ],

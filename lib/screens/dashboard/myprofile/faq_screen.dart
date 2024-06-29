@@ -4,7 +4,7 @@ import 'package:velvot_pay/helper/app_color.dart';
 import 'package:velvot_pay/helper/getText.dart';
 import 'package:velvot_pay/helper/images.dart';
 import 'package:velvot_pay/helper/screen_size.dart';
-import 'package:velvot_pay/util/constaints.dart';
+import 'package:velvot_pay/utils/Constants.dart';
 import 'package:velvot_pay/widget/appBar.dart';
 
 class FaqScreen extends StatefulWidget {
@@ -74,7 +74,7 @@ class _FaqScreenState extends State<FaqScreen> {
                         getText(
                             title: faqList[index]['title'],
                             size: 16,
-                            fontFamily: Constaints.poppinsMedium,
+                            fontFamily: Constants.poppinsMedium,
                             color: selectedIndex == index
                                 ? AppColor.purpleColor
                                 : AppColor.darkBlackColor,
@@ -90,7 +90,7 @@ class _FaqScreenState extends State<FaqScreen> {
                             title:
                                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar sic tempor.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet',
                             size: 14,
-                            fontFamily: Constaints.poppinsRegular,
+                            fontFamily: Constants.poppinsRegular,
                             color: const Color(0xff616161),
                             fontWeight: FontWeight.w300)
                         : Container()

@@ -6,7 +6,7 @@ import 'package:velvot_pay/helper/getText.dart';
 import 'package:velvot_pay/helper/images.dart';
 import 'package:velvot_pay/helper/screen_size.dart';
 import 'package:velvot_pay/screens/dashboard/home/pay_screen.dart';
-import 'package:velvot_pay/util/constaints.dart';
+import 'package:velvot_pay/utils/constants.dart';
 import 'package:velvot_pay/widget/appBar.dart';
 import 'package:velvot_pay/widget/custom_divider.dart';
 
@@ -72,7 +72,7 @@ class _ChoosePlanScreenState extends State<ChoosePlanScreen> {
                 getText(
                     title: '\$499',
                     size: 25,
-                    fontFamily: Constaints.poppinsSemiBold,
+                    fontFamily: Constants.poppinsSemiBold,
                     color: AppColor.darkBlackColor,
                     fontWeight: FontWeight.w600),
                 ScreenSize.width(35),
@@ -88,13 +88,13 @@ class _ChoosePlanScreenState extends State<ChoosePlanScreen> {
                     getText(
                         title: 'Data :',
                         size: 12,
-                        fontFamily: Constaints.poppinsMedium,
+                        fontFamily: Constants.poppinsMedium,
                         color: AppColor.hintTextColor,
                         fontWeight: FontWeight.w400),
                     getText(
                         title: '12 GB/day',
                         size: 14,
-                        fontFamily: Constaints.poppinsSemiBold,
+                        fontFamily: Constants.poppinsSemiBold,
                         color: AppColor.darkBlackColor,
                         fontWeight: FontWeight.w600),
                   ],
@@ -106,13 +106,13 @@ class _ChoosePlanScreenState extends State<ChoosePlanScreen> {
                     getText(
                         title: 'Validity :',
                         size: 12,
-                        fontFamily: Constaints.poppinsMedium,
+                        fontFamily: Constants.poppinsMedium,
                         color: AppColor.hintTextColor,
                         fontWeight: FontWeight.w400),
                     getText(
                         title: '28 Days',
                         size: 14,
-                        fontFamily: Constaints.poppinsSemiBold,
+                        fontFamily: Constants.poppinsSemiBold,
                         color: AppColor.darkBlackColor,
                         fontWeight: FontWeight.w600),
                   ],
@@ -129,28 +129,28 @@ class _ChoosePlanScreenState extends State<ChoosePlanScreen> {
                 getText(
                     title: 'Sms :',
                     size: 12,
-                    fontFamily: Constaints.poppinsMedium,
+                    fontFamily: Constants.poppinsMedium,
                     color: AppColor.hintTextColor,
                     fontWeight: FontWeight.w400),
                 ScreenSize.width(7),
                 getText(
                     title: '100/day',
                     size: 14,
-                    fontFamily: Constaints.poppinsSemiBold,
+                    fontFamily: Constants.poppinsSemiBold,
                     color: AppColor.darkBlackColor,
                     fontWeight: FontWeight.w600),
                 ScreenSize.width(23),
                 getText(
                     title: 'Calls :',
                     size: 12,
-                    fontFamily: Constaints.poppinsMedium,
+                    fontFamily: Constants.poppinsMedium,
                     color: AppColor.hintTextColor,
                     fontWeight: FontWeight.w400),
                 ScreenSize.width(7),
                 getText(
                     title: 'Unlimited Calls',
                     size: 14,
-                    fontFamily: Constaints.poppinsSemiBold,
+                    fontFamily: Constants.poppinsSemiBold,
                     color: AppColor.darkBlackColor,
                     fontWeight: FontWeight.w600),
               ],
