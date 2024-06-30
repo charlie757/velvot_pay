@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:velvot_pay/approutes/app_routes.dart';
 import 'package:velvot_pay/helper/app_color.dart';
+import 'package:velvot_pay/helper/custom_btn.dart';
 import 'package:velvot_pay/helper/getText.dart';
 import 'package:velvot_pay/helper/images.dart';
 import 'package:velvot_pay/helper/screen_size.dart';
@@ -26,22 +27,24 @@ class _PayScreenState extends State<PayScreen> {
             onTap: () {
               Navigator.pop(context);
             }),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            widget.index == 0 ? payWidget() : electiricityBillWidget(),
-            bottomImageButtonWidget(
-                onTap: () {
-                  AppRoutes.pushNavigation(const SuccessfullyPaymentScreen());
-                },
-                btnText: "Proceed to Pay")
-          ],
+        body: Padding(
+          padding: const EdgeInsets.only(left: 10, right: 10, bottom: 40),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              widget.index == 0 ? payWidget() : electiricityBillWidget(),
+              CustomBtn(
+                  title: 'Proceed to Pay',
+                  onTap: () {
+                    AppRoutes.pushNavigation(const SuccessfullyPaymentScreen());
+                  })
+            ],
+          ),
         ));
   }
 
   payWidget() {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(5),
         color: AppColor.lightAppColor,

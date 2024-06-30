@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
@@ -9,8 +10,10 @@ import 'package:velvot_pay/helper/custom_btn.dart';
 import 'package:velvot_pay/helper/custom_textfield.dart';
 import 'package:velvot_pay/helper/getText.dart';
 import 'package:velvot_pay/helper/images.dart';
+import 'package:velvot_pay/helper/network_image_helper.dart';
 import 'package:velvot_pay/helper/screen_size.dart';
 import 'package:velvot_pay/provider/profile_provider.dart';
+import 'package:velvot_pay/utils/emoji_restrict.dart';
 import 'package:velvot_pay/utils/utils.dart';
 import 'package:velvot_pay/widget/appBar.dart';
 
@@ -35,7 +38,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   callInitFunction() {
     final profileProvider =
         Provider.of<ProfileProvider>(context, listen: false);
-    if (widget.route == 'inital') {
+    if (widget.route == 'login') {
       profileProvider.resetValues();
       profileProvider.numberController.text = widget.number;
     } else {
@@ -49,8 +52,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBar(
-          title: widget.route == 'initial' ? 'Complete Profile' : "Profile",
-          isShowArrow: widget.route == 'initial' ? true : false,
+          title: widget.route == 'login' ? 'Complete Profile' : "Profile",
+          isShowArrow: widget.route == 'login' ? true : false,
           onTap: () {
             Navigator.pop(context);
           }),
@@ -58,8 +61,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
         return Form(
           key: myProvider.formKey,
           child: SingleChildScrollView(
-            padding:
-                const EdgeInsets.only(left: 20, right: 20, top: 30, bottom: 30),
+            padding: EdgeInsets.only(
+                left: 20,
+                right: 20,
+                top: 20,
+                bottom: widget.route == 'login' ? 30 : 120),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -78,6 +84,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 CustomTextField(
                   isReadOnly: myProvider.isLoading,
                   hintText: 'Full Name',
+                  inputFormatters: [EmojiRestrictingTextInputFormatter()],
                   textInputAction: TextInputAction.next,
                   controller: myProvider.nameController,
                   validator: (val) {
@@ -95,10 +102,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     fontWeight: FontWeight.w500),
                 ScreenSize.height(10),
                 CustomTextField(
-                  isReadOnly: myProvider.isLoading,
+                  isReadOnly:
+                      widget.route == 'login' ? myProvider.isLoading : true,
                   hintText: 'Email Address',
                   textInputAction: TextInputAction.next,
                   controller: myProvider.emailController,
+                  inputFormatters: [EmojiRestrictingTextInputFormatter()],
                   validator: (val) {
                     RegExp regExp = RegExp(Utils.emailPattern.trim());
 
@@ -145,9 +154,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ScreenSize.height(20),
                 CustomBtn(
                     isLoading: myProvider.isLoading,
-                    title: widget.route == 'initial' ? "Continue" : 'Save',
+                    title: widget.route == 'login' ? "Continue" : 'Save',
                     onTap: () {
-                      myProvider.checkValidation();
+                      if (widget.route == 'login') {
+                        myProvider.checkValidation();
+                      } else {
+                        myProvider.checkUpdateProfileValidation();
+                      }
                     })
               ],
             ),
@@ -168,15 +181,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
               decoration: BoxDecoration(
                   border: Border.all(color: AppColor.darkBlackColor, width: 3),
                   borderRadius: BorderRadius.circular(50)),
-              child: provider.file != null
-                  ? ClipRRect(
-                      borderRadius: BorderRadius.circular(50),
-                      child: Image.file(
-                        File(provider.file!.path),
-                        width: double.infinity,
-                        height: double.infinity,
-                      ))
-                  : Image.asset('assets/icons/Mask.png'),
+              child: ClipRRect(
+                  borderRadius: BorderRadius.circular(50),
+                  child: provider.file != null
+                      ? Image.file(
+                          File(provider.file!.path),
+                          width: double.infinity,
+                          height: double.infinity,
+                          fit: BoxFit.cover,
+                        )
+                      : provider.model != null && provider.model!.data != null
+                          ? NetworkImagehelper(
+                              img: provider.model!.data!.imageUrl,
+                              height: 96.0,
+                              width: 96.0,
+                            )
+                          : Image.asset('assets/icons/Mask.png')),
             ),
             Positioned(
               bottom: 0,
@@ -224,6 +244,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       controller: provider.addressController,
       textInputAction: TextInputAction.done,
       readOnly: provider.isLoading,
+      inputFormatters: [EmojiRestrictingTextInputFormatter()],
       style: TextStyle(
           fontWeight: FontWeight.w400,
           fontSize: 12,

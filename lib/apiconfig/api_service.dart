@@ -63,6 +63,7 @@ class ApiService {
     if (response.statusCode == 200) {
       return json.decode(response.body);
     } else if (response.statusCode == 401) {
+      print('object');
       var dataAll = json.decode(response.body);
       // SessionManager.unauthorizedUser(navigatorKey.currentState!.context);
       Utils.logOut();
@@ -71,6 +72,7 @@ class ApiService {
           : null;
       return null;
     } else {
+      print('object');
       var dataAll = json.decode(response.body);
       isErrorMessageShow
           ? Utils.errorSnackBar(dataAll['message'], navigatorKey.currentContext)

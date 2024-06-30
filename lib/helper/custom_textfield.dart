@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -18,6 +20,7 @@ class CustomTextField extends StatefulWidget {
   Widget? suffixWidget;
   FocusNode? focusNode;
   Color? fillColor;
+  Function()? onTap;
   CustomTextField(
       {required this.hintText,
       this.controller,
@@ -31,7 +34,8 @@ class CustomTextField extends StatefulWidget {
       this.textCapitalization = TextCapitalization.none,
       this.textColor = const Color(0xff0E0E0E),
       this.focusNode,
-      this.fillColor});
+      this.fillColor,
+      this.onTap});
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
@@ -42,6 +46,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
   Widget build(BuildContext context) {
     return TextFormField(
       // focusNode: widget.focusNode,
+      onTap: widget.onTap,
       readOnly: widget.isReadOnly,
       keyboardType: widget.textInputType,
       textInputAction: widget.textInputAction,

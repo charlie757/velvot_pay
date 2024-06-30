@@ -11,6 +11,8 @@ class Utils {
   static const emailPattern =
       r'^(([^<>()[\]\\.,;:@\"]+(\.[^<>()[\]\\.,;:@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
 
+  static final RegExp alphanumericRegex = RegExp(r'^[a-zA-Z0-9]+$');
+
   static hideTextField() {
     FocusManager.instance.primaryFocus?.unfocus();
   }

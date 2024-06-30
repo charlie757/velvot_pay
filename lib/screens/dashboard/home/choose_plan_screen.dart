@@ -26,29 +26,17 @@ class _ChoosePlanScreenState extends State<ChoosePlanScreen> {
           onTap: () {
             Navigator.pop(context);
           }),
-      body: Stack(
-        children: [
-          ListView.separated(
-              separatorBuilder: (context, sp) {
-                return ScreenSize.height(15);
-              },
-              itemCount: 6,
-              padding: const EdgeInsets.only(
-                  left: 10, right: 10, top: 10, bottom: 240),
-              shrinkWrap: true,
-              itemBuilder: (context, index) {
-                return planWidget();
-              }),
-          Align(
-              alignment: Alignment.bottomCenter,
-              child: SvgPicture.asset(
-                Images.bottomImage,
-                fit: BoxFit.cover,
-                // height: 250,
-                // width: double.infinity,
-              ))
-        ],
-      ),
+      body: ListView.separated(
+          separatorBuilder: (context, sp) {
+            return ScreenSize.height(15);
+          },
+          itemCount: 6,
+          padding:
+              const EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 40),
+          shrinkWrap: true,
+          itemBuilder: (context, index) {
+            return planWidget();
+          }),
     );
   }
 

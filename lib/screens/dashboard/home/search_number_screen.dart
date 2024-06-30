@@ -21,24 +21,12 @@ class _SearchNumberScreenState extends State<SearchNumberScreen> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: SafeArea(
-        child: Stack(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 5),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [customSearchBarWidget(), searchResultWidget()],
-              ),
-            ),
-            Align(
-                alignment: Alignment.bottomCenter,
-                child: SvgPicture.asset(
-                  Images.bottomImage,
-                  fit: BoxFit.cover,
-                  // height: 250,
-                  // width: double.infinity,
-                ))
-          ],
+        child: Padding(
+          padding: const EdgeInsets.only(top: 5),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [customSearchBarWidget(), searchResultWidget()],
+          ),
         ),
       ),
     );

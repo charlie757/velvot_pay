@@ -47,12 +47,18 @@ class ProfileProvider extends ChangeNotifier {
   checkValidation() {
     if (formKey.currentState!.validate() && file != null) {
       updatePhotoError(false);
-      callApiFunction();
+      callRegisterApiFunction();
     }
     if (file == null) {
       updatePhotoError(true);
     } else {
       updatePhotoError(false);
+    }
+  }
+
+  checkUpdateProfileValidation() {
+    if (formKey.currentState!.validate()) {
+      updateProfileApiFunction();
     }
   }
 
@@ -67,9 +73,9 @@ class ProfileProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  callApiFunction() async {
+  callRegisterApiFunction() async {
     updateIndex(true);
-    Map<String, String> headers = {"Authorization": SessionManager.token};
+    Map<String, String> headers = {"x-access-token": SessionManager.token};
 
     var request = http.MultipartRequest('POST', Uri.parse(ApiUrl.registerUrl));
     request.headers.addAll(headers);
@@ -103,17 +109,57 @@ class ProfileProvider extends ChangeNotifier {
   }
 
   getProfileApiFunction() async {
-    showLoader(navigatorKey.currentContext!);
+    file = null;
+    model != null ? null : showLoader(navigatorKey.currentContext!);
     var body = json.encode({});
     final response = await ApiService.apiMethod(
         url: ApiUrl.getProfileUrl,
         body: body,
         method: checkApiMethod(httpMethod.get));
-    Navigator.pop(navigatorKey.currentContext!);
+    model != null ? null : Navigator.pop(navigatorKey.currentContext!);
     if (response != null) {
       model = ProfileModel.fromJson(response);
+      nameController.text = model!.data!.firstName ?? '';
+      emailController.text = model!.data!.email ?? '';
+      numberController.text = model!.data!.mobileNumber ?? '';
+      addressController.text = model!.data!.address ?? '';
+      notifyListeners();
     } else {
       model = null;
+    }
+  }
+
+  updateProfileApiFunction() async {
+    showLoader(navigatorKey.currentContext!);
+    Map<String, String> headers = {"x-access-token": SessionManager.token};
+
+    var request =
+        http.MultipartRequest('POST', Uri.parse(ApiUrl.updateProfileUrl));
+    request.headers.addAll(headers);
+    request.fields['name'] = nameController.text;
+    request.fields['address'] = addressController.text;
+    if (file != null) {
+      final file = await http.MultipartFile.fromPath(
+        'image',
+        this.file!.path,
+      );
+      request.files.add(file);
+    }
+
+    var res = await request.send();
+    var vb = await http.Response.fromStream(res);
+    print(vb.request);
+    log(vb.body);
+    Navigator.pop(navigatorKey.currentContext!);
+    if (vb.statusCode == 200) {
+      var dataAll = json.decode(vb.body);
+      getProfileApiFunction();
+      Utils.successSnackBar(dataAll['message'], navigatorKey.currentContext!);
+    } else if (vb.statusCode == 401) {
+      Utils.logOut();
+    } else {
+      var dataAll = json.decode(vb.body);
+      Utils.errorSnackBar(dataAll['message'], navigatorKey.currentContext!);
     }
   }
 }

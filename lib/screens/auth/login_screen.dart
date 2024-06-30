@@ -9,6 +9,7 @@ import 'package:velvot_pay/helper/images.dart';
 import 'package:velvot_pay/helper/screen_size.dart';
 import 'package:velvot_pay/provider/login_provider.dart';
 import 'package:velvot_pay/utils/constants.dart';
+import 'package:velvot_pay/utils/emoji_restrict.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -52,6 +53,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     textInputType: TextInputType.number,
                     isReadOnly: myProvider.isLoading,
                     inputFormatters: [
+                      EmojiRestrictingTextInputFormatter(),
                       FilteringTextInputFormatter.digitsOnly,
                       LengthLimitingTextInputFormatter(10)
                     ],

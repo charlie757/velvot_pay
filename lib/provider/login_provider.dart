@@ -39,7 +39,7 @@ class LoginProvider extends ChangeNotifier {
       ));
     } else {
       AppRoutes.pushNavigation(ProfileScreen(
-        route: 'initial',
+        route: 'login',
         number: phoneController.text,
       ));
     }

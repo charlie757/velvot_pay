@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:velvot_pay/approutes/app_routes.dart';
 import 'package:velvot_pay/helper/app_color.dart';
 import 'package:velvot_pay/helper/custom_search_bar.dart';
 import 'package:velvot_pay/helper/getText.dart';
 import 'package:velvot_pay/helper/screen_size.dart';
+import 'package:velvot_pay/provider/dashboard_provider.dart';
 import 'package:velvot_pay/screens/dashboard/home/search_number_screen.dart';
 import 'package:velvot_pay/utils/Constants.dart';
 import 'package:velvot_pay/widget/appBar.dart';
@@ -52,6 +54,7 @@ class _DataSubscriptionScreenState extends State<DataSubscriptionScreen> {
   ];
   @override
   Widget build(BuildContext context) {
+    final dashboardProvider = Provider.of<DashboardProvider>(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: appBar(
@@ -63,7 +66,10 @@ class _DataSubscriptionScreenState extends State<DataSubscriptionScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            sliderWidget(),
+            dashboardProvider.bannerModel != null &&
+                    dashboardProvider.bannerModel!.data != null
+                ? sliderWidget(dashboardProvider)
+                : Container(),
             ScreenSize.height(20),
             Padding(
               padding: const EdgeInsets.only(left: 15, right: 15),

@@ -27,4 +27,11 @@ class Images {
   static String transferIcon = 'assets/svg/transfer_icon.svg';
   static String creditIcon = 'assets/icons/credit_icon.png';
   static String menuIcon = 'assets/icons/menu.png';
+  static String profileBackImage = 'assets/svg/bg-img.svg';
+  static String userIcon = 'assets/svg/user.svg';
+  static String faqIcon = 'assets/svg/faq.svg';
+  static String privacyPolicyIcon = 'assets/svg/privacy_policy.svg';
+  static String contactUsIcon = 'assets/svg/contact_us.svg';
+  static String logoutIcon = 'assets/svg/logout.svg';
+  static String successIcon = 'assets/svg/success-icon.svg';
 }

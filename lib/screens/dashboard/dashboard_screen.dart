@@ -26,6 +26,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
   callIniFunction() {
     final profileProvider =
         Provider.of<ProfileProvider>(context, listen: false);
+    final dashboardProvider =
+        Provider.of<DashboardProvider>(context, listen: false);
+    dashboardProvider.resetValues();
+    profileProvider.resetValues();
+    profileProvider.model = null;
     Future.delayed(Duration.zero, () {
       profileProvider.getProfileApiFunction();
     });

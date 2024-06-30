@@ -1,30 +1,25 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:velvot_pay/helper/network_image_helper.dart';
+import 'package:velvot_pay/provider/dashboard_provider.dart';
 
-sliderWidget() {
+sliderWidget(DashboardProvider dashboardProvider) {
   return SizedBox(
     height: 184,
     width: double.infinity,
     child: CarouselSlider.builder(
-      itemCount: 2,
+      itemCount: dashboardProvider.bannerModel!.data!.length,
       itemBuilder: (BuildContext context, int itemIndex, int pageViewIndex) {
         return Container(
           margin: const EdgeInsets.only(right: 5, left: 5),
           child: ClipRRect(
               borderRadius: BorderRadius.circular(15),
-              child: Image.asset(
-                'assets/icons/slider_image.png',
+              child: NetworkImagehelper(
+                img:
+                    "${dashboardProvider.bannerModel!.data![itemIndex].imageUrl}",
+                height: 168.0,
                 width: double.infinity,
-                fit: BoxFit.cover,
-              )
-              // NetworkImageHelper(
-              //   img:
-              //   "${provider.homeModel!.data!.bannerPath}${provider.homeModel!.data!.banners![itemIndex].bannerImage}",
-              //   height: 168.0,
-              //   width: double.infinity,
-              //   isAnotherColorOfLodingIndicator: true,
-              // )
-              ),
+              )),
         );
       },
       options: CarouselOptions(

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:velvot_pay/utils/constants.dart';
 
 import 'app_color.dart';

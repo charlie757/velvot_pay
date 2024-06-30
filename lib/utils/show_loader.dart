@@ -43,7 +43,7 @@ class CustomCircularProgressIndicator extends StatelessWidget {
             child:
                 // CupertinoActivityIndicator()
                 CircularProgressIndicator(
-              color: AppColor.btnColor,
+              color: AppColor.hintTextColor,
               strokeWidth: 3,
             )),
       ],

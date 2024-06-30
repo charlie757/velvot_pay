@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:velvot_pay/helper/session_manager.dart';
+import 'package:velvot_pay/provider/contact_us_provider.dart';
 import 'package:velvot_pay/provider/dashboard_provider.dart';
+import 'package:velvot_pay/provider/pages_provider.dart';
 import 'package:velvot_pay/provider/login_provider.dart';
+import 'package:velvot_pay/provider/operator_provider.dart';
 import 'package:velvot_pay/provider/profile_provider.dart';
 import 'package:velvot_pay/provider/splash_provider.dart';
 import 'package:velvot_pay/provider/verify_otp_provider.dart';
@@ -35,6 +38,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => VerifyOtpProvider()),
         ChangeNotifierProvider(create: (_) => ProfileProvider()),
         ChangeNotifierProvider(create: (_) => DashboardProvider()),
+        ChangeNotifierProvider(create: (_) => OperatorProvider()),
+        ChangeNotifierProvider(create: (_) => PagesProvider()),
+        ChangeNotifierProvider(create: (_) => ContactUsProvider())
       ],
       child: MaterialApp(
           navigatorKey: navigatorKey,
