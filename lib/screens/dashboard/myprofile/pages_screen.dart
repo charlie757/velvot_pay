@@ -10,19 +10,20 @@ import 'package:velvot_pay/utils/Constants.dart';
 import 'package:velvot_pay/widget/appBar.dart';
 import 'package:velvot_pay/widget/conver_html.dart';
 
-class PrivacyPolicyScreen extends StatefulWidget {
-  const PrivacyPolicyScreen({super.key});
-
+class PagesScreen extends StatefulWidget {
+  String title;
+  String url;
+   PagesScreen({required this.title,required this.url});
   @override
-  State<PrivacyPolicyScreen> createState() => _PrivacyPolicyScreenState();
+  State<PagesScreen> createState() => _PagesScreenState();
 }
 
-class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
+class _PagesScreenState extends State<PagesScreen> {
   @override
   void initState() {
     Future.delayed(Duration.zero, () {
       Provider.of<PagesProvider>(context, listen: false)
-          .callPrivacyApiFunction();
+          .callPrivacyApiFunction(widget.url);
     });
     super.initState();
   }
@@ -31,7 +32,7 @@ class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBar(
-          title: 'Privacy Policy',
+          title: widget.title,
           onTap: () {
             Navigator.pop(context);
           }),

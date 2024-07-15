@@ -9,7 +9,7 @@ import 'package:velvot_pay/provider/splash_provider.dart';
 import '../utils/constants.dart';
 
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({super.key});
+  const SplashScreen();
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();

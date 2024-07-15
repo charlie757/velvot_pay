@@ -10,7 +10,7 @@ import 'package:velvot_pay/utils/constants.dart';
 import 'package:provider/provider.dart';
 
 class DashboardScreen extends StatefulWidget {
-  const DashboardScreen({super.key});
+  const DashboardScreen();
 
   @override
   State<DashboardScreen> createState() => _DashboardScreenState();
@@ -39,89 +39,92 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
     return Consumer<DashboardProvider>(builder: (context, myProvider, child) {
-      return Scaffold(
-        resizeToAvoidBottomInset: false,
-        body: Stack(
-          children: [
-            myProvider.screenList[myProvider.currentIndex],
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Container(
-                height: 90,
+      return WillPopScope(
+        onWillPop: myProvider.onWillPop,
+        child: Scaffold(
+          resizeToAvoidBottomInset: false,
+          body: Stack(
+            children: [
+              myProvider.screenList[myProvider.currentIndex],
+              Align(
                 alignment: Alignment.bottomCenter,
-                child: Stack(
-                  children: [
-                    Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Container(
-                        height: 79,
-                        width: double.infinity,
-                        decoration:
-                            BoxDecoration(color: AppColor.darkBlackColor),
-                        padding: const EdgeInsets.only(left: 29, right: 29),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            myProvider.currentIndex == 0
-                                ? const Spacer()
-                                : Container(),
-                            myProvider.currentIndex != 0
-                                ? bottomColumnWidget(
-                                    Images.historyIcon, 'History', () {
-                                    myProvider.updateIndex(0);
-                                  })
-                                : Flexible(
-                                    child: Container(
-                                    width: 0,
-                                  )),
-                            const Spacer(),
-                            myProvider.currentIndex != 1
-                                ? bottomColumnWidget(Images.homeIcon, 'Home',
-                                    () {
-                                    myProvider.updateIndex(1);
-                                  })
-                                : Container(),
-                            const Spacer(),
-                            myProvider.currentIndex != 2
-                                ? bottomColumnWidget(
-                                    Images.profileIcon, 'My Profile', () {
-                                    myProvider.updateIndex(2);
-                                  })
-                                : Container(),
-                            myProvider.currentIndex == 2
-                                ? const Spacer()
-                                : Container(),
-                          ],
+                child: Container(
+                  height: 90,
+                  alignment: Alignment.bottomCenter,
+                  child: Stack(
+                    children: [
+                      Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Container(
+                          height: 79,
+                          width: double.infinity,
+                          decoration:
+                              BoxDecoration(color: AppColor.darkBlackColor),
+                          padding: const EdgeInsets.only(left: 29, right: 29),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              myProvider.currentIndex == 0
+                                  ? const Spacer()
+                                  : Container(),
+                              myProvider.currentIndex != 0
+                                  ? bottomColumnWidget(
+                                      Images.historyIcon, 'History', () {
+                                      myProvider.updateIndex(0);
+                                    })
+                                  : Flexible(
+                                      child: Container(
+                                      width: 0,
+                                    )),
+                              const Spacer(),
+                              myProvider.currentIndex != 1
+                                  ? bottomColumnWidget(Images.homeIcon, 'Home',
+                                      () {
+                                      myProvider.updateIndex(1);
+                                    })
+                                  : Container(),
+                              const Spacer(),
+                              myProvider.currentIndex != 2
+                                  ? bottomColumnWidget(
+                                      Images.profileIcon, 'My Profile', () {
+                                      myProvider.updateIndex(2);
+                                    })
+                                  : Container(),
+                              myProvider.currentIndex == 2
+                                  ? const Spacer()
+                                  : Container(),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(
-                          bottom: 20,
-                          left: myProvider.currentIndex == 1
-                              ? 0
-                              : myProvider.currentIndex == 0
-                                  ? 20
-                                  : 0,
-                          right: myProvider.currentIndex == 2 ? 20 : 0),
-                      alignment: myProvider.currentIndex == 1
-                          ? Alignment.center
-                          : myProvider.currentIndex == 0
-                              ? Alignment.centerLeft
-                              : Alignment.centerRight,
-                      child: myProvider.currentIndex == 1
-                          ? centerBottomWidget(myProvider, Images.homeIcon, 1)
-                          : myProvider.currentIndex == 2
-                              ? centerBottomWidget(
-                                  myProvider, Images.profileIcon, 2)
-                              : centerBottomWidget(
-                                  myProvider, Images.historyIcon, 0),
-                    )
-                  ],
+                      Container(
+                        margin: EdgeInsets.only(
+                            bottom: 20,
+                            left: myProvider.currentIndex == 1
+                                ? 0
+                                : myProvider.currentIndex == 0
+                                    ? 20
+                                    : 0,
+                            right: myProvider.currentIndex == 2 ? 20 : 0),
+                        alignment: myProvider.currentIndex == 1
+                            ? Alignment.center
+                            : myProvider.currentIndex == 0
+                                ? Alignment.centerLeft
+                                : Alignment.centerRight,
+                        child: myProvider.currentIndex == 1
+                            ? centerBottomWidget(myProvider, Images.homeIcon, 1)
+                            : myProvider.currentIndex == 2
+                                ? centerBottomWidget(
+                                    myProvider, Images.profileIcon, 2)
+                                : centerBottomWidget(
+                                    myProvider, Images.historyIcon, 0),
+                      )
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       );
     });

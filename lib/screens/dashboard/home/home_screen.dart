@@ -13,13 +13,18 @@ import 'package:velvot_pay/provider/profile_provider.dart';
 import 'package:velvot_pay/screens/dashboard/home/operator_screen.dart';
 import 'package:velvot_pay/screens/dashboard/myprofile/contact_us_screen.dart';
 import 'package:velvot_pay/screens/dashboard/myprofile/faq_screen.dart';
-import 'package:velvot_pay/screens/dashboard/myprofile/privacy_policy_screen.dart';
+import 'package:velvot_pay/screens/dashboard/myprofile/pages_screen.dart';
 import 'package:velvot_pay/utils/constants.dart';
 import 'package:velvot_pay/widget/custom_divider.dart';
 import 'package:velvot_pay/widget/slider_widget.dart';
 
+import '../../../apiconfig/api_url.dart';
+import '../../../helper/custom_btn.dart';
+import '../../../utils/utils.dart';
+import '../../../widget/general_dialog_box.dart';
+
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  const HomeScreen();
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -74,7 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             color: AppColor.darkBlackColor,
                             fontWeight: FontWeight.w600),
                         ScreenSize.height(20),
-                        typesWidget()
+                        typesWidget(dashboardProvider)
                       ],
                     ),
                   )
@@ -112,8 +117,15 @@ class _HomeScreenState extends State<HomeScreen> {
                               Border.all(width: 2, color: AppColor.whiteColor),
                           shape: BoxShape.circle),
                       child: ClipRRect(
-                          borderRadius: BorderRadius.circular(30),
-                          child: Image.asset('assets/icons/dummy_girl.png')),
+                          borderRadius: BorderRadius.circular(50),
+                          child: profileProvider.model != null &&
+                              profileProvider.model!.data != null
+                              ? NetworkImagehelper(
+                            img: profileProvider.model!.data!.imageUrl,
+                            height: 40.0,
+                            width: 40.0,
+                          )
+                              : Image.asset('assets/icons/dummy_girl.png'))
                     ),
                     Positioned(
                       bottom: 0,
@@ -161,70 +173,84 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  typesWidget() {
-    return Column(
-      children: [
-        Row(
-          children: [
-            Expanded(
-              child: Column(
-                children: [
-                  customTypesContainer(
-                      AppColor.dataSubsriptionColor,
-                      Images.dataSubscriptionIcon,
-                      'Data Subscription',
-                      150, () {
-                    AppRoutes.pushNavigation(const OperatorScreen(
-                      title: 'Select Operator',
-                      index: 0,
-                    ));
-                  }),
-                  ScreenSize.height(16),
-                  customTypesContainer(AppColor.electricityColor,
-                      Images.electricityIcon, 'Electricity Payment', 150, () {
-                    AppRoutes.pushNavigation(const OperatorScreen(
-                      title: 'Choose Electricity Bill Operator',
-                      index: 1,
-                    ));
-                  })
-                ],
-              ),
-            ),
-            ScreenSize.width(15),
-            Expanded(
-                child: customTypesContainer(AppColor.educationColor,
-                    Images.educationIcon, 'Educational\nPayment', 320, () {
-              AppRoutes.pushNavigation(const OperatorScreen(
-                title: 'Choose Educational Bill Operator',
-                index: 2,
-              ));
-            }))
-          ],
-        ),
-        ScreenSize.height(15),
-        Row(
-          children: [
-            Expanded(
-                child: customTypesContainer(AppColor.tvSubcriptionColor,
-                    Images.tvSubscriptionIcon, 'TV Subscription', 150, () {
-              AppRoutes.pushNavigation(const OperatorScreen(
-                title: 'Choose TV Subcription Operator',
-                index: 3,
-              ));
-            })),
-            ScreenSize.width(15),
-            Expanded(
-                child: customTypesContainer(AppColor.insuranceColor,
-                    Images.insuranceIcon, 'Insurance\nPayment', 150, () {
-              AppRoutes.pushNavigation(const OperatorScreen(
-                title: 'Choose Insurance Bill Operator',
-                index: 4,
-              ));
-            }))
-          ],
-        )
-      ],
-    );
+  typesWidget(DashboardProvider provider) {
+    return GridView.builder(
+        shrinkWrap: true,
+        itemCount: provider.serviceList.length,
+        physics: const NeverScrollableScrollPhysics(),
+        gridDelegate:const SliverGridDelegateWithFixedCrossAxisCount(
+      crossAxisCount: 2,mainAxisSpacing: 15,crossAxisSpacing: 15,
+          childAspectRatio: 1/1.1
+    ),
+        itemBuilder: (context,index){
+          return customTypesContainer(provider.serviceList[index]['color'],
+              provider.serviceList[index]['img'], provider.serviceList[index]['title'], 150, () {
+            provider.serviceNavigateRoutes(index);
+              });
+    });
+    //   Column(
+    //   children: [
+    //     Row(
+    //       children: [
+    //         Expanded(
+    //           child: Column(
+    //             children: [
+    //               customTypesContainer(
+    //                   AppColor.dataSubsriptionColor,
+    //                   Images.dataSubscriptionIcon,
+    //                   'Data Subscription',
+    //                   150, () {
+    //                 AppRoutes.pushNavigation(const OperatorScreen(
+    //                   title: 'Select Operator',
+    //                   route: 'operator',
+    //                 ));
+    //               }),
+    //               ScreenSize.height(16),
+    //               customTypesContainer(AppColor.electricityColor,
+    //                   Images.electricityIcon, 'Electricity Payment', 150, () {
+    //                 AppRoutes.pushNavigation(const OperatorScreen(
+    //                   title: 'Choose Electricity Bill Operator',
+    //                   route: 'electricity',
+    //                 ));
+    //               })
+    //             ],
+    //           ),
+    //         ),
+    //         ScreenSize.width(15),
+    //         Expanded(
+    //             child: customTypesContainer(AppColor.educationColor,
+    //                 Images.educationIcon, 'Educational\nPayment', 320, () {
+    //           AppRoutes.pushNavigation(const OperatorScreen(
+    //             title: 'Choose Educational Bill Operator',
+    //             route: 'education',
+    //           ));
+    //         }))
+    //       ],
+    //     ),
+    //     ScreenSize.height(15),
+    //     Row(
+    //       children: [
+    //         Expanded(
+    //             child: customTypesContainer(AppColor.tvSubcriptionColor,
+    //                 Images.tvSubscriptionIcon, 'TV Subscription', 150, () {
+    //           AppRoutes.pushNavigation(const OperatorScreen(
+    //             title: 'Choose TV Subcription Operator',
+    //             route: 'tv',
+    //           ));
+    //         })),
+    //         ScreenSize.width(15),
+    //         Expanded(
+    //             child: customTypesContainer(AppColor.insuranceColor,
+    //                 Images.insuranceIcon, 'Insurance\nPayment', 150, () {
+    //           AppRoutes.pushNavigation(const OperatorScreen(
+    //             title: 'Choose Insurance Bill Operator',
+    //             route: 'insurance',
+    //           ));
+    //         }))
+    //       ],
+    //     )
+    //   ],
+    // );
   }
 
   customTypesContainer(
@@ -260,7 +286,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Container(
       width: MediaQuery.of(context).size.width / 1.2,
       height: double.infinity,
-      padding: const EdgeInsets.only(bottom: 120),
+      padding: const EdgeInsets.only(bottom: 100),
       color: AppColor.whiteColor,
       child: Column(
         children: [
@@ -270,11 +296,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 Images.profileBackImage,
                 fit: BoxFit.cover,
                 width: double.infinity,
-                height: 250,
+                height: 230,
               ),
               Positioned(
                 bottom: 0 + 25,
                 left: 10,
+                right: 5,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -303,17 +330,21 @@ class _HomeScreenState extends State<HomeScreen> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            getText(
-                                title: provider.model != null &&
-                                        provider.model!.data != null
-                                    ? provider.model!.data!.firstName
-                                        .toString()
-                                        .capitalize()
-                                    : "",
-                                size: 18,
-                                fontFamily: Constants.poppinsSemiBold,
+                            Text(provider.model != null &&
+                                provider.model!.data != null
+                                ? provider.model!.data!.firstName
+                                .toString()
+                                .capitalize()
+                                : "",
+                            maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
                                 color: AppColor.whiteColor,
-                                fontWeight: FontWeight.w600),
+                                fontSize: 18,
+                                  fontFamily: Constants.poppinsSemiBold,
+                                  fontWeight: FontWeight.w600
+                              ),
+                            ),
                             ScreenSize.height(5),
                             getText(
                                 title: provider.model != null &&
@@ -329,15 +360,20 @@ class _HomeScreenState extends State<HomeScreen> {
                       ],
                     ),
                     ScreenSize.height(15),
-                    getText(
-                        title: provider.model != null &&
-                                provider.model!.data != null
-                            ? provider.model!.data!.email
-                            : "",
-                        size: 18,
-                        fontFamily: Constants.poppinsLight,
-                        color: AppColor.whiteColor,
-                        fontWeight: FontWeight.w300),
+                    Text(provider.model != null &&
+                        provider.model!.data != null
+                        ? provider.model!.data!.email
+                        : "",
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                          color: AppColor.whiteColor,
+                          fontSize: 18,
+                          fontFamily: Constants.poppinsLight,
+                          fontWeight: FontWeight.w300
+                      ),
+                    ),
+
                   ],
                 ),
               )
@@ -346,21 +382,18 @@ class _HomeScreenState extends State<HomeScreen> {
           ScreenSize.height(15),
           customRowWidgetForDrawer(Images.userIcon, 'My Profile', 0),
           ScreenSize.height(14),
-          customDivider(0),
-          ScreenSize.height(14),
           customRowWidgetForDrawer(
               Images.faqIcon, 'Frequently Asked Questions', 1),
-          ScreenSize.height(14),
-          customDivider(0),
           ScreenSize.height(14),
           customRowWidgetForDrawer(
               Images.privacyPolicyIcon, 'Privacy Policy', 2),
           ScreenSize.height(14),
-          customDivider(0),
-          ScreenSize.height(14),
           customRowWidgetForDrawer(Images.contactUsIcon, 'Contact us', 3),
           ScreenSize.height(14),
-          customDivider(0),
+          customRowWidgetForDrawer(
+              Images.privacyPolicyIcon, 'About Us', 4),
+          ScreenSize.height(14),
+          customRowWidgetForDrawer(Images.logoutIcon, 'Logout', 5),
           const Spacer(),
           getText(
               title: 'App Version 1.01',
@@ -387,7 +420,7 @@ class _HomeScreenState extends State<HomeScreen> {
               AppRoutes.pushNavigation(const FaqScreen());
               break;
             case 2:
-              AppRoutes.pushNavigation(const PrivacyPolicyScreen());
+              AppRoutes.pushNavigation(PagesScreen(title: 'Privacy Policy',url: ApiUrl.privacyUrl,));
               break;
             case 3:
               AppRoutes.pushNavigation(ContactUsScreen(
@@ -405,27 +438,86 @@ class _HomeScreenState extends State<HomeScreen> {
                     .firstName,
               ));
               break;
+            case 4:
+              AppRoutes.pushNavigation( PagesScreen(title: 'About Us',url: ApiUrl.aboutUsUrl,));
+              break;
+            case 5:
+              logoutDialogBox(context);
+              break;
+
           }
         },
-        child: Row(
+        child: Column(
           children: [
-            SvgPicture.asset(
-              img,
-              height: 24,
-              width: 24,
+            Row(
+              children: [
+                SvgPicture.asset(
+                  img,
+                  height: 24,
+                  width: 24,
+                ),
+                ScreenSize.width(15),
+                getText(
+                    title: title,
+                    size: 16,
+                    fontFamily: Constants.poppinsMedium,
+                    color: AppColor.darkBlackColor,
+                    fontWeight: FontWeight.w400)
+              ],
             ),
-            ScreenSize.width(15),
-            getText(
-                title: title,
-                size: 16,
-                fontFamily: Constants.poppinsMedium,
-                color: AppColor.darkBlackColor,
-                fontWeight: FontWeight.w400)
+            ScreenSize.height(14),
+            customDivider(0),
           ],
         ),
       ),
     );
   }
+
+
+
+  logoutDialogBox(BuildContext context,) async {
+    generalDialogBox(
+        context,true,
+        Padding(
+          padding: const EdgeInsets.only(top: 20,left: 15,right: 15,bottom: 25),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            // crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              getText(
+                  title: 'Logout',
+                  size: 18,
+                  fontFamily: Constants.poppinsMedium,
+                  color: AppColor.blackColor,
+                  fontWeight: FontWeight.w500),
+              ScreenSize.height(15),
+              getText(
+                  title: 'Do you want to logout?',
+                  size: 15,
+                  fontFamily: Constants.poppinsRegular,
+                  color: AppColor.blackColor,
+                  fontWeight: FontWeight.w400),
+              ScreenSize.height(30),
+              Row(
+                children: [
+                  Flexible(
+                      child: CustomBtn(
+                          title: 'No', height: 44, width: 100, onTap: (){
+                        Navigator.pop(context);
+                      })),
+                  ScreenSize.width(15),
+                  Flexible(
+                      child: CustomBtn(
+                          title: 'Yes', height: 44, width: 100, onTap: (){
+                        Utils.logOut();
+                      })),
+                ],
+              )
+            ],
+          ),
+        ));
+  }
+
 }
 
 extension StringExtension on String {

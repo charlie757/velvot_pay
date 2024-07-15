@@ -19,7 +19,6 @@ class ProfileProvider extends ChangeNotifier {
   final emailController = TextEditingController();
   final nameController = TextEditingController();
   final addressController = TextEditingController();
-  final formKey = GlobalKey<FormState>();
   bool isLoading = false;
   bool isPhotoError = false;
   File? file;
@@ -27,6 +26,7 @@ class ProfileProvider extends ChangeNotifier {
 
   resetValues() {
     file = null;
+    model=null;
     isLoading = false;
     isPhotoError = false;
     nameController.text = '';
@@ -44,7 +44,7 @@ class ProfileProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  checkValidation() {
+  checkValidation(formKey) {
     if (formKey.currentState!.validate() && file != null) {
       updatePhotoError(false);
       callRegisterApiFunction();
@@ -56,7 +56,7 @@ class ProfileProvider extends ChangeNotifier {
     }
   }
 
-  checkUpdateProfileValidation() {
+  checkUpdateProfileValidation(formKey) {
     if (formKey.currentState!.validate()) {
       updateProfileApiFunction();
     }
@@ -66,9 +66,9 @@ class ProfileProvider extends ChangeNotifier {
     final ImagePicker picker = ImagePicker();
     final XFile? img = await picker.pickImage(
       source: source,
+      imageQuality: 25
     );
     if (img == null) return;
-
     file = File(img.path);
     notifyListeners();
   }

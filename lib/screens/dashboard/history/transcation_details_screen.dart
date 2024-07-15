@@ -1,68 +1,79 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 import 'package:velvot_pay/helper/app_color.dart';
 import 'package:velvot_pay/helper/getText.dart';
 import 'package:velvot_pay/helper/images.dart';
 import 'package:velvot_pay/helper/screen_size.dart';
+import 'package:velvot_pay/provider/dashboard_provider.dart';
+import 'package:velvot_pay/provider/transaction_provider.dart';
 import 'package:velvot_pay/utils/Constants.dart';
+import 'package:velvot_pay/utils/time_format.dart';
 import 'package:velvot_pay/widget/custom_divider.dart';
+import 'package:velvot_pay/widget/slider_widget.dart';
 
-class TranscationHistoryScreen extends StatefulWidget {
-  const TranscationHistoryScreen({super.key});
+class TransactionDetailsScreen extends StatefulWidget {
+  final String transactionId;
+     TransactionDetailsScreen({required this.transactionId});
 
   @override
-  State<TranscationHistoryScreen> createState() =>
-      _TranscationHistoryScreenState();
+  State<TransactionDetailsScreen> createState() =>
+      _TransactionDetailsScreenState();
 }
 
-class _TranscationHistoryScreenState extends State<TranscationHistoryScreen> {
+class _TransactionDetailsScreenState extends State<TransactionDetailsScreen> {
+
+@override
+  void initState() {
+  callInitFunction();
+    // TODO: implement initState
+    super.initState();
+  }
+
+  callInitFunction(){
+  final provider = Provider.of<TransactionProvider>(context,listen: false);
+  Future.delayed(Duration.zero,(){
+    provider.getTransactionDetailsApiFunction(widget.transactionId);
+  });
+  }
+
   @override
   Widget build(BuildContext context) {
+  final dashboardProvider = Provider.of<DashboardProvider>(context);
     return Scaffold(
-      body: Stack(
-        children: [
-          Column(
+      body: Consumer<TransactionProvider>(
+        builder: (context,myProvider,child) {
+          return  Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
                 height: 50,
                 color: AppColor.darkBlackColor,
               ),
-              headerWidget(),
+              headerWidget(myProvider),
+              myProvider.transactionDetailsModel!=null&&myProvider.transactionDetailsModel!.data!=null?
               Expanded(
                   child: SingleChildScrollView(
-                padding: const EdgeInsets.only(bottom: 250),
+                padding: const EdgeInsets.only(bottom: 30),
                 child: Column(
                   children: [
-                    rechargeDetailsWidget(),
+                    rechargeDetailsWidget(myProvider),
                     ScreenSize.height(20),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: Image.asset(
-                        'assets/icons/slider_image.png',
-                        width: double.infinity,
-                        fit: BoxFit.cover,
-                      ),
+                      child: sliderWidget(dashboardProvider)
                     )
                   ],
                 ),
-              ))
+              )):Container()
             ],
-          ),
-          Align(
-              alignment: Alignment.bottomCenter,
-              child: SvgPicture.asset(
-                Images.bottomImage,
-                fit: BoxFit.cover,
-                // height: 250,
-                // width: double.infinity,
-              ))
-        ],
+          );
+        }
       ),
     );
   }
 
-  headerWidget() {
+  headerWidget(TransactionProvider provider) {
     return Container(
       height: 53,
       alignment: Alignment.center,
@@ -93,7 +104,8 @@ class _TranscationHistoryScreenState extends State<TranscationHistoryScreen> {
                   color: AppColor.whiteColor,
                   fontWeight: FontWeight.w600),
               getText(
-                  title: '11:34pm on 16 Jul 2020',
+                title:provider.transactionDetailsModel!=null&&provider.transactionDetailsModel!.data!=null&&provider.transactionDetailsModel!.data!.date!=null?
+                  TimeFormat.convertToReadableFormat(provider.transactionDetailsModel!.data!.date):"",
                   size: 12,
                   fontFamily: Constants.poppinsRegular,
                   color: AppColor.whiteColor,
@@ -105,7 +117,7 @@ class _TranscationHistoryScreenState extends State<TranscationHistoryScreen> {
     );
   }
 
-  rechargeDetailsWidget() {
+  rechargeDetailsWidget(TransactionProvider provider) {
     return Container(
       padding: const EdgeInsets.only(top: 33, left: 20, right: 20, bottom: 30),
       decoration: BoxDecoration(color: AppColor.whiteColor, boxShadow: [
@@ -136,7 +148,8 @@ class _TranscationHistoryScreenState extends State<TranscationHistoryScreen> {
                     borderRadius: BorderRadius.circular(25)),
                 alignment: Alignment.center,
                 child: getText(
-                    title: 'DR',
+                    title:provider.transactionDetailsModel!.data!.number!=null?
+                    provider.transactionDetailsModel!.data!.number.toString().substring(0,2):"",
                     size: 18,
                     fontFamily: Constants.poppinsMedium,
                     color: AppColor.whiteColor,
@@ -148,7 +161,7 @@ class _TranscationHistoryScreenState extends State<TranscationHistoryScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Danny Rice',
+                      provider.transactionDetailsModel!.data!.productName??"",
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
@@ -159,7 +172,7 @@ class _TranscationHistoryScreenState extends State<TranscationHistoryScreen> {
                     ),
                     ScreenSize.height(4),
                     getText(
-                        title: '9876543210',
+                        title: provider.transactionDetailsModel!.data!.number??"",
                         size: 14,
                         fontFamily: Constants.poppinsRegular,
                         color: const Color(0xff747474),
@@ -167,8 +180,9 @@ class _TranscationHistoryScreenState extends State<TranscationHistoryScreen> {
                   ],
                 ),
               ),
+              ScreenSize.width(5),
               getText(
-                  title: '\$500',
+                  title: '₦${ provider.transactionDetailsModel!.data!.amount??""}',
                   size: 16,
                   fontFamily: Constants.poppinsSemiBold,
                   color: AppColor.purpleColor,
@@ -203,12 +217,13 @@ class _TranscationHistoryScreenState extends State<TranscationHistoryScreen> {
               color: AppColor.hintTextColor,
               fontWeight: FontWeight.w300),
           getText(
-              title: 'T2265688966465465465498898',
+              title: provider.transactionDetailsModel!.data!.transactionId??"",
               size: 12,
               fontFamily: Constants.poppinsMedium,
               color: AppColor.darkBlackColor,
               fontWeight: FontWeight.w400),
           ScreenSize.height(15),
+
           getText(
               title: 'Credited to',
               size: 14,
@@ -224,15 +239,16 @@ class _TranscationHistoryScreenState extends State<TranscationHistoryScreen> {
                 width: 23,
               ),
               ScreenSize.width(4),
+              provider.transactionDetailsModel!.data!.paymentData!=null&&provider.transactionDetailsModel!.data!.paymentData!.card!=null?
               getText(
-                  title: '**************58',
+                  title: '************${provider.transactionDetailsModel!.data!.paymentData!.card!.last4Digit??''}',
                   size: 14,
                   fontFamily: Constants.poppinsMedium,
                   color: AppColor.hintTextColor,
-                  fontWeight: FontWeight.w400),
+                  fontWeight: FontWeight.w400):Container(),
               const Spacer(),
               getText(
-                  title: '\$500',
+                  title: '\$${provider.transactionDetailsModel!.data!.amount??''}',
                   size: 16,
                   fontFamily: Constants.poppinsSemiBold,
                   color: AppColor.purpleColor,
@@ -242,7 +258,7 @@ class _TranscationHistoryScreenState extends State<TranscationHistoryScreen> {
           Padding(
             padding: const EdgeInsets.only(left: 28),
             child: getText(
-                title: 'UTR: 987412548753',
+                title: 'UTR: ${provider.transactionDetailsModel!.data!.requestId??""}',
                 size: 13,
                 fontFamily: Constants.poppinsMedium,
                 color: AppColor.hintTextColor,

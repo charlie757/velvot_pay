@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_contacts/contact.dart';
 import 'package:provider/provider.dart';
 import 'package:velvot_pay/approutes/app_routes.dart';
 import 'package:velvot_pay/helper/app_color.dart';
@@ -6,55 +7,50 @@ import 'package:velvot_pay/helper/custom_search_bar.dart';
 import 'package:velvot_pay/helper/getText.dart';
 import 'package:velvot_pay/helper/screen_size.dart';
 import 'package:velvot_pay/provider/dashboard_provider.dart';
+import 'package:velvot_pay/provider/data_subscription_provider.dart';
+import 'package:velvot_pay/provider/operator_provider.dart';
+import 'package:velvot_pay/screens/dashboard/home/choose_plan_screen.dart';
 import 'package:velvot_pay/screens/dashboard/home/search_number_screen.dart';
 import 'package:velvot_pay/utils/Constants.dart';
+import 'package:velvot_pay/utils/utils.dart';
 import 'package:velvot_pay/widget/appBar.dart';
 import 'package:velvot_pay/widget/custom_divider.dart';
 import 'package:velvot_pay/widget/slider_widget.dart';
 
 class DataSubscriptionScreen extends StatefulWidget {
-  const DataSubscriptionScreen({super.key});
+  String serviceId;
+  String operatorName;
+  String operatorImage;
+  final String route;
+  DataSubscriptionScreen({required this.serviceId,required this.operatorName,required this.operatorImage, required this.route,});
 
   @override
   State<DataSubscriptionScreen> createState() => _DataSubscriptionScreenState();
 }
 
 class _DataSubscriptionScreenState extends State<DataSubscriptionScreen> {
-  List numberList = [
-    {
-      'sn': 'SK',
-      'name': 'Sunil Kumar Saini',
-      'number': '+234 9876543210',
-      'color': '0xff181D3D'
-    },
-    {
-      'sn': 'DS',
-      'name': 'Daarsat Sharma',
-      'number': '+234 9876543210',
-      'color': 0xff13D3CE
-    },
-    {
-      'sn': 'VS',
-      'name': 'Varsha Sharma',
-      'number': '+234 9876543210',
-      'color': 0xff7358F6
-    },
-    {
-      'sn': 'VS',
-      'name': 'Varun Sharma',
-      'number': '+234 9876543210',
-      'color': 0xff7358F6
-    },
-    {
-      'sn': 'SS',
-      'name': 'Shyam Sharma',
-      'number': '+234 9876543210',
-      'color': 0xff5A9E39
-    },
-  ];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    // fetchContacts();
+    callInitFunction();
+    super.initState();
+  }
+
+  callInitFunction(){
+    final dataSubscriptionProvider = Provider.of<DataSubscriptionProvider>(context,listen: false);
+      Future.delayed(Duration.zero,(){
+        dataSubscriptionProvider.fetchContacts();
+      });
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     final dashboardProvider = Provider.of<DashboardProvider>(context);
+    // final dataSubscriptionProvider = Provider.of<DataSubscriptionProvider>(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: appBar(
@@ -62,55 +58,65 @@ class _DataSubscriptionScreenState extends State<DataSubscriptionScreen> {
           onTap: () {
             Navigator.pop(context);
           }),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            dashboardProvider.bannerModel != null &&
-                    dashboardProvider.bannerModel!.data != null
-                ? sliderWidget(dashboardProvider)
-                : Container(),
-            ScreenSize.height(20),
-            Padding(
-              padding: const EdgeInsets.only(left: 15, right: 15),
-              child: CustomSearchBar(
-                hintText: 'Search by Number or Name',
-                isReadOnly: true,
-                onTap: () {},
+      body: Consumer<DataSubscriptionProvider>(
+          builder: (context,myProvider,child) {
+            return SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  dashboardProvider.bannerModel != null &&
+                      dashboardProvider.bannerModel!.data != null
+                      ? sliderWidget(dashboardProvider)
+                      : Container(),
+                  ScreenSize.height(20),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 15, right: 15),
+                    child: CustomSearchBar(
+                      hintText: 'Search by Number or Name',
+                      isReadOnly: true,
+                      onTap: () {
+                        AppRoutes.pushNavigation(SearchNumberScreen(serviceId: widget.serviceId,operatorName: widget.operatorName,operatorImage: widget.operatorImage,
+                        route: widget.route,
+                        ));
+                      },
+                    ),
+                  ),
+                  ScreenSize.height(30),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 30),
+                    child: getText(
+                        title: 'All Contacts',
+                        size: 16,
+                        fontFamily: Constants.poppinsSemiBold,
+                        color: AppColor.darkBlackColor,
+                        fontWeight: FontWeight.w600),
+                  ),
+                  numbersWidget(myProvider)
+                ],
               ),
-            ),
-            ScreenSize.height(30),
-            Padding(
-              padding: const EdgeInsets.only(left: 30),
-              child: getText(
-                  title: 'All Contacts',
-                  size: 16,
-                  fontFamily: Constants.poppinsSemiBold,
-                  color: AppColor.darkBlackColor,
-                  fontWeight: FontWeight.w600),
-            ),
-            numbersWidget()
-          ],
-        ),
+            );
+          }
       ),
     );
   }
 
-  numbersWidget() {
+  numbersWidget(DataSubscriptionProvider provider) {
     return ListView.separated(
         separatorBuilder: (context, sp) {
           return ScreenSize.height(15);
         },
-        itemCount: numberList.length,
+        itemCount:provider.contactList.length,
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
         padding:
-            const EdgeInsets.only(left: 30, right: 20, top: 20, bottom: 30),
+        const EdgeInsets.only(left: 30, right: 20, top: 20, bottom: 30),
         itemBuilder: (context, index) {
+          Contact contact =provider. contactList[index];
           return GestureDetector(
             onTap: () {
-              print('object');
-              AppRoutes.pushNavigation(SearchNumberScreen());
+              AppRoutes.pushNavigation(ChoosePlanScreen(serviceId: widget.serviceId,number: contact.phones.first.number??'',
+              operatorImage: widget.operatorImage,operatorName: widget.operatorName,route: widget.route,isFromSearchNumberRoute: '',
+              ));
             },
             child: Container(
               color: AppColor.whiteColor,
@@ -124,16 +130,19 @@ class _DataSubscriptionScreenState extends State<DataSubscriptionScreen> {
                           height: 47,
                           width: 47,
                           decoration: BoxDecoration(
-                              color: Color(int.parse(
-                                  numberList[index]['color'].toString())),
+                              color: AppColor.btnColor,
                               border: Border.all(color: AppColor.e1Color),
                               borderRadius: BorderRadius.circular(25)),
-                          alignment: Alignment.center,
-                          child: getText(
-                              title: numberList[index]['sn'],
+                          alignment:contact.photo!=null?null: Alignment.center,
+                          child:contact.photo!=null? ClipRRect(
+                            borderRadius: BorderRadius.circular(30),
+                            child:Image.memory(contact.photo!,fit: BoxFit.cover,),
+                          ):
+                          getText(
+                              title:contact.displayName.isNotEmpty? Utils.getInitials(contact.displayName):'',
                               size: 18,
                               fontFamily: Constants.poppinsMedium,
-                              color: AppColor.whiteColor,
+                              color: AppColor.blackColor,
                               fontWeight: FontWeight.w600),
                         ),
                         ScreenSize.width(14),
@@ -142,7 +151,7 @@ class _DataSubscriptionScreenState extends State<DataSubscriptionScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                numberList[index]['name'],
+                                contact.displayName??"Unknown",
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
@@ -153,7 +162,7 @@ class _DataSubscriptionScreenState extends State<DataSubscriptionScreen> {
                               ),
                               ScreenSize.height(5),
                               getText(
-                                  title: numberList[index]['number'],
+                                  title:contact.phones.isNotEmpty? contact.phones.first.number??'':"",
                                   size: 14,
                                   fontFamily: Constants.poppinsMedium,
                                   color: AppColor.darkBlackColor,

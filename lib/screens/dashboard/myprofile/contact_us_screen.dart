@@ -13,6 +13,8 @@ import 'package:velvot_pay/utils/constants.dart';
 import 'package:velvot_pay/widget/appBar.dart';
 import 'package:velvot_pay/widget/bottom_image_button_widget.dart';
 
+import '../../../widget/custom_radio_button.dart';
+
 class ContactUsScreen extends StatefulWidget {
   final String number;
   final String email;
@@ -120,40 +122,25 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                     color: AppColor.darkBlackColor,
                     fontWeight: FontWeight.w500),
                 ScreenSize.height(10),
-                CompositedTransformTarget(
-                  link: myProvider.link,
-                  child: OverlayPortal(
-                    controller: myProvider.tooltipController,
-                    overlayChildBuilder: (BuildContext context) {
-                      return CompositedTransformFollower(
-                        link: myProvider.link,
-                        targetAnchor: Alignment.bottomLeft,
-                        child: Align(
-                          alignment: AlignmentDirectional.topStart,
-                          child: topicWidget(myProvider),
-                        ),
-                      );
+            CustomTextField(
+                    hintText: 'Choose an option',
+                    isReadOnly: true,
+                    controller: myProvider.topicController,
+                    textInputAction: TextInputAction.next,
+                    onTap: () {
+                      optionBottomSheet(myProvider);
+                      // myProvider.tooltipController.toggle();
                     },
-                    child: CustomTextField(
-                      hintText: 'Choose an option',
-                      isReadOnly: true,
-                      controller: myProvider.topicController,
-                      textInputAction: TextInputAction.next,
-                      onTap: () {
-                        myProvider.tooltipController.toggle();
-                      },
-                      suffixWidget: Container(
-                          width: 30,
-                          alignment: Alignment.center,
-                          child: SvgPicture.asset(Images.arrowDownIcon)),
-                      validator: (val) {
-                        if (val.isEmpty) {
-                          return "Select your topic";
-                        }
-                      },
-                    ),
+                    suffixWidget: Container(
+                        width: 30,
+                        alignment: Alignment.center,
+                        child: SvgPicture.asset(Images.arrowDownIcon)),
+                    validator: (val) {
+                      if (val.isEmpty) {
+                        return "Select your topic";
+                      }
+                    },
                   ),
-                ),
                 ScreenSize.height(20),
                 getText(
                     title: 'Write more about your concern',
@@ -252,7 +239,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
               onTap: () {
                 provider.topicController.text = provider.topicList[index];
                 setState(() {});
-                provider.tooltipController.hide();
+                // provider.tooltipController.hide();
               },
               child: SizedBox(
                 height: 30,
@@ -267,4 +254,87 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
           }),
     );
   }
+
+  optionBottomSheet(ContactUsProvider provider){
+    showModalBottomSheet(context: context,
+        backgroundColor: AppColor.whiteColor,
+        shape:const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+                topRight: Radius.circular(15),
+                topLeft: Radius.circular(15)
+            )
+        ),
+        builder: (context){
+          return StatefulBuilder(
+              builder: (context,state) {
+                return Container(
+                  decoration: BoxDecoration(
+                      color: AppColor.whiteColor,
+                      borderRadius:const BorderRadius.only(
+                          topRight: Radius.circular(15),
+                          topLeft: Radius.circular(15)
+                      )
+                  ),
+                  padding:const EdgeInsets.only(left: 15,right: 15,top: 20,bottom: 30),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          getText(title: 'Option',
+                              size: 17, fontFamily: Constants.poppinsMedium,
+                              color: AppColor.blackColor, fontWeight: FontWeight.w500),
+                          GestureDetector(
+                              onTap: (){
+                                Navigator.pop(context);
+                              },
+                              child: Icon(Icons.close,color: AppColor.blackColor,))
+                        ],
+                      ),
+                      ScreenSize.height(25),
+                      ListView.separated(
+                        separatorBuilder: (context,sp){
+                          return ScreenSize.height(10);
+                        },
+                          itemCount: provider.topicList.length,
+                          shrinkWrap: true,
+                          itemBuilder: (context,index){
+                        return GestureDetector(
+                          onTap: (){
+                            provider.updateOptions(index);
+                            provider.topicController.text = provider.topicList[index];
+                            Navigator.pop(context);
+                            state((){});
+                          },
+                          child: Container(
+                            color: AppColor.whiteColor,
+                            height: 30,
+                            child: Row(
+                              children: [
+                                customRadioButton(provider.selectedOption==index?true:false,),
+                                ScreenSize.width(10),
+                                Text(provider.topicList[index],
+                                    style: TextStyle(
+                                      fontFamily:Constants.poppinsMedium,
+                                      fontSize: 14,
+                                      overflow: TextOverflow.ellipsis,
+                                      fontWeight: FontWeight.w300,
+                                      color: AppColor.blackColor,
+                                    )),
+                              ],
+                            ),
+                          ),
+                        );
+                      })
+                    ],
+                  ),
+                );
+              }
+          );
+        });
+  }
+
+
 }

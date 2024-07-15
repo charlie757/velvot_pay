@@ -12,12 +12,19 @@ class ContactUsProvider extends ChangeNotifier {
   final numberController = TextEditingController();
   final messageController = TextEditingController();
   final topicController = TextEditingController();
-  final OverlayPortalController tooltipController = OverlayPortalController();
+  // final OverlayPortalController tooltipController = OverlayPortalController();
   final link = LayerLink();
   List topicList = ["Transaction issue", 'Profile issue', 'Other'];
   final formKey = GlobalKey<FormState>();
+  int selectedOption = -1;
+
+  updateOptions(value){
+    selectedOption=value;
+    notifyListeners();
+  }
 
   resetValue() {
+    selectedOption=-1;
     nameController.clear();
     emailController.clear();
     numberController.clear();

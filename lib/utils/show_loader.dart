@@ -9,8 +9,10 @@ showLoader(BuildContext context) async {
       barrierDismissible: false,
       barrierColor: AppColor.blackColor.withOpacity(.2),
       builder: (BuildContext context) {
-        return PopScope(
-          canPop: false,
+        return WillPopScope(
+          onWillPop: ()async{
+            return false;
+          },
           child: CustomCircularProgressIndicator(),
         );
       });

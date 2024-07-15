@@ -26,11 +26,13 @@ class PagesProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  callPrivacyApiFunction() async {
+  callPrivacyApiFunction(String url) async {
     showLoader(navigatorKey.currentContext!);
+    policyModel=null;
+    notifyListeners();
     var body = json.encode({});
     final response = await ApiService.apiMethod(
-        url: ApiUrl.privacyUrl,
+        url: url,
         body: body,
         method: checkApiMethod(httpMethod.get));
     Navigator.pop(navigatorKey.currentContext!);

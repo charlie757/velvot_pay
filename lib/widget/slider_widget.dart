@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:velvot_pay/apiconfig/api_url.dart';
 import 'package:velvot_pay/helper/network_image_helper.dart';
 import 'package:velvot_pay/provider/dashboard_provider.dart';
 
@@ -16,7 +17,7 @@ sliderWidget(DashboardProvider dashboardProvider) {
               borderRadius: BorderRadius.circular(15),
               child: NetworkImagehelper(
                 img:
-                    "${dashboardProvider.bannerModel!.data![itemIndex].imageUrl}",
+                    "${ApiUrl.imgBaseUrl}${dashboardProvider.bannerModel!.data![itemIndex].imageUrl}",
                 height: 168.0,
                 width: double.infinity,
               )),

@@ -31,13 +31,17 @@ class Data {
   dynamic serviceID;
   dynamic title;
   dynamic image;
+  dynamic minimiumAmount;
+  dynamic maximumAmount;
 
-  Data({this.serviceID, this.title, this.image});
+  Data({this.serviceID, this.title, this.image,this.maximumAmount,this.minimiumAmount});
 
   Data.fromJson(Map<String, dynamic> json) {
     serviceID = json['serviceID'];
     title = json['title'];
     image = json['image'];
+    minimiumAmount = json['minimium_amount'];
+    maximumAmount = json['maximum_amount'];
   }
 
   Map<String, dynamic> toJson() {
@@ -45,6 +49,8 @@ class Data {
     data['serviceID'] = serviceID;
     data['title'] = title;
     data['image'] = image;
+    data['minimium_amount'] = minimiumAmount;
+    data['maximum_amount'] = maximumAmount;
     return data;
   }
 }

@@ -29,6 +29,7 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  final formKey = GlobalKey<FormState>();
   @override
   void initState() {
     callInitFunction();
@@ -59,7 +60,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           }),
       body: Consumer<ProfileProvider>(builder: (context, myProvider, child) {
         return Form(
-          key: myProvider.formKey,
+          key: formKey,
           child: SingleChildScrollView(
             padding: EdgeInsets.only(
                 left: 20,
@@ -157,9 +158,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     title: widget.route == 'login' ? "Continue" : 'Save',
                     onTap: () {
                       if (widget.route == 'login') {
-                        myProvider.checkValidation();
+                        myProvider.checkValidation(formKey);
                       } else {
-                        myProvider.checkUpdateProfileValidation();
+                        myProvider.checkUpdateProfileValidation(formKey);
                       }
                     })
               ],
@@ -290,6 +291,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   imagePickerBottomSheet(ProfileProvider profileProvider) {
     showModalBottomSheet(
         context: context,
+        backgroundColor: AppColor.whiteColor,
         builder: (context) {
           return Container(
             padding:

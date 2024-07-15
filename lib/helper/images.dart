@@ -1,5 +1,6 @@
 class Images {
   static String appIcon = 'assets/svg/app_icon.svg';
+  static String vpLogo = 'assets/icons/vp.png';
   static String splashLogo = 'assets/icons/splash_logo.png';
   static String splashBottomLogo = 'assets/svg/splash_bottom.svg';
   static String appHorizontalLogo = 'assets/icons/horizontal_logo.png';
@@ -13,6 +14,7 @@ class Images {
   static String dataSubscriptionIcon = 'assets/svg/data_subscription_icon.svg';
   static String educationIcon = 'assets/svg/education_icon.svg';
   static String electricityIcon = 'assets/svg/electricity_icon.svg';
+  static String topUpIcon = 'assets/svg/top-up_icon.svg';
   static String insuranceIcon = 'assets/svg/insurance_icon.svg';
   static String tvSubscriptionIcon = 'assets/svg/tv_subscription_icon.svg';
   static String jioIcon = 'assets/icons/jio_icon.png';
@@ -32,6 +34,6 @@ class Images {
   static String faqIcon = 'assets/svg/faq.svg';
   static String privacyPolicyIcon = 'assets/svg/privacy_policy.svg';
   static String contactUsIcon = 'assets/svg/contact_us.svg';
-  static String logoutIcon = 'assets/svg/logout.svg';
   static String successIcon = 'assets/svg/success-icon.svg';
+  static String logoutIcon = 'assets/svg/logout_icon.svg';
 }

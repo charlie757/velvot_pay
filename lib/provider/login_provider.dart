@@ -8,7 +8,6 @@ import 'package:velvot_pay/screens/auth/veriy_otp_screen.dart';
 import 'package:velvot_pay/utils/utils.dart';
 
 class LoginProvider extends ChangeNotifier {
-  final formKey = GlobalKey<FormState>();
   final phoneController = TextEditingController();
   bool isLoading = false;
 
@@ -17,7 +16,12 @@ class LoginProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  checkValidation() {
+  resetValues(){
+    isLoading = false;
+    phoneController.clear();
+  }
+
+  checkValidation(formKey) {
     if (formKey.currentState!.validate()) {
       callApiFunction();
     }
@@ -32,16 +36,22 @@ class LoginProvider extends ChangeNotifier {
         method: checkApiMethod(httpMethod.post));
     upateLoading(false);
     if (response != null) {
-      Utils.showToast(response['data']['otp'].toString());
-      AppRoutes.pushNavigation(VerifyOtpScreen(
-        route: 'login',
-        number: phoneController.text,
-      ));
+      if(response['data']['isUser']){
+        Utils.showToast(response['data']['otp'].toString());
+        AppRoutes.pushNavigation(VerifyOtpScreen(
+          route: 'login',
+          number: phoneController.text,
+        ));
+      }
+      else{
+        Utils.successSnackBar(response['message'], navigatorKey.currentContext!);
+        AppRoutes.pushNavigation(ProfileScreen(
+          route: 'login',
+          number: phoneController.text,
+        ));
+      }
     } else {
-      AppRoutes.pushNavigation(ProfileScreen(
-        route: 'login',
-        number: phoneController.text,
-      ));
+
     }
   }
 }

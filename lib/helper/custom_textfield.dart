@@ -21,6 +21,7 @@ class CustomTextField extends StatefulWidget {
   FocusNode? focusNode;
   Color? fillColor;
   Function()? onTap;
+  int maxLines;
   CustomTextField(
       {required this.hintText,
       this.controller,
@@ -35,7 +36,7 @@ class CustomTextField extends StatefulWidget {
       this.textColor = const Color(0xff0E0E0E),
       this.focusNode,
       this.fillColor,
-      this.onTap});
+      this.onTap,this.maxLines=1});
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
@@ -48,6 +49,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
       // focusNode: widget.focusNode,
       onTap: widget.onTap,
       readOnly: widget.isReadOnly,
+      maxLines: widget.maxLines,
       keyboardType: widget.textInputType,
       textInputAction: widget.textInputAction,
       textCapitalization: widget.textCapitalization,
@@ -62,12 +64,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
       cursorColor: AppColor.blackColor,
       decoration: InputDecoration(
         fillColor: widget.fillColor ?? AppColor.lightAppColor,
-        suffixIcon: widget.suffixWidget ??
-            Container(
-              height: 0,
-              width: 0,
-            ),
-        // isDense: true,
+        suffixIcon: widget.suffixWidget,
+        isDense: true,
         filled: true,
         border: OutlineInputBorder(
             borderSide: BorderSide(color: AppColor.lightAppColor, width: 1),
@@ -86,7 +84,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
             borderRadius: BorderRadius.circular(5)),
         hintText: widget.hintText,
         errorStyle: TextStyle(
-          color: AppColor.redColor,
+          color: AppColor.redColor.withOpacity(.7),
         ),
         hintStyle: TextStyle(
             fontWeight: FontWeight.w400,

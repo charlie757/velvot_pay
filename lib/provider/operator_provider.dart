@@ -9,9 +9,12 @@ import 'package:velvot_pay/utils/utils.dart';
 
 class OperatorProvider extends ChangeNotifier {
   OperatorModel? model;
+  bool noDataFound = false;
+  List searchList = [];
 
   callOperatorListApiFunction(String url) async {
     model = null;
+    searchList.clear();
     notifyListeners();
     showLoader(navigatorKey.currentContext!);
     var body = json.encode({});
@@ -25,4 +28,30 @@ class OperatorProvider extends ChangeNotifier {
     }
     notifyListeners();
   }
+
+  searchFunction(String val,)async{
+    if (!model!.data
+        .toString()
+        .toLowerCase()
+        .contains(val.toLowerCase())) {
+      searchList.clear();
+      noDataFound=true;
+    }
+    model!.data!.forEach((element) {
+      if (val.isEmpty) {
+        searchList.clear();
+        noDataFound=false;
+        notifyListeners();
+      } else if (element.title
+          .toLowerCase()
+          .contains(val.toString().toLowerCase())) {
+        noDataFound=false;
+        print("element...${element.title}");
+        searchList.add(element);
+      } });
+    notifyListeners();
+    // setState(() {});
+  }
+
+
 }

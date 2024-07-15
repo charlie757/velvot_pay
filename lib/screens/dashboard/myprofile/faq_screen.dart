@@ -12,35 +12,13 @@ import 'package:velvot_pay/widget/appBar.dart';
 import 'package:velvot_pay/widget/conver_html.dart';
 
 class FaqScreen extends StatefulWidget {
-  const FaqScreen({super.key});
+  const FaqScreen();
 
   @override
   State<FaqScreen> createState() => _FaqScreenState();
 }
 
 class _FaqScreenState extends State<FaqScreen> {
-  List faqList = [
-    {
-      'title': 'How to register',
-      'sub':
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar sic tempor.\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet'
-    },
-    {
-      'title': 'How to register',
-      'sub':
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar sic tempor.\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet'
-    },
-    {
-      'title': 'How to register',
-      'sub':
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar sic tempor.\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet'
-    },
-    {
-      'title': 'How to register',
-      'sub':
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar sic tempor.\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet'
-    },
-  ];
 
   int selectedIndex = 0;
 
@@ -92,15 +70,19 @@ class _FaqScreenState extends State<FaqScreen> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              getText(
-                                  title: myProvider.model!.data![index].title ??
-                                      "",
-                                  size: 16,
-                                  fontFamily: Constants.poppinsMedium,
-                                  color: selectedIndex == index
-                                      ? AppColor.purpleColor
-                                      : AppColor.darkBlackColor,
-                                  fontWeight: FontWeight.w400),
+                              Expanded(
+                                child: Text(
+                                     myProvider.model!.data![index].title ??
+                                        "",
+                                    maxLines: 1,overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                    fontSize: 16,
+                                    fontFamily: Constants.poppinsMedium,
+                                    color: selectedIndex == index
+                                        ? AppColor.purpleColor
+                                        : AppColor.darkBlackColor,
+                                    fontWeight: FontWeight.w400)),
+                              ),
                               SvgPicture.asset(selectedIndex == index
                                   ? Images.arrowUpIcon
                                   : Images.arrowRightIcon)

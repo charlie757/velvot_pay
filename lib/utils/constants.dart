@@ -11,4 +11,5 @@ class Constants {
   static String TOKEN = 'token';
   static String FCM_TOKEN = 'FCM_TOKEN';
   static String USER_ID = 'USER_ID';
+
 }
