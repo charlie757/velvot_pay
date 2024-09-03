@@ -22,6 +22,7 @@ class CustomSearchBar extends StatelessWidget {
   Widget? suffixWidget;
   FocusNode? focusNode;
   Color? fillColor;
+  bool isSearchIconColor;
   Function()? onTap;
   CustomSearchBar(
       {required this.hintText,
@@ -36,7 +37,8 @@ class CustomSearchBar extends StatelessWidget {
       this.textCapitalization = TextCapitalization.none,
       this.textColor = const Color(0xff0E0E0E),
       this.focusNode,
-      this.fillColor,
+      this.fillColor = const Color(0xffFAFAFA),
+        this.isSearchIconColor=false,
       this.onTap});
 
   @override
@@ -55,41 +57,43 @@ class CustomSearchBar extends StatelessWidget {
           fontFamily: Constants.poppinsRegular),
       cursorColor: AppColor.blackColor,
       decoration: InputDecoration(
-        fillColor: fillColor ?? AppColor.lightAppColor,
+        isDense: true,
+        fillColor:fillColor,
         prefixIcon: Container(
-          height: 20,
-          width: 20,
+          height:14,
+          width: 14,
           alignment: Alignment.center,
           child: SvgPicture.asset(
             Images.searchIcon,
+            color: isSearchIconColor? const Color(0xffA0A0AB):null,
           ),
         ),
         // isDense: true,
         filled: true,
         border: OutlineInputBorder(
-            borderSide: BorderSide(color: AppColor.hintTextColor, width: 1),
-            borderRadius: BorderRadius.circular(5)),
+            borderSide:const BorderSide(color:  Color(0xffD1D1D6), width: 1),
+            borderRadius: BorderRadius.circular(8)),
         enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: AppColor.hintTextColor, width: 1),
-            borderRadius: BorderRadius.circular(5)),
+            borderSide: const BorderSide(color: Color(0xffD1D1D6), width: 1),
+            borderRadius: BorderRadius.circular(8)),
         focusedErrorBorder: OutlineInputBorder(
             borderSide: BorderSide(color: AppColor.redColor, width: 1),
-            borderRadius: BorderRadius.circular(5)),
+            borderRadius: BorderRadius.circular(8)),
         errorBorder: OutlineInputBorder(
             borderSide: BorderSide(color: AppColor.redColor, width: 1),
-            borderRadius: BorderRadius.circular(5)),
+            borderRadius: BorderRadius.circular(8)),
         focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: AppColor.hintTextColor, width: 1),
-            borderRadius: BorderRadius.circular(5)),
+            borderSide: const BorderSide(color: Color(0xffD1D1D6), width: 1),
+            borderRadius: BorderRadius.circular(8)),
         hintText: hintText,
         errorStyle: TextStyle(
           color: AppColor.redColor,
         ),
         hintStyle: TextStyle(
             fontWeight: FontWeight.w400,
-            fontSize: 14,
+            fontSize: 12,
             color: AppColor.hintTextColor,
-            fontFamily: Constants.poppinsRegular),
+            fontFamily: Constants.galanoGrotesqueRegular),
       ),
       onChanged: onChanged,
     );

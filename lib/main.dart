@@ -3,20 +3,33 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:velvot_pay/helper/session_manager.dart';
+import 'package:velvot_pay/provider/add_email_provider.dart';
 import 'package:velvot_pay/provider/bill_number_provider.dart';
+import 'package:velvot_pay/provider/buy_subscription_provider.dart';
 import 'package:velvot_pay/provider/choose_plan_provider.dart';
 import 'package:velvot_pay/provider/contact_us_provider.dart';
 import 'package:velvot_pay/provider/dashboard_provider.dart';
 import 'package:velvot_pay/provider/data_subscription_provider.dart';
+import 'package:velvot_pay/provider/education_provider.dart';
+import 'package:velvot_pay/provider/electricity_provider.dart';
+import 'package:velvot_pay/provider/forgot_provider.dart';
+import 'package:velvot_pay/provider/insurance_provider.dart';
+import 'package:velvot_pay/provider/notification_provider.dart';
+import 'package:velvot_pay/provider/onboarding_provider.dart';
 import 'package:velvot_pay/provider/pages_provider.dart';
 import 'package:velvot_pay/provider/login_provider.dart';
 import 'package:velvot_pay/provider/operator_provider.dart';
 import 'package:velvot_pay/provider/pay_provider.dart';
 import 'package:velvot_pay/provider/profile_provider.dart';
+import 'package:velvot_pay/provider/service_provider.dart';
+import 'package:velvot_pay/provider/singup_provider.dart';
 import 'package:velvot_pay/provider/splash_provider.dart';
 import 'package:velvot_pay/provider/transaction_provider.dart';
+import 'package:velvot_pay/provider/tv_subscription_provider.dart';
 import 'package:velvot_pay/provider/verify_otp_provider.dart';
+import 'package:velvot_pay/provider/wallet_provider.dart';
 import 'package:velvot_pay/screens/splash_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:velvot_pay/utils/theme.dart';
@@ -27,6 +40,10 @@ void main() async {
   await SessionManager().init();
   HttpOverrides.global = MyHttpOverrides();
   await FlutterContacts.requestPermission();
+  await FlutterDownloader.initialize(
+      debug: true, // optional: set to false to disable printing logs to console (default: true)
+      ignoreSsl: true // option: set to false to disable working with http links (default: false)
+  );
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
@@ -38,6 +55,8 @@ void main() async {
           create: (_) => SplashProvider(),
         ),
         ChangeNotifierProvider(create: (_) => LoginProvider()),
+        ChangeNotifierProvider(create: (_) => ForgotProvider()),
+        ChangeNotifierProvider(create: (_) => SignupProvider()),
         ChangeNotifierProvider(create: (_) => VerifyOtpProvider()),
         ChangeNotifierProvider(create: (_) => ProfileProvider()),
         ChangeNotifierProvider(create: (_) => DashboardProvider()),
@@ -49,6 +68,16 @@ void main() async {
         ChangeNotifierProvider(create: (_) => ChoosePlanProvider()),
         ChangeNotifierProvider(create: (_) => PayProvider()),
         ChangeNotifierProvider(create: (_) => TransactionProvider()),
+        ChangeNotifierProvider(create: (_) => WalletProvider()),
+        ChangeNotifierProvider(create: (_) => NotificationProvider()),
+        ChangeNotifierProvider(create: (_) => OnBoardingProvider()),
+        ChangeNotifierProvider(create: (_) => AddEmailProvider()),
+        ChangeNotifierProvider(create: (_) => BuySubscriptionProvider()),
+        ChangeNotifierProvider(create: (_) => ElectricityProvider()),
+        ChangeNotifierProvider(create: (_) => TvSubscriptionProvider()),
+        ChangeNotifierProvider(create: (_) => EducationProvider()),
+        ChangeNotifierProvider(create: (_) => InsuranceProvider()),
+        ChangeNotifierProvider(create: (_) => ServiceProvider()),
       ],
       child: const MyApp()));
 }

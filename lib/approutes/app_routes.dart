@@ -12,4 +12,8 @@ class AppRoutes{
   static Future pushReplacementNavigation(route){
     return Navigator.pushReplacement(navigatorKey.currentContext!, CupertinoPageRoute(builder: (context)=>route));
   }
+
+  static Future pushRemoveReplacementNavigation(route){
+    return Navigator.pushAndRemoveUntil(navigatorKey.currentContext!, CupertinoPageRoute(builder: (context)=>route),(route) => false,);
+  }
 }

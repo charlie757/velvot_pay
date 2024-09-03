@@ -46,9 +46,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
     return Scaffold(
       appBar: appBar(
           title: "Contact Us",
-          onTap: () {
-            Navigator.pop(context);
-          }),
+          ),
       body: Consumer<ContactUsProvider>(builder: (context, myProvider, child) {
         return Form(
           key: myProvider.formKey,
@@ -60,11 +58,11 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
               children: [
                 getText(
                     title: 'Name',
-                    size: 16,
-                    fontFamily: Constants.poppinsSemiBold,
-                    color: AppColor.darkBlackColor,
+                    size: 14,
+                    fontFamily: Constants.galanoGrotesqueMedium,
+                    color: AppColor.grayIronColor,
                     fontWeight: FontWeight.w500),
-                ScreenSize.height(10),
+                ScreenSize.height(6),
                 CustomTextField(
                   hintText: 'Full Name',
                   controller: myProvider.nameController,
@@ -79,11 +77,11 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                 ScreenSize.height(20),
                 getText(
                     title: 'Email Address',
-                    size: 16,
-                    fontFamily: Constants.poppinsSemiBold,
-                    color: AppColor.darkBlackColor,
+                    size: 14,
+                    fontFamily: Constants.galanoGrotesqueMedium,
+                    color: AppColor.grayIronColor,
                     fontWeight: FontWeight.w500),
-                ScreenSize.height(10),
+                ScreenSize.height(6),
                 CustomTextField(
                   hintText: 'Email Address',
                   controller: myProvider.emailController,
@@ -98,11 +96,11 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                 ScreenSize.height(20),
                 getText(
                     title: 'Mobile Number',
-                    size: 16,
-                    fontFamily: Constants.poppinsSemiBold,
-                    color: AppColor.darkBlackColor,
+                    size: 14,
+                    fontFamily: Constants.galanoGrotesqueMedium,
+                    color: AppColor.grayIronColor,
                     fontWeight: FontWeight.w500),
-                ScreenSize.height(10),
+                ScreenSize.height(6),
                 CustomTextField(
                   hintText: 'Mobile Number',
                   controller: myProvider.numberController,
@@ -116,14 +114,14 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                 ),
                 ScreenSize.height(20),
                 getText(
-                    title: 'How May help You?',
-                    size: 16,
-                    fontFamily: Constants.poppinsSemiBold,
-                    color: AppColor.darkBlackColor,
+                    title: 'How may we help you?',
+                    size: 14,
+                    fontFamily: Constants.galanoGrotesqueMedium,
+                    color: AppColor.grayIronColor,
                     fontWeight: FontWeight.w500),
-                ScreenSize.height(10),
+                ScreenSize.height(6),
             CustomTextField(
-                    hintText: 'Choose an option',
+                    hintText: 'Choose category',
                     isReadOnly: true,
                     controller: myProvider.topicController,
                     textInputAction: TextInputAction.next,
@@ -134,22 +132,30 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                     suffixWidget: Container(
                         width: 30,
                         alignment: Alignment.center,
-                        child: SvgPicture.asset(Images.arrowDownIcon)),
+                        child: SvgPicture.asset(Images.arrowUpIcon)),
                     validator: (val) {
                       if (val.isEmpty) {
-                        return "Select your topic";
+                        return "Select your category";
                       }
                     },
                   ),
                 ScreenSize.height(20),
                 getText(
-                    title: 'Write more about your concern',
-                    size: 16,
-                    fontFamily: Constants.poppinsSemiBold,
-                    color: AppColor.darkBlackColor,
+                    title: 'Description',
+                    size: 14,
+                    fontFamily: Constants.galanoGrotesqueMedium,
+                    color: AppColor.grayIronColor,
                     fontWeight: FontWeight.w500),
-                ScreenSize.height(10),
-                commentBox(myProvider),
+                ScreenSize.height(6),
+                CustomTextField(hintText: 'Enter your message',
+                  controller: myProvider.messageController,
+                  maxLines: 4,
+                  validator: (val) {
+                    if (val!.isEmpty) {
+                      return "Enter your message";
+                    }
+                  },
+                ),
                 ScreenSize.height(30),
                 CustomBtn(
                     title: "Submit Now",
@@ -163,55 +169,6 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
       }),
     );
   }
-
-  commentBox(ContactUsProvider provider) {
-    return TextFormField(
-      autofocus: false,
-      maxLines: 4,
-      controller: provider.messageController,
-      textInputAction: TextInputAction.done,
-      style: TextStyle(
-          fontWeight: FontWeight.w400,
-          fontSize: 12,
-          color: AppColor.blackColor,
-          fontFamily: Constants.poppinsRegular),
-      cursorColor: AppColor.blackColor,
-      decoration: InputDecoration(
-        fillColor: AppColor.lightAppColor,
-        filled: true,
-        border: OutlineInputBorder(
-            borderSide: BorderSide(color: AppColor.lightAppColor, width: 1),
-            borderRadius: BorderRadius.circular(5)),
-        enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: AppColor.lightAppColor, width: 1),
-            borderRadius: BorderRadius.circular(5)),
-        focusedErrorBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: AppColor.redColor, width: 1),
-            borderRadius: BorderRadius.circular(5)),
-        errorBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: AppColor.redColor, width: 1),
-            borderRadius: BorderRadius.circular(5)),
-        focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: AppColor.lightAppColor, width: 1),
-            borderRadius: BorderRadius.circular(5)),
-        hintText: 'Type here...',
-        errorStyle: TextStyle(
-          color: AppColor.redColor,
-        ),
-        hintStyle: TextStyle(
-            fontWeight: FontWeight.w400,
-            fontSize: 14,
-            color: AppColor.hintTextColor,
-            fontFamily: Constants.poppinsRegular),
-      ),
-      validator: (val) {
-        if (val!.isEmpty) {
-          return "Enter your message";
-        }
-      },
-    );
-  }
-
   topicWidget(ContactUsProvider provider) {
     return Container(
       margin: const EdgeInsets.only(top: 15, right: 40),

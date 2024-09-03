@@ -2,8 +2,10 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 import 'package:http/http.dart' as http;
+import 'package:velvot_pay/apiconfig/api_url.dart';
 import 'package:velvot_pay/helper/session_manager.dart';
 import 'package:velvot_pay/utils/utils.dart';
+import '../utils/Constants.dart';
 
 enum httpMethod { post, get, delete, put }
 
@@ -37,8 +39,8 @@ class ApiService {
             method,
             Uri.parse(url),
           );
-
           request.body = body;
+          print(body);
           request.headers['Content-Type'] = 'application/json';
           request.headers['x-access-token'] = SessionManager.token;
           final client = http.Client();
@@ -47,7 +49,7 @@ class ApiService {
           print(response.request);
           log(response.body);
           print(response.statusCode);
-          return _handleResponse(response, isErrorMessageShow);
+          return _handleResponse(response, isErrorMessageShow, url);
         } on Exception catch (_) {
           rethrow;
         }
@@ -59,14 +61,19 @@ class ApiService {
   }
 
   // Helper method to handle API response
-  static _handleResponse(http.Response response, isErrorMessageShow) {
+  static _handleResponse(http.Response response, isErrorMessageShow, String url) {
     if (response.statusCode == 200) {
       return json.decode(response.body);
     } else if (response.statusCode == 401) {
       print('object');
       var dataAll = json.decode(response.body);
-      // SessionManager.unauthorizedUser(navigatorKey.currentState!.context);
-      Utils.logOut();
+      if(Constants.is401Error==false){
+        print('objectdsffdsdfsd');
+        Future.delayed(const Duration(milliseconds: 300),(){
+          Utils.logOut();
+          Constants.is401Error=true;
+        });
+      }
       isErrorMessageShow
           ? Utils.errorSnackBar(dataAll['message'], navigatorKey.currentContext)
           : null;
@@ -77,7 +84,10 @@ class ApiService {
       isErrorMessageShow
           ? Utils.errorSnackBar(dataAll['message'], navigatorKey.currentContext)
           : null;
-      return null;
+      return url==ApiUrl.checkPinUrl||url==ApiUrl.buyDataSubscriptionPlanUrl
+          ||url==ApiUrl.electricityBillPaymentUrl||url==ApiUrl.buyEducationalPlanUrl ||url== ApiUrl.buyEducationalPlanUrl
+         ||url==ApiUrl.buyVehiclePlanUrl||url==ApiUrl.buyPersonalPlanUrl|| url==ApiUrl.buyHealthPlanUrl
+          ?json.decode(response.body): null;
     }
   }
 }

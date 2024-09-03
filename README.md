@@ -1,6 +1,6 @@
 # velvot_pay
 
-Velvot Pay
+A new Flutter project.
 
 ## Getting Started
 

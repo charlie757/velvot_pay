@@ -18,10 +18,14 @@ class CustomTextField extends StatefulWidget {
   final TextCapitalization textCapitalization;
   Color textColor;
   Widget? suffixWidget;
+  Widget? prefixWidget;
   FocusNode? focusNode;
   Color? fillColor;
   Function()? onTap;
   int maxLines;
+  Color borderColor;
+  double borderRadius;
+  bool isObscureText;
   CustomTextField(
       {required this.hintText,
       this.controller,
@@ -32,11 +36,13 @@ class CustomTextField extends StatefulWidget {
       this.validator,
       this.onChanged,
       this.suffixWidget,
+        this.prefixWidget,
       this.textCapitalization = TextCapitalization.none,
-      this.textColor = const Color(0xff0E0E0E),
+      this.textColor = AppColor.grayIronColor,
       this.focusNode,
-      this.fillColor,
-      this.onTap,this.maxLines=1});
+        this.isObscureText=false,
+      this.fillColor = const Color(0xffF9FAFB),
+      this.onTap,this.maxLines=1,this.borderColor=AppColor.lightAppColor,this.borderRadius=1});
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
@@ -47,6 +53,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
   Widget build(BuildContext context) {
     return TextFormField(
       // focusNode: widget.focusNode,
+      obscureText: widget.isObscureText,
       onTap: widget.onTap,
       readOnly: widget.isReadOnly,
       maxLines: widget.maxLines,
@@ -57,40 +64,43 @@ class _CustomTextFieldState extends State<CustomTextField> {
       controller: widget.controller,
       autofocus: false,
       style: TextStyle(
-          fontWeight: FontWeight.w400,
+          fontWeight: FontWeight.w500,
           fontSize: 12,
           color: widget.textColor,
-          fontFamily: Constants.poppinsRegular),
-      cursorColor: AppColor.blackColor,
+          fontFamily: Constants.galanoGrotesqueMedium),
+      cursorColor: AppColor.appColor,
       decoration: InputDecoration(
-        fillColor: widget.fillColor ?? AppColor.lightAppColor,
+        // fillColor: widget.fillColor ?? AppColor.lightAppColor,
+        fillColor: widget.fillColor,
         suffixIcon: widget.suffixWidget,
+        prefixIcon: widget.prefixWidget,
         isDense: true,
         filled: true,
         border: OutlineInputBorder(
-            borderSide: BorderSide(color: AppColor.lightAppColor, width: 1),
-            borderRadius: BorderRadius.circular(5)),
+            borderSide: BorderSide(color: widget.borderColor, width: 1),
+            borderRadius: BorderRadius.circular(widget.borderRadius)),
         enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: AppColor.lightAppColor, width: 1),
-            borderRadius: BorderRadius.circular(5)),
+            borderSide: BorderSide(color: widget.borderColor, width: 1),
+            borderRadius: BorderRadius.circular(widget.borderRadius)),
         focusedErrorBorder: OutlineInputBorder(
             borderSide: BorderSide(color: AppColor.redColor, width: 1),
-            borderRadius: BorderRadius.circular(5)),
+            borderRadius: BorderRadius.circular(widget.borderRadius)),
         errorBorder: OutlineInputBorder(
             borderSide: BorderSide(color: AppColor.redColor, width: 1),
-            borderRadius: BorderRadius.circular(5)),
+            borderRadius: BorderRadius.circular(widget.borderRadius)),
         focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: AppColor.lightAppColor, width: 1),
-            borderRadius: BorderRadius.circular(5)),
+            borderSide: BorderSide(color: widget.borderColor, width: 1),
+            borderRadius: BorderRadius.circular(widget.borderRadius)),
         hintText: widget.hintText,
+        errorMaxLines: 3,
         errorStyle: TextStyle(
           color: AppColor.redColor.withOpacity(.7),
         ),
         hintStyle: TextStyle(
             fontWeight: FontWeight.w400,
-            fontSize: 14,
+            fontSize: 13,
             color: AppColor.hintTextColor,
-            fontFamily: Constants.poppinsRegular),
+            fontFamily: Constants.galanoGrotesqueRegular),
       ),
       validator: widget.validator,
       onChanged: widget.onChanged,

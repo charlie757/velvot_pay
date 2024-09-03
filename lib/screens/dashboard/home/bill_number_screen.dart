@@ -17,11 +17,8 @@ import 'package:velvot_pay/utils/uppercase_text_formatter.dart';
 import 'package:velvot_pay/utils/utils.dart';
 import 'package:velvot_pay/widget/appBar.dart';
 import 'package:velvot_pay/widget/bottom_image_button_widget.dart';
-
 import '../../../helper/network_image_helper.dart';
-import '../../../utils/emoji_restrict.dart';
 import '../../../widget/custom_radio_button.dart';
-import '../../custom_drop.dart';
 
 class BillNumberScreen extends StatefulWidget {
   final String route;
@@ -182,7 +179,7 @@ class _BillNumberScreenState extends State<BillNumberScreen> {
           CustomTextField(hintText: 'Enter Your Amount',controller: provider.amountController,
             textInputType: TextInputType.number,
             inputFormatters: [
-              EmojiRestrictingTextInputFormatter(),
+              FilteringTextInputFormatter.deny(RegExp(Utils.regexToRemoveEmoji)),
               FilteringTextInputFormatter.digitsOnly,
             ],
             validator: (val){
@@ -195,7 +192,7 @@ class _BillNumberScreenState extends State<BillNumberScreen> {
           CustomTextField(hintText: 'Enter Your Meter Number',controller: provider.meterNumberController,
           textInputType: TextInputType.number,
           inputFormatters: [
-            EmojiRestrictingTextInputFormatter(),
+            FilteringTextInputFormatter.deny(RegExp(Utils.regexToRemoveEmoji)),
             FilteringTextInputFormatter.digitsOnly,
             LengthLimitingTextInputFormatter(13)
           ],
@@ -242,7 +239,7 @@ class _BillNumberScreenState extends State<BillNumberScreen> {
           CustomTextField(hintText: 'Enter Your Tv Subscription Number',controller: provider.tVController,
           textInputType: TextInputType.number,
           inputFormatters: [
-            EmojiRestrictingTextInputFormatter(),
+            FilteringTextInputFormatter.deny(RegExp(Utils.regexToRemoveEmoji)),
             FilteringTextInputFormatter.digitsOnly,
             LengthLimitingTextInputFormatter(10)
           ],
@@ -268,7 +265,7 @@ instituteWidget(BillNumberProvider provider){
         CustomTextField(hintText: 'Enter Your Institute Number',controller: provider.instituteController,
           textInputType: TextInputType.number,
           inputFormatters: [
-            EmojiRestrictingTextInputFormatter(),
+            FilteringTextInputFormatter.deny(RegExp(Utils.regexToRemoveEmoji)),
             FilteringTextInputFormatter.digitsOnly,
             LengthLimitingTextInputFormatter(10)
           ],
@@ -458,7 +455,7 @@ return Container(
               hintText: 'Enter Your Full Name',
               textInputAction: TextInputAction.next,
               inputFormatters: [
-                EmojiRestrictingTextInputFormatter()
+                FilteringTextInputFormatter.deny(RegExp(Utils.regexToRemoveEmoji)),
               ],
               controller: provider.controller1,
               validator: (val){
@@ -488,7 +485,7 @@ return Container(
               textInputAction: TextInputAction.next,
               controller: provider.controller3,
               inputFormatters: [
-                EmojiRestrictingTextInputFormatter()
+                FilteringTextInputFormatter.deny(RegExp(Utils.regexToRemoveEmoji)),
               ],
               validator: (val){
                 if(val.isEmpty){
@@ -501,7 +498,7 @@ return Container(
               textInputAction: TextInputAction.next,
               controller: provider.controller4,
               inputFormatters: [
-                EmojiRestrictingTextInputFormatter()
+                FilteringTextInputFormatter.deny(RegExp(Utils.regexToRemoveEmoji)),
               ],
               validator: (val){
                 if(val.isEmpty){
@@ -549,7 +546,7 @@ return Container(
             hintText: 'Enter Your Full Name',
             textInputAction: TextInputAction.next,
             inputFormatters: [
-              EmojiRestrictingTextInputFormatter()
+              FilteringTextInputFormatter.deny(RegExp(Utils.regexToRemoveEmoji)),
             ],
             controller: provider.controller1,
             validator: (val){
@@ -567,7 +564,7 @@ return Container(
             inputFormatters: [
               LengthLimitingTextInputFormatter(10),
               FilteringTextInputFormatter.digitsOnly,
-              EmojiRestrictingTextInputFormatter()
+              FilteringTextInputFormatter.deny(RegExp(Utils.regexToRemoveEmoji)),
             ],
             validator: (val){
               if(val.isEmpty){
@@ -580,7 +577,7 @@ return Container(
             textInputAction: TextInputAction.next,
             controller: provider.controller3,
             inputFormatters: [
-              EmojiRestrictingTextInputFormatter()
+              FilteringTextInputFormatter.deny(RegExp(Utils.regexToRemoveEmoji)),
             ],
             validator: (val){
               if(val.isEmpty){
@@ -620,7 +617,7 @@ return Container(
             textInputAction: TextInputAction.next,
             controller: provider.controller5,
             inputFormatters: [
-              EmojiRestrictingTextInputFormatter()
+              FilteringTextInputFormatter.deny(RegExp(Utils.regexToRemoveEmoji)),
             ],
             validator: (val){
               if(val.isEmpty){
@@ -634,7 +631,7 @@ return Container(
             controller: provider.controller6,
             maxLines: 4,
             inputFormatters: [
-              EmojiRestrictingTextInputFormatter()
+              FilteringTextInputFormatter.deny(RegExp(Utils.regexToRemoveEmoji)),
             ],
             validator: (val){
               if(val.isEmpty){

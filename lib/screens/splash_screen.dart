@@ -26,38 +26,13 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const Spacer(),
-            SizedBox(
-              height: 282,
-              width: 262,
-              child: Image.asset(
-                Images.splashLogo,
-              ),
-            ),
-            const Spacer(),
-            Stack(
-              children: [
-                SvgPicture.asset(
-                  Images.splashBottomLogo,
-                  fit: BoxFit.cover,
-                ),
-                Positioned(
-                    bottom: 0 + 40,
-                    right: MediaQuery.of(context).size.width / 2.5,
-                    child: getText(
-                        title: "App Version 1.01",
-                        size: 12,
-                        fontFamily: Constants.poppinsRegular,
-                        color: AppColor.hintTextColor,
-                        fontWeight: FontWeight.w300))
-              ],
-            )
-          ],
-        ),
+      backgroundColor: AppColor.darkBlueColor,
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        color: AppColor.darkBlueColor,
+        alignment: Alignment.center,
+        child: Image.asset(Images.logo,width: 171,height: 175,),
       ),
     );
   }

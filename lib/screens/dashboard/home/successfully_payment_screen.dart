@@ -10,7 +10,7 @@ import 'package:velvot_pay/helper/images.dart';
 import 'package:velvot_pay/helper/screen_size.dart';
 import 'package:velvot_pay/provider/dashboard_provider.dart';
 import 'package:velvot_pay/screens/dashboard/dashboard_screen.dart';
-import 'package:velvot_pay/screens/dashboard/history/transcation_details_screen.dart';
+import 'package:velvot_pay/screens/dashboard/transaction/transcation_receipt_screen.dart';
 import 'package:velvot_pay/utils/Constants.dart';
 import 'package:velvot_pay/widget/bottom_image_button_widget.dart';
 import 'package:velvot_pay/widget/slider_widget.dart';
@@ -77,7 +77,7 @@ class _SuccessfullyPaymentScreenState extends State<SuccessfullyPaymentScreen> {
                 ScreenSize.height(20),
                 GestureDetector(
                   onTap: (){
-                    AppRoutes.pushNavigation( TransactionDetailsScreen(transactionId: widget.transactionId,));
+                    AppRoutes.pushNavigation( TransactionReceiptScreen(transactionId: widget.transactionId,));
                   },
                   child: Container(
                     height: 49,
@@ -98,7 +98,7 @@ class _SuccessfullyPaymentScreenState extends State<SuccessfullyPaymentScreen> {
                   ),
                 ),
                 ScreenSize.height(30),
-                sliderWidget(dashboardProvider)
+                // sliderWidget(dashboardProvider)
               ],
             ),
           ),

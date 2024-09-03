@@ -9,12 +9,14 @@ class CustomBtn extends StatelessWidget {
   final double? height;
   final double? width;
   final bool isLoading;
+  final Color btnColor;
   final Function() onTap;
   const CustomBtn({
     required this.title,
     this.height,
     this.width,
     required this.onTap,
+    this.btnColor = AppColor.appColor,
     this.isLoading = false,
   });
 
@@ -23,7 +25,7 @@ class CustomBtn extends StatelessWidget {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
           backgroundColor:
-              isLoading ? AppColor.btnColor.withOpacity(.5) : AppColor.btnColor,
+              isLoading ? btnColor.withOpacity(.5) : btnColor,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
       onPressed: onTap,
@@ -45,9 +47,9 @@ class CustomBtn extends StatelessWidget {
             : getText(
                 title: title,
                 size: 16,
-                fontFamily: Constants.poppinsMedium,
+                fontFamily: Constants.galanoGrotesqueMedium,
                 color: AppColor.whiteColor,
-                fontWeight: FontWeight.w600),
+                fontWeight: FontWeight.w700),
       ),
     );
   }

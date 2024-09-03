@@ -39,10 +39,8 @@ class _FaqScreenState extends State<FaqScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBar(
-          title: "Faq's",
-          onTap: () {
-            Navigator.pop(context);
-          }),
+          title: "FAQs",
+      ),
       body: Consumer<PagesProvider>(builder: (context, myProvider, child) {
         return myProvider.model != null && myProvider.model!.data != null
             ? ListView.separated(
@@ -61,10 +59,9 @@ class _FaqScreenState extends State<FaqScreen> {
                     },
                     child: Container(
                       decoration: BoxDecoration(
-                          border: Border.all(color: AppColor.e1Color),
-                          borderRadius: BorderRadius.circular(4)),
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 17, vertical: 16),
+                          border: Border.all(color:const Color(0xffF4F4F5)),
+                          borderRadius: BorderRadius.circular(8)),
+                      padding: const EdgeInsets.all(8),
                       child: Column(
                         children: [
                           Row(
@@ -76,29 +73,20 @@ class _FaqScreenState extends State<FaqScreen> {
                                         "",
                                     maxLines: 1,overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
-                                    fontSize: 16,
-                                    fontFamily: Constants.poppinsMedium,
-                                    color: selectedIndex == index
-                                        ? AppColor.purpleColor
-                                        : AppColor.darkBlackColor,
-                                    fontWeight: FontWeight.w400)),
+                                    fontSize: 14,
+                                    fontFamily: Constants.galanoGrotesqueMedium,
+                                    color: AppColor.appColor,
+                                    fontWeight: FontWeight.w500)),
                               ),
                               SvgPicture.asset(selectedIndex == index
-                                  ? Images.arrowUpIcon
-                                  : Images.arrowRightIcon)
+                                  ? Images.arrowDownIcon
+                                  : Images.arrowUpIcon)
                             ],
                           ),
                           ScreenSize.height(selectedIndex == index ? 16 : 0),
                           selectedIndex == index
                               ? convertHtmlWidget(
-                                  myProvider.model!.data![index].description)
-                              // getText(
-                              //     title:
-                              //         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar sic tempor.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet',
-                              //     size: 14,
-                              //     fontFamily: Constants.poppinsRegular,
-                              //     color: const Color(0xff616161),
-                              //     fontWeight: FontWeight.w300)
+                                  myProvider.model!.data![index].description,12, FontWeight.w400)
                               : Container()
                         ],
                       ),

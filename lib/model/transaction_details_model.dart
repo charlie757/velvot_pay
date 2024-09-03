@@ -32,10 +32,25 @@ class Data {
   dynamic type;
   dynamic policyCertificate;
   dynamic requestId;
+  dynamic paymentMethod;
+  dynamic transactionsType;
+  dynamic planName;
   dynamic date;
-  PaymentData? paymentData;
 
-  Data({this.id, this.amount, this.productName, this.number, this.transactionId, this.operator, this.type, this.policyCertificate, this.requestId, this.date, this.paymentData});
+  Data(
+      {this.id,
+        this.amount,
+        this.productName,
+        this.number,
+        this.transactionId,
+        this.operator,
+        this.type,
+        this.policyCertificate,
+        this.requestId,
+        this.paymentMethod,
+        this.transactionsType,
+        this.planName,
+        this.date});
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -43,12 +58,16 @@ class Data {
     productName = json['product_name'];
     number = json['number'];
     transactionId = json['transactionId'];
-    operator = json['operator'] != null ?  Operator.fromJson(json['operator']) : null;
+    operator = json['operator'] != null
+        ?  Operator.fromJson(json['operator'])
+        : null;
     type = json['type'];
     policyCertificate = json['policy_certificate'];
     requestId = json['requestId'];
+    paymentMethod = json['payment_method'];
+    transactionsType = json['transactions_type'];
+    planName = json['plan_name'];
     date = json['date'];
-    paymentData = json['payment_data'] != null ?  PaymentData.fromJson(json['payment_data']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -56,7 +75,7 @@ class Data {
     data['id'] = id;
     data['amount'] = amount;
     data['product_name'] = productName;
-    data['number'] =number;
+    data['number'] = number;
     data['transactionId'] = transactionId;
     if (operator != null) {
       data['operator'] = operator!.toJson();
@@ -64,16 +83,16 @@ class Data {
     data['type'] = type;
     data['policy_certificate'] = policyCertificate;
     data['requestId'] = requestId;
-    data['date'] = this.date;
-    if (paymentData != null) {
-      data['payment_data'] = paymentData!.toJson();
-    }
+    data['payment_method'] = paymentMethod;
+    data['transactions_type'] = transactionsType;
+    data['plan_name'] = planName;
+    data['date'] = date;
     return data;
   }
 }
 
 class Operator {
-  String? serviceID;
+  dynamic serviceID;
   dynamic title;
   dynamic image;
 
@@ -90,69 +109,6 @@ class Operator {
     data['serviceID'] = serviceID;
     data['title'] = title;
     data['image'] = image;
-    return data;
-  }
-}
-class PaymentData {
-  Card? card;
-  dynamic verify;
-  dynamic reference;
-  dynamic method;
-
-  PaymentData({this.card, this.verify, this.reference, this.method});
-
-  PaymentData.fromJson(Map<String, dynamic> json) {
-    card = json['card'] != null ?  Card.fromJson(json['card']) : null;
-    verify = json['verify'];
-    reference = json['reference'];
-    method = json['method'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  Map<String, dynamic>();
-    if (card != null) {
-      data['card'] = card!.toJson();
-    }
-    data['verify'] = verify;
-    data['reference'] = reference;
-    data['method'] = method;
-    return data;
-  }
-}
-
-class Card {
-  dynamic cvc;
-  dynamic expiryMonth;
-  dynamic expiryYear;
-  dynamic name;
-  dynamic type;
-  dynamic last4Digit;
-
-  Card(
-      {this.cvc,
-        this.expiryMonth,
-        this.expiryYear,
-        this.name,
-        this.type,
-        this.last4Digit});
-
-  Card.fromJson(Map<String, dynamic> json) {
-    cvc = json['cvc'];
-    expiryMonth = json['expiryMonth'];
-    expiryYear = json['expiryYear'];
-    name = json['name'];
-    type = json['type'];
-    last4Digit = json['last4Digit'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  Map<String, dynamic>();
-    data['cvc'] = cvc;
-    data['expiryMonth'] = expiryMonth;
-    data['expiryYear'] = expiryYear;
-    data['name'] = name;
-    data['type'] = type;
-    data['last4Digit'] = last4Digit;
     return data;
   }
 }

@@ -1,58 +1,59 @@
 class TransactionModel {
-  int? status;
-  String? message;
-  Data? data;
+  dynamic status;
+  dynamic message;
+  List<Data>? data;
 
   TransactionModel({this.status, this.message, this.data});
 
   TransactionModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
-    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
+    if (json['data'] != null) {
+      data = <Data>[];
+      json['data'].forEach((v) {
+        data!.add( Data.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['status'] = this.status;
-    data['message'] = this.message;
+    final Map<String, dynamic> data =  Map<String, dynamic>();
+    data['status'] = status;
+    data['message'] = message;
     if (this.data != null) {
-      data['data'] = this.data!.toJson();
+      data['data'] = this.data!.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
 
 class Data {
-  List<TransData>? data;
-  Pagination? pagination;
+  dynamic sId;
+  List<Items>? items;
 
-  Data({this.data, this.pagination});
+  Data({this.sId, this.items});
 
   Data.fromJson(Map<String, dynamic> json) {
-    if (json['data'] != null) {
-      data = <TransData>[];
-      json['data'].forEach((v) {
-        data!.add( TransData.fromJson(v));
+    sId = json['_id'];
+    if (json['items'] != null) {
+      items = <Items>[];
+      json['items'].forEach((v) {
+        items!.add( Items.fromJson(v));
       });
     }
-    pagination = json['pagination'] != null
-        ?  Pagination.fromJson(json['pagination'])
-        : null;
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data =  Map<String, dynamic>();
-    if (this.data != null) {
-      data['data'] = this.data!.map((v) => v.toJson()).toList();
-    }
-    if (pagination != null) {
-      data['pagination'] = pagination!.toJson();
+    data['_id'] = sId;
+    if (items != null) {
+      data['items'] = items!.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
 
-class TransData {
+class Items {
   dynamic sId;
   dynamic title;
   dynamic number;
@@ -61,8 +62,8 @@ class TransData {
   dynamic date;
   dynamic type;
   Operator? operator;
-
-  TransData(
+  dynamic transactionType;
+  Items(
       {this.sId,
         this.title,
         this.number,
@@ -70,9 +71,9 @@ class TransData {
         this.amount,
         this.date,
         this.type,
-        this.operator});
+        this.operator,this.transactionType});
 
-  TransData.fromJson(Map<String, dynamic> json) {
+  Items.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];
     title = json['title'];
     number = json['number'];
@@ -83,6 +84,7 @@ class TransData {
     operator = json['operator'] != null
         ?  Operator.fromJson(json['operator'])
         : null;
+    transactionType = json['transactions_type']??'';
   }
 
   Map<String, dynamic> toJson() {
@@ -97,6 +99,7 @@ class TransData {
     if (operator != null) {
       data['operator'] = operator!.toJson();
     }
+    data['transactions_type'] = transactionType;
     return data;
   }
 }
@@ -115,55 +118,10 @@ class Operator {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  Map<String, dynamic>();
+    final Map<String, dynamic> data = new Map<String, dynamic>();
     data['serviceID'] = serviceID;
     data['title'] = title;
     data['image'] = image;
-    return data;
-  }
-}
-
-class Pagination {
-  dynamic total;
-  dynamic count;
-  dynamic perPage;
-  dynamic currentPage;
-  dynamic totalPages;
-  dynamic nextPage;
-  dynamic from;
-  dynamic to;
-
-  Pagination(
-      {this.total,
-        this.count,
-        this.perPage,
-        this.currentPage,
-        this.totalPages,
-        this.nextPage,
-        this.from,
-        this.to});
-
-  Pagination.fromJson(Map<String, dynamic> json) {
-    total = json['total'];
-    count = json['count'];
-    perPage = json['per_page'];
-    currentPage = json['current_page'];
-    totalPages = json['total_pages'];
-    nextPage = json['nextPage'];
-    from = json['from'];
-    to = json['to'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  Map<String, dynamic>();
-    data['total'] = total;
-    data['count'] = count;
-    data['per_page'] = perPage;
-    data['current_page'] = currentPage;
-    data['total_pages'] = totalPages;
-    data['nextPage'] = nextPage;
-    data['from'] = from;
-    data['to'] = to;
     return data;
   }
 }

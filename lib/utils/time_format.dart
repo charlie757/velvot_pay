@@ -13,6 +13,17 @@ class TimeFormat{
     return formattedDate;
   }
 
+ static String convertTransaction(String isoDateString) {
+   DateTime dateTime = DateTime.parse(isoDateString,).toLocal();
+   final DateFormat formatter = DateFormat('MMM dd, yyyy, hh:mma');
+   // Format the DateTime object
+   String formattedDate = formatter.format(dateTime,);
+
+   formattedDate = formattedDate.replaceAll('AM', 'am').replaceAll('PM', 'pm');
+
+   return formattedDate;
+ }
+
   static String getCommentTime(String isoDateString) {
     DurationDifference difference = calculateDetailedDifference(isoDateString);
 

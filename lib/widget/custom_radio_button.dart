@@ -8,13 +8,13 @@ customRadioButton(bool isShowSelected){
     height: 18,width: 18,
     decoration: BoxDecoration(
         shape: BoxShape.circle,
-        border: Border.all(color: AppColor.hintTextColor)
+        border: Border.all(color: AppColor.greenColor)
     ),
     padding:const EdgeInsets.all(2),
     child: isShowSelected? Container(
       height: 18,width: 18,
       decoration: BoxDecoration(
-          shape: BoxShape.circle,color: AppColor.hintTextColor
+          shape: BoxShape.circle,color: AppColor.greenColor
       ),
     ):Container(),
   );

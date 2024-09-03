@@ -41,9 +41,9 @@ class _PagesScreenState extends State<PagesScreen> {
                 myProvider.policyModel!.data != null
             ? SingleChildScrollView(
                 padding: const EdgeInsets.only(
-                  left: 36,
-                  right: 35,
-                  top: 10,
+                  left: 16,
+                  right: 16,
+                  top: 10,bottom: 30
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -51,11 +51,11 @@ class _PagesScreenState extends State<PagesScreen> {
                     getText(
                         title: myProvider.policyModel!.data!.title,
                         size: 16,
-                        fontFamily: Constants.poppinsMedium,
-                        color: AppColor.darkBlackColor,
-                        fontWeight: FontWeight.w600),
+                        fontFamily: Constants.galanoGrotesqueSemiBold,
+                        color: const Color(0xff70707B),
+                        fontWeight: FontWeight.w400),
                     ScreenSize.height(15),
-                    convertHtmlWidget(myProvider.policyModel!.data!.content)
+                    convertHtmlWidget(myProvider.policyModel!.data!.content,14, FontWeight.w500)
                   ],
                 ),
               )
