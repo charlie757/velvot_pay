@@ -102,6 +102,8 @@ class ProfileProvider extends ChangeNotifier {
         this.file!.path,
       );
       request.files.add(file);
+      print(file);
+      print(this.file!.path);
     }
     var res = await request.send();
     var vb = await http.Response.fromStream(res);

@@ -271,6 +271,7 @@ class _EducationPaymentScreenState extends State<EducationPaymentScreen> {
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      e.request!=null&&e.request!.operator!=null&&e.request!.operator!.image!=null?
                       ClipRRect(
                           borderRadius: BorderRadius.circular(15) ,
                           child:NetworkImagehelper(
@@ -278,31 +279,32 @@ class _EducationPaymentScreenState extends State<EducationPaymentScreen> {
                             height: 29.0,
                             width: 29.0,
                           )
-                      ),
+                      ):Container(),
                       ScreenSize.width(4),
+                      e.request!=null?
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(
                             children: [
-                              Text( e.request!.planName,
+                              Text( e.request!.planName??"",
                                   style: TextStyle(
                                       fontSize: 12, fontFamily: Constants.galanoGrotesqueMedium,
                                       color: const Color(0xff51525C), fontWeight: FontWeight.w500)),
                               ScreenSize.width(8),
-                              getText(title: '₦${e.amount}',
+                              getText(title: '₦${e.amount??''}',
                                   size: 10, fontFamily: Constants.galanoGrotesqueMedium,
                                   color: const Color(0xff51525C), fontWeight: FontWeight.w400),
                             ],
                           ),
-                          getText(title: e.request!.phone,
+                          getText(title: e.request!.phone??'',
                               size: 12, fontFamily: Constants.galanoGrotesqueRegular,
                               color: const Color(0xff51525C), fontWeight: FontWeight.w400),
                           getText(title: 'Result Checker Pin',
                               size: 12, fontFamily: Constants.galanoGrotesqueMedium,
                               color: const Color(0xff51525C), fontWeight: FontWeight.w600),
                         ],
-                      )
+                      ):Container()
                     ],
                   ),
                 );

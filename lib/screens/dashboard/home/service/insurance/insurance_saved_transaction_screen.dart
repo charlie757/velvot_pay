@@ -78,6 +78,7 @@ class _InsuranceSavedTransactionScreenState extends State<InsuranceSavedTransact
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
+                              model.request!=null&& model.request!.operator!=null&&model.request!.operator!.image!=null?
                               ClipRRect(
                                   borderRadius: BorderRadius.circular(15) ,
                                   child:NetworkImagehelper(
@@ -85,24 +86,24 @@ class _InsuranceSavedTransactionScreenState extends State<InsuranceSavedTransact
                                     height: 29.0,
                                     width: 29.0,
                                   )
-                              ),
+                              ):Container(),
                               ScreenSize.width(4),
                               Expanded(
-                                child: Column(
+                                child:model.request!=null? Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    getText(title: model.request!.operator!.title,
+                                    getText(title:model.request!.operator!=null? model.request!.operator!.title??"":"",
                                         size: 12, fontFamily: Constants.galanoGrotesqueMedium,
                                         color: const Color(0xff51525C), fontWeight: FontWeight.w500),
-                                    getText(title: model.request!.phone,
+                                    getText(title: model.request!.phone??"",
                                         size: 12, fontFamily: Constants.galanoGrotesqueRegular,
                                         color: const Color(0xff51525C), fontWeight: FontWeight.w400),
-                                    getText(title: '₦${model.amount}',
+                                    getText(title: '₦${model.amount??""}',
                                         size: 12, fontFamily: Constants.galanoGrotesqueSemiBold,
                                         color: const Color(0xff51525C), fontWeight: FontWeight.w600),
 
                                   ],
-                                ),
+                                ):Container(),
                               )
                             ],
                           ),

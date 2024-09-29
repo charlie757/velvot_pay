@@ -1,8 +1,11 @@
 class ApiUrl {
   static String payStackPublicKey = 'pk_test_04a44a0fbe29b8103e588c722c42817364df3412';
-  static String baseUrl = 'https://velvotpay.com/api/v1/';
+  static String baseUrl = 'https://velvotpay.com:2021/v1/';
+      // 'http://20.56.149.83:2021/v1/';
+      // 'http://app.velvotpay.com:2021/v1/';
       // 'http://velvotpay.com:2021/v1/';
-  static String imgBaseUrl = 'https://velvotpay.com/api/';
+  static String imgBaseUrl = 'https://velvotpay.com:2021/';
+      // 'http://app.velvotpay.com/api/';
       // 'http://velvotpay.com:2021/';
   static String loginUrl = '${baseUrl}auth/customer-login';
   /// sign up

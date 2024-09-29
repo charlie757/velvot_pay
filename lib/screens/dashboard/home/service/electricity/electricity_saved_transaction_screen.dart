@@ -84,13 +84,14 @@ class _ElectricitySavedTransactionScreenState extends State<ElectricitySavedTran
                             ),
                             ScreenSize.width(4),
                             Expanded(
-                              child: Column(
+                              child:model.request!=null? Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
+                                  model.request!.operator!=null?
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text( model.request!.operator!.title,
+                                      Text( model.request!.operator!.title??"",
                                           maxLines: 1,overflow: TextOverflow.ellipsis,
                                           style: TextStyle(
                                               fontSize: 12, fontFamily: Constants.galanoGrotesqueMedium,
@@ -100,15 +101,15 @@ class _ElectricitySavedTransactionScreenState extends State<ElectricitySavedTran
                                           size: 10, fontFamily: Constants.galanoGrotesqueRegular,
                                           color: const Color(0xff51525C), fontWeight: FontWeight.w400),
                                     ],
-                                  ),
-                                  getText(title: model.request!.phone,
+                                  ):Container(),
+                                  getText(title: model.request!.phone??"",
                                       size: 12, fontFamily: Constants.galanoGrotesqueRegular,
                                       color: const Color(0xff51525C), fontWeight: FontWeight.w400),
-                                  getText(title: '₦${model.amount}',
+                                  getText(title: '₦${model.amount??""}',
                                       size: 12, fontFamily: Constants.galanoGrotesqueMedium,
                                       color: AppColor.grayIronColor, fontWeight: FontWeight.w700),
                                 ],
-                              ),
+                              ):Container(),
                             )
                           ],
                         ),

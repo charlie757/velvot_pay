@@ -219,6 +219,7 @@ class _InsuranceOperatorScreenState extends State<InsuranceOperatorScreen> {
                   padding:const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
                   child: Row(
                     children: [
+                      e.request!=null&&e.request!.operator!=null&& e.request!.operator!.image!=null?
                       ClipRRect(
                           borderRadius: BorderRadius.circular(15) ,
                           child:NetworkImagehelper(
@@ -226,22 +227,23 @@ class _InsuranceOperatorScreenState extends State<InsuranceOperatorScreen> {
                             height: 29.0,
                             width: 29.0,
                           )
-                      ),
+                      ):Container(),
                       ScreenSize.width(4),
+                      e.request!=null?
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          getText(title: e.request!.operator!.title,
+                          getText(title:e.request!.operator!=null? e.request!.operator!.title??"":"",
                               size: 12, fontFamily: Constants.galanoGrotesqueMedium,
                               color: const Color(0xff51525C), fontWeight: FontWeight.w500),
-                          getText(title: e.request!.phone,
+                          getText(title: e.request!.phone??"",
                               size: 12, fontFamily: Constants.galanoGrotesqueRegular,
                               color: const Color(0xff51525C), fontWeight: FontWeight.w400),
-                          getText(title: '₦${e.amount}',
+                          getText(title: '₦${e.amount??""}',
                               size: 12, fontFamily: Constants.galanoGrotesqueSemiBold,
                               color: const Color(0xff51525C), fontWeight: FontWeight.w600),
                         ],
-                      )
+                      ):Container()
                     ],
                   ),
                 );

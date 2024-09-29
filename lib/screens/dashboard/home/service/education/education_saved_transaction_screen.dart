@@ -75,6 +75,7 @@ class _EducationSavedTransactionScreenState extends State<EducationSavedTransact
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            model.request!=null&& model.request!.operator!!=null&&model.request!.operator!.image!=null?
                             ClipRRect(
                                 borderRadius: BorderRadius.circular(15) ,
                                 child:NetworkImagehelper(
@@ -82,34 +83,34 @@ class _EducationSavedTransactionScreenState extends State<EducationSavedTransact
                                   height: 29.0,
                                   width: 29.0,
                                 )
-                            ),
+                            ):Container(),
                             ScreenSize.width(4),
                             Expanded(
-                              child: Column(
+                              child:model.request!=null? Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text( model.request!.planName,
+                                      Text( model.request!.planName??'',
                                           maxLines: 1,overflow: TextOverflow.ellipsis,
                                           style: TextStyle(
                                               fontSize: 12, fontFamily: Constants.galanoGrotesqueMedium,
                                               color: const Color(0xff51525C), fontWeight: FontWeight.w500)),
                                       ScreenSize.width(8),
-                                      getText(title: '₦${model.amount}',
+                                      getText(title: '₦${model.amount??''}',
                                           size: 10, fontFamily: Constants.galanoGrotesqueMedium,
                                           color: const Color(0xff51525C), fontWeight: FontWeight.w400),
                                     ],
                                   ),
-                                  getText(title: model.request!.phone,
+                                  getText(title: model.request!.phone??"",
                                       size: 12, fontFamily: Constants.galanoGrotesqueRegular,
                                       color: const Color(0xff51525C), fontWeight: FontWeight.w400),
                                   getText(title: 'Result Checker Pin',
                                       size: 12, fontFamily: Constants.galanoGrotesqueMedium,
                                       color: const Color(0xff51525C), fontWeight: FontWeight.w600),
                                 ],
-                              ),
+                              ):Container(),
                             )
                           ],
                         ),

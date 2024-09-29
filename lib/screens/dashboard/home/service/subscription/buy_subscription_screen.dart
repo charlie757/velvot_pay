@@ -202,6 +202,7 @@ class _BuySubscriptionScreenState extends State<BuySubscriptionScreen> {
                   padding:const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
                   child: Row(
                     children: [
+                      e.request!=null&&e.request!.operator!=null?
                       ClipRRect(
                         borderRadius: BorderRadius.circular(15) ,
                         child:NetworkImagehelper(
@@ -209,25 +210,27 @@ class _BuySubscriptionScreenState extends State<BuySubscriptionScreen> {
                           height: 29.0,
                           width: 29.0,
                         )
-                      ),
+                      ):Container(),
                       ScreenSize.width(4),
+                      e.request!=null?
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          getText(title: e.request!.phone,
+                          getText(title: e.request!.phone??"",
                               size: 12, fontFamily: Constants.galanoGrotesqueMedium,
                               color: const Color(0xff51525C), fontWeight: FontWeight.w500),
-                          getText(title: e.request!.planName,
+                          getText(title: e.request!.planName??'',
                               size: 12, fontFamily: Constants.galanoGrotesqueRegular,
                               color: const Color(0xff51525C), fontWeight: FontWeight.w400),
                         ],
-                      )
+                      ):Container()
                     ],
                   ),
                 );
               }).toList(),
             ),
           ):Container()
+
         ],
       ),
     );

@@ -1,4 +1,4 @@
-package com.example.velvot_pay
+package com.velvot.pay
 
 import io.flutter.embedding.android.FlutterActivity
 

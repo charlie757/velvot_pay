@@ -311,6 +311,7 @@ class _BuyElectricityScreenState extends State<BuyElectricityScreen> {
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      e.request!=null&&e.request!.operator!=null&&e.request!.operator!.image!=null?
                       ClipRRect(
                           borderRadius: BorderRadius.circular(15) ,
                           child:NetworkImagehelper(
@@ -318,13 +319,14 @@ class _BuyElectricityScreenState extends State<BuyElectricityScreen> {
                             height: 29.0,
                             width: 29.0,
                           )
-                      ), ScreenSize.width(4),
-                      Column(
+                      ):Container(), ScreenSize.width(4),
+                      e.request!=null?  Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          e.request!.operator!=null?
                         Row(
                           children: [
-                            Text( e.request!.operator!.title,
+                            Text( e.request!.operator!.title??"",
                                 style: TextStyle(
                                 fontSize: 12, fontFamily: Constants.galanoGrotesqueMedium,
                                 color: const Color(0xff51525C), fontWeight: FontWeight.w500)),
@@ -333,15 +335,15 @@ class _BuyElectricityScreenState extends State<BuyElectricityScreen> {
                                 size: 10, fontFamily: Constants.galanoGrotesqueRegular,
                                 color: const Color(0xff51525C), fontWeight: FontWeight.w400),
                           ],
-                        ),
-                          getText(title: e.request!.phone,
+                        ):Container(),
+                          getText(title: e.request!.phone??"",
                               size: 12, fontFamily: Constants.galanoGrotesqueRegular,
                               color: const Color(0xff51525C), fontWeight: FontWeight.w400),
                           getText(title: '₦${e.amount}',
                               size: 12, fontFamily: Constants.galanoGrotesqueMedium,
                               color: AppColor.grayIronColor, fontWeight: FontWeight.w700),
                         ],
-                      )
+                      ):Container()
                     ],
                   ),
                 );
