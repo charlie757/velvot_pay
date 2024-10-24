@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
-import 'package:velvot_pay/helper/app_color.dart';
 import 'package:velvot_pay/helper/getText.dart';
-import 'package:velvot_pay/helper/images.dart';
 import 'package:velvot_pay/helper/screen_size.dart';
 import 'package:velvot_pay/provider/pages_provider.dart';
 import 'package:velvot_pay/utils/Constants.dart';
 import 'package:velvot_pay/widget/appBar.dart';
 import 'package:velvot_pay/widget/conver_html.dart';
 
+// ignore: must_be_immutable
 class PagesScreen extends StatefulWidget {
   String title;
   String url;

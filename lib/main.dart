@@ -6,12 +6,10 @@ import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:velvot_pay/helper/session_manager.dart';
 import 'package:velvot_pay/provider/add_email_provider.dart';
-import 'package:velvot_pay/provider/bill_number_provider.dart';
 import 'package:velvot_pay/provider/buy_subscription_provider.dart';
 import 'package:velvot_pay/provider/choose_plan_provider.dart';
 import 'package:velvot_pay/provider/contact_us_provider.dart';
 import 'package:velvot_pay/provider/dashboard_provider.dart';
-import 'package:velvot_pay/provider/data_subscription_provider.dart';
 import 'package:velvot_pay/provider/education_provider.dart';
 import 'package:velvot_pay/provider/electricity_provider.dart';
 import 'package:velvot_pay/provider/forgot_provider.dart';
@@ -32,7 +30,6 @@ import 'package:velvot_pay/provider/verify_otp_provider.dart';
 import 'package:velvot_pay/provider/wallet_provider.dart';
 import 'package:velvot_pay/screens/splash_screen.dart';
 import 'package:provider/provider.dart';
-import 'package:velvot_pay/utils/theme.dart';
 import 'package:velvot_pay/utils/utils.dart';
 
 void main() async {
@@ -63,8 +60,6 @@ void main() async {
         ChangeNotifierProvider(create: (_) => OperatorProvider()),
         ChangeNotifierProvider(create: (_) => PagesProvider()),
         ChangeNotifierProvider(create: (_) => ContactUsProvider()),
-        ChangeNotifierProvider(create: (_) => DataSubscriptionProvider()),
-        ChangeNotifierProvider(create: (_) => BillNumberProvider()),
         ChangeNotifierProvider(create: (_) => ChoosePlanProvider()),
         ChangeNotifierProvider(create: (_) => PayProvider()),
         ChangeNotifierProvider(create: (_) => TransactionProvider()),

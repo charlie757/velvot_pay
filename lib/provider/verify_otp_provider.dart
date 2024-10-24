@@ -7,8 +7,6 @@ import 'package:velvot_pay/apiconfig/api_service.dart';
 import 'package:velvot_pay/apiconfig/api_url.dart';
 import 'package:velvot_pay/approutes/app_routes.dart';
 import 'package:velvot_pay/helper/session_manager.dart';
-import 'package:velvot_pay/provider/dashboard_provider.dart';
-import 'package:velvot_pay/screens/auth/profile_screen.dart';
 import 'package:velvot_pay/screens/dashboard/dashboard_screen.dart';
 import 'package:velvot_pay/utils/show_loader.dart';
 import 'package:velvot_pay/utils/utils.dart';

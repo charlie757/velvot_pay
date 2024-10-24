@@ -12,7 +12,6 @@ import '../helper/getText.dart';
 import '../helper/images.dart';
 import '../helper/screen_size.dart';
 import '../model/operator_model.dart';
-import '../model/saved_buy_subscription_transaction_model.dart';
 import '../model/tv_subscription_plan_model.dart';
 import '../screens/dashboard/dashboard_screen.dart';
 import '../utils/Constants.dart';
@@ -29,10 +28,12 @@ class TvSubscriptionProvider extends ChangeNotifier{
   final providerController = TextEditingController();
   final icuNoController = TextEditingController();
   final bundleController = TextEditingController();
+  final numberController = TextEditingController();
 
   resetValues(){
     selectedBundleIndex=-1;
     currentOperatorIndex=-1;
+    numberController.clear();
     providerController.clear();
     icuNoController.clear();
     bundleController.clear();
@@ -98,10 +99,10 @@ class TvSubscriptionProvider extends ChangeNotifier{
     var body = json.encode({
 
         "serviceID": model!.data![currentOperatorIndex].serviceID,
-        "billersCode": "1212121212",
+        "billersCode": icuNoController.text,
         "variation_code": tvSubscriptionPlanModel!.data!.varations![selectedBundleIndex].variationCode,
         "amount": tvSubscriptionPlanModel!.data!.varations![selectedBundleIndex].variationAmount,
-        "phone": "1212121212",
+        "phone": "234${numberController.text}",
         "plan_name": tvSubscriptionPlanModel!.data!.varations![selectedBundleIndex].name,
         "operator": {
           "serviceID":model!.data![currentOperatorIndex].serviceID,
@@ -112,8 +113,9 @@ class TvSubscriptionProvider extends ChangeNotifier{
     });
     print(body);
     final response = await ApiService.apiMethod(
-        url: ApiUrl.buyTvPlanUrl, body: body, method: checkApiMethod(httpMethod.post),isErrorMessageShow: true);
+        url: ApiUrl.buyTvPlanUrl, body: body, method: checkApiMethod(httpMethod.post),isErrorMessageShow: false);
     Navigator.pop(navigatorKey.currentContext!);
+    print("response..$response");
     if (response != null) {
       if(response['status']==200){
         successBottomSheet();
@@ -163,6 +165,8 @@ class TvSubscriptionProvider extends ChangeNotifier{
                       color: const Color(0xff51525C), fontWeight: FontWeight.w400),
                   ScreenSize.height(24),
                   rowColumnForConfirmationWidget('LCU No', icuNoController.text),
+                  ScreenSize.height(16),
+                  rowColumnForConfirmationWidget('Phone No', numberController.text),
                   ScreenSize.height(16),
                   rowColumnForConfirmationWidget('Bundle', bundleController.text),
                   ScreenSize.height(16),

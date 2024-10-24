@@ -13,7 +13,6 @@ import '../helper/images.dart';
 import '../helper/screen_size.dart';
 import '../model/educational_plan_model.dart';
 import '../model/operator_model.dart';
-import '../model/saved_buy_subscription_transaction_model.dart';
 import '../screens/dashboard/dashboard_screen.dart';
 import '../utils/Constants.dart';
 import '../utils/error_dialog_box.dart';
@@ -105,10 +104,12 @@ class EducationProvider extends ChangeNotifier{
     showLoader(navigatorKey.currentContext!);
     var body = json.encode({
       "serviceID": model!.data![currentOperatorIndex].serviceID,
-      "billersCode": "0123456789",
+      "billersCode": "234${phoneNumberController.text}",
+      // "0123456789",
       "variation_code": educationPlanModel!.data!.varations![selectedServiceType].variationCode,
       "amount": amountController.text,
-      "phone": "08011111111",
+      "phone": "234${phoneNumberController.text}",
+      // "08011111111",
       "plan_name":educationPlanModel!.data!.varations![selectedServiceType].name,
       "operator": {
         "serviceID": model!.data![currentOperatorIndex].serviceID,

@@ -11,7 +11,6 @@ import 'package:velvot_pay/helper/session_manager.dart';
 import 'package:http/http.dart' as http;
 import 'package:velvot_pay/model/profile_model.dart';
 import 'package:velvot_pay/screens/auth/signup/verify_email_screen.dart';
-import 'package:velvot_pay/screens/auth/veriy_otp_screen.dart';
 import 'package:velvot_pay/utils/show_loader.dart';
 import 'package:velvot_pay/utils/utils.dart';
 

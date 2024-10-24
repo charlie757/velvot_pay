@@ -14,6 +14,7 @@ import '../../../../../model/saved_buy_subscription_transaction_model.dart';
 import '../../../../../utils/Constants.dart';
 import '../../../../../utils/utils.dart';
 
+// ignore: must_be_immutable
 class ElectricitySavedTransactionScreen extends StatefulWidget {
   SavedTransactionModel? model;
    ElectricitySavedTransactionScreen({required this.model});
@@ -77,7 +78,7 @@ class _ElectricitySavedTransactionScreenState extends State<ElectricitySavedTran
                             ClipRRect(
                                 borderRadius: BorderRadius.circular(15) ,
                                 child:NetworkImagehelper(
-                                  img: model!.request!.operator!.image,
+                                  img: model.request!.operator!.image,
                                   height: 29.0,
                                   width: 29.0,
                                 )

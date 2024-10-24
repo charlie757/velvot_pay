@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
-import 'package:velvot_pay/provider/add_email_provider.dart';
-
 import '../../../helper/app_color.dart';
 import '../../../helper/custom_btn.dart';
 import '../../../helper/custom_textfield.dart';

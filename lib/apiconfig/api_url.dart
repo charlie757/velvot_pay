@@ -1,5 +1,6 @@
 class ApiUrl {
-  static String payStackPublicKey = 'pk_test_04a44a0fbe29b8103e588c722c42817364df3412';
+  static String payStackPublicKey ='pk_live_962799e6dfcc1656219ff10af5328a05b24e086e';
+  //  'pk_test_04a44a0fbe29b8103e588c722c42817364df3412';
   static String baseUrl = 'https://velvotpay.com:2021/v1/';
       // 'http://20.56.149.83:2021/v1/';
       // 'http://app.velvotpay.com:2021/v1/';
@@ -56,7 +57,7 @@ class ApiUrl {
   /// electricity
   static String electricityOperatorListUrl =
       '${baseUrl}utility/electricity/operator';
-  static String prepaidElectricityPlanUrl = '${baseUrl}utility/electricity/bill-details';
+  // static String prepaidElectricityPlanUrl = '${baseUrl}utility/electricity/bill-details';
   static String getElectricityPlanUrl = '${baseUrl}utility/electricity/bill-details';
   static String electricityBillPaymentUrl = '${baseUrl}utility/electricity/bill-payment';
 

@@ -517,7 +517,7 @@ class _InsuranceDetailsScreenState extends State<InsuranceDetailsScreen> {
             size: 14, fontFamily: Constants.galanoGrotesqueMedium,
             color: AppColor.grayIronColor, fontWeight: FontWeight.w500),
         ScreenSize.height(8),
-        CustomTextField(
+         CustomTextField(
           hintText: 'Enter Vehicle Owner Name',
           textInputAction: TextInputAction.next,
           controller: provider.controller2,
@@ -526,6 +526,28 @@ class _InsuranceDetailsScreenState extends State<InsuranceDetailsScreen> {
           validator: (val){
             if(val.isEmpty){
               return "Enter your owner name";
+            }
+          },),
+          
+        ScreenSize.height(24),
+         getText(title: 'Phone Number',
+            size: 14, fontFamily: Constants.galanoGrotesqueMedium,
+            color: AppColor.grayIronColor, fontWeight: FontWeight.w500),
+        ScreenSize.height(8),
+        CustomTextField(
+          hintText: 'Enter Your Mobile Number',
+          textInputAction: TextInputAction.next,
+          borderColor: const Color(0xffD1D1D6),
+          borderRadius: 8,
+          textInputType: TextInputType.number,
+          inputFormatters: [
+            FilteringTextInputFormatter.digitsOnly,
+            LengthLimitingTextInputFormatter(10)
+          ],
+          controller: provider.numberController,
+          validator: (val){
+            if(val.isEmpty){
+              return "Enter mobile number";
             }
           },),
         ScreenSize.height(24),

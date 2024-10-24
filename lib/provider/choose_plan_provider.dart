@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:velvot_pay/model/electricity_plan_model.dart';
 import 'package:velvot_pay/model/insurance_plan_model.dart';
 import 'package:velvot_pay/model/tv_subscription_plan_model.dart';
 

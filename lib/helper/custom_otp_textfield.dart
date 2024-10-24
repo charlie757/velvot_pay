@@ -48,6 +48,7 @@ customOtpTextField(BuildContext context, TextEditingController controller, {bool
         } else if (val.length < 6) {
           return 'Enter otp shoulb be valid';
         }
+        return null;
       },
     ),
   );

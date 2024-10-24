@@ -10,13 +10,11 @@ import 'package:velvot_pay/helper/custom_btn.dart';
 import 'package:velvot_pay/helper/getText.dart';
 import 'package:velvot_pay/helper/images.dart';
 import 'package:velvot_pay/helper/screen_size.dart';
-import 'package:velvot_pay/provider/dashboard_provider.dart';
 import 'package:velvot_pay/provider/transaction_provider.dart';
 import 'package:velvot_pay/utils/Constants.dart';
 import 'package:velvot_pay/utils/time_format.dart';
 import 'package:velvot_pay/widget/appBar.dart';
 import 'package:velvot_pay/widget/custom_divider.dart';
-import 'package:velvot_pay/widget/slider_widget.dart';
 import 'package:widgets_to_image/widgets_to_image.dart';
 
 
@@ -90,17 +88,17 @@ WidgetsToImageController controller = WidgetsToImageController();
           children: [
             SvgPicture.asset(Images.successIcon),
             ScreenSize.height(32),
-            menuRowWidget(title: 'Recipent Mobile',subTitle: model!.requestId!=null&&model!.requestId.toString().isNotEmpty?model!.requestId.toString():'NA', ),
+            menuRowWidget(title: 'Recipent Mobile',subTitle: model!.requestId!=null&&model.requestId.toString().isNotEmpty?model!.requestId.toString():'NA', ),
             ScreenSize.height(24),
-            menuRowWidget(title: 'Data Bundle',subTitle: model!.planName!=null&&model!.planName.toString().isNotEmpty?model!.planName.toString():"NA",),
+            menuRowWidget(title: 'Data Bundle',subTitle: model.planName!=null&&model.planName.toString().isNotEmpty?model!.planName.toString():"NA",),
             ScreenSize.height(24),
-            menuRowWidget(title: 'Transaction type',subTitle: model!.transactionsType.toString()=='1'?"Deposit":"Credit",),
+            menuRowWidget(title: 'Transaction type',subTitle: model.transactionsType.toString()=='1'?"Deposit":"Credit",),
             ScreenSize.height(24),
-            menuRowWidget(title: 'Payment Method',subTitle: model!.paymentMethod!=null&&model!.paymentMethod.toString().isNotEmpty?model!.paymentMethod:'NA'),
+            menuRowWidget(title: 'Payment Method',subTitle: model.paymentMethod!=null&&model.paymentMethod.toString().isNotEmpty?model!.paymentMethod:'NA'),
             ScreenSize.height(24),
-            menuRowWidget(title: 'Transaction ID',subTitle: model!.transactionId!=null&&model!.transactionId.toString().isNotEmpty?model!.transactionId:'-'),
+            menuRowWidget(title: 'Transaction ID',subTitle: model.transactionId!=null&&model.transactionId.toString().isNotEmpty?model!.transactionId:'-'),
             ScreenSize.height(24),
-            menuRowWidget(title: 'Transaction Date',subTitle:model!.date!=null? TimeFormat.convertTransaction(model!.date):"NA"),
+            menuRowWidget(title: 'Transaction Date',subTitle:model.date!=null? TimeFormat.convertTransaction(model!.date):"NA"),
             ScreenSize.height(24),
             menuRowWidget(title: 'Status',subTitle: '', ),
             ScreenSize.height(24),

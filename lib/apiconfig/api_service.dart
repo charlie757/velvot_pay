@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 import 'package:http/http.dart' as http;
-import 'package:velvot_pay/apiconfig/api_url.dart';
 import 'package:velvot_pay/helper/session_manager.dart';
 import 'package:velvot_pay/utils/utils.dart';
 import '../utils/Constants.dart';
@@ -79,14 +78,11 @@ class ApiService {
           : null;
       return null;
     } else {
-      print('object');
       var dataAll = json.decode(response.body);
       isErrorMessageShow
           ? Utils.errorSnackBar(dataAll['message'], navigatorKey.currentContext)
           : null;
-      return url==ApiUrl.checkPinUrl||url==ApiUrl.buyDataSubscriptionPlanUrl
-          ||url==ApiUrl.electricityBillPaymentUrl||url==ApiUrl.buyEducationalPlanUrl ||url== ApiUrl.buyEducationalPlanUrl
-         ||url==ApiUrl.buyVehiclePlanUrl||url==ApiUrl.buyPersonalPlanUrl|| url==ApiUrl.buyHealthPlanUrl
+      return Utils.isReturnError(url)
           ?json.decode(response.body): null;
     }
   }

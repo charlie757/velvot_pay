@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_paystack/flutter_paystack.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:velvot_pay/helper/app_color.dart';
@@ -35,13 +34,13 @@ class _FundWalletScreenState extends State<FundWalletScreen> {
 
   callInitFunction()async{;
     final provider = Provider.of<WalletProvider>(context,listen: false);
+    provider.resetValues();
         Future.delayed(Duration.zero,(){
           provider.fetchBankApiFunction();
         });
     provider.plugin.initialize(publicKey: ApiUrl.payStackPublicKey);
   }
 
-  bool isCollapsed = false;
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +75,7 @@ class _FundWalletScreenState extends State<FundWalletScreen> {
             provider.createBankApiFunction();
           }
           else{
-            isCollapsed = !isCollapsed;
+           provider. isCollapsed = !provider. isCollapsed;
           }
         }
         setState(() {
@@ -110,11 +109,11 @@ class _FundWalletScreenState extends State<FundWalletScreen> {
                     ],
                   ),
                 ),
-                SvgPicture.asset(!isCollapsed?Images.arrowDownIcon: Images.keyboardArrowDown)
+                SvgPicture.asset(!provider. isCollapsed?Images.arrowDownIcon: Images.keyboardArrowDown)
               ],
             ),
             ScreenSize.height(8),
-            isCollapsed?
+            provider. isCollapsed?
             bankDetails(provider):Container()
           ],
         ),

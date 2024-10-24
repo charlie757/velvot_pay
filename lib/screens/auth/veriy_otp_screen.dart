@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:provider/provider.dart';
-import 'package:velvot_pay/approutes/app_routes.dart';
 import 'package:velvot_pay/helper/app_color.dart';
 import 'package:velvot_pay/helper/custom_btn.dart';
 import 'package:velvot_pay/helper/getText.dart';
@@ -191,6 +190,7 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
           } else if (val.length < 6) {
             return 'Enter otp shoulb be valid';
           }
+          return null;
         },
       ),
     );

@@ -97,6 +97,5 @@ class CustomSearchBar extends StatelessWidget {
       ),
       onChanged: onChanged,
     );
-    ;
   }
 }

@@ -14,6 +14,7 @@ import '../../../../../utils/Constants.dart';
 import '../../../../../utils/utils.dart';
 import '../../../../../widget/appBar.dart';
 
+// ignore: must_be_immutable
 class EducationSavedTransactionScreen extends StatefulWidget {
   SavedTransactionModel? model;
   EducationSavedTransactionScreen({required this.model});
@@ -75,7 +76,7 @@ class _EducationSavedTransactionScreenState extends State<EducationSavedTransact
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            model.request!=null&& model.request!.operator!!=null&&model.request!.operator!.image!=null?
+                            model.request!=null&& model.request!.operator!=null&&model.request!.operator!.image!=null?
                             ClipRRect(
                                 borderRadius: BorderRadius.circular(15) ,
                                 child:NetworkImagehelper(

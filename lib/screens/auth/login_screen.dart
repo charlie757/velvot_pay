@@ -134,9 +134,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     validator: (val) {
                       if (val.isEmpty) {
                         return "Enter your password";
-                      } else if (!Utils.passwordValidateRegExp(val)) {
-                        return 'The password should contain at least one uppercase letter, one lowercase letter, one digit, and one special character.';
-                      }
+                      } 
+                      // else if (!Utils.passwordValidateRegExp(val)) {
+                      //   return 'The password should contain at least one uppercase letter, one lowercase letter, one digit, and one special character.';
+                      // }
                     },
                   ),
                   ScreenSize.height(8),

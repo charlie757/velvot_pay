@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:velvot_pay/provider/forgot_provider.dart';
-
 import '../../../helper/app_color.dart';
 import '../../../helper/custom_btn.dart';
 import '../../../helper/custom_textfield.dart';
 import '../../../helper/getText.dart';
-import '../../../helper/images.dart';
 import '../../../helper/screen_size.dart';
 import '../../../utils/Constants.dart';
 import '../../../utils/utils.dart';

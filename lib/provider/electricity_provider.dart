@@ -13,7 +13,6 @@ import '../helper/images.dart';
 import '../helper/screen_size.dart';
 import '../model/electricity_plan_model.dart';
 import '../model/operator_model.dart';
-import '../model/saved_buy_subscription_transaction_model.dart';
 import '../screens/dashboard/dashboard_screen.dart';
 import '../utils/Constants.dart';
 import '../utils/error_dialog_box.dart';
@@ -30,8 +29,10 @@ class ElectricityProvider extends ChangeNotifier{
   final meterTypeController = TextEditingController();
   final meterNumberController =TextEditingController();
   final amountController = TextEditingController();
+  final numberController = TextEditingController();
 
   resetValues(){
+    numberController.clear();
     providerController.clear();
     meterNumberController.clear();
     meterTypeController.clear();
@@ -115,7 +116,7 @@ class ElectricityProvider extends ChangeNotifier{
       "billersCode": meterNumberController.text,
       "variation_code": meterTypeController.text.toLowerCase(),
       "amount": amountController.text,
-      "phone": "7424816199",
+      "phone": "234${numberController.text}",
       "operator": {
         "serviceID": model!.data![currentOperatorIndex].serviceID,
         "title": model!.data![currentOperatorIndex].title,
@@ -178,6 +179,8 @@ class ElectricityProvider extends ChangeNotifier{
                       color: const Color(0xff51525C), fontWeight: FontWeight.w400),
                   ScreenSize.height(24),
                   rowColumnForConfirmationWidget('Name', electricityPlanModel!.data!.customerName??""),
+                  ScreenSize.height(16),
+                  rowColumnForConfirmationWidget('Phone Number', numberController.text),
                   ScreenSize.height(16),
                   rowColumnForConfirmationWidget('Meter No', meterNumberController.text),
                   ScreenSize.height(16),

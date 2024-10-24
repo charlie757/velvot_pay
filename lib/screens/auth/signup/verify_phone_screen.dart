@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:provider/provider.dart';
 import 'package:velvot_pay/helper/custom_otp_textfield.dart';
 import 'package:velvot_pay/provider/singup_provider.dart';
-import 'package:velvot_pay/screens/auth/signup/password_screen.dart';
 import 'package:velvot_pay/utils/enum.dart';
-
-import '../../../approutes/app_routes.dart';
 import '../../../helper/app_color.dart';
 import '../../../helper/custom_btn.dart';
 import '../../../helper/getText.dart';

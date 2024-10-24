@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:velvot_pay/apiconfig/api_service.dart';
 import 'package:velvot_pay/apiconfig/api_url.dart';
 import 'package:velvot_pay/model/banner_model.dart';
-import 'package:velvot_pay/screens/auth/profile_screen.dart';
 import 'package:velvot_pay/screens/dashboard/home/service/education/education_payment_screen.dart';
 import 'package:velvot_pay/screens/dashboard/home/service/electricity/buy_electricity_screen.dart';
 import 'package:velvot_pay/screens/dashboard/home/service/insurance/insurance_operator_screen.dart';
@@ -18,7 +17,6 @@ import 'package:velvot_pay/utils/utils.dart';
 import '../approutes/app_routes.dart';
 import '../model/dashboard_model.dart';
 import '../screens/dashboard/home/home_screen.dart';
-import '../screens/dashboard/home/operator_screen.dart';
 import '../screens/dashboard/myprofile/new_profile_screen.dart';
 
 class DashboardProvider extends ChangeNotifier {
@@ -110,7 +108,7 @@ class DashboardProvider extends ChangeNotifier {
       }
       exit(0);
     }
-    return true;
+    // return true;
   }
 
   getBannerApiFunction() async {

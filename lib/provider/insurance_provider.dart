@@ -15,7 +15,6 @@ import '../helper/images.dart';
 import '../helper/screen_size.dart';
 import '../model/hospital_model.dart';
 import '../model/operator_model.dart';
-import '../model/saved_buy_subscription_transaction_model.dart';
 import '../screens/dashboard/dashboard_screen.dart';
 import '../utils/Constants.dart';
 import '../utils/error_dialog_box.dart';
@@ -31,6 +30,7 @@ class InsuranceProvider extends ChangeNotifier{
   File? file;
   int currentOperatorIndex =-1;
   String selectedHospitalValue = '';
+  final numberController = TextEditingController();
   final controller1 = TextEditingController();
   final controller2 = TextEditingController();
   final controller3 = TextEditingController();
@@ -42,6 +42,7 @@ class InsuranceProvider extends ChangeNotifier{
   final controller9 = TextEditingController();
   final amountController = TextEditingController();
   clearControllers(){
+    numberController.clear();
     controller1.clear();
     controller2.clear();
     controller3.clear();
@@ -167,10 +168,11 @@ class InsuranceProvider extends ChangeNotifier{
     showLoader(navigatorKey.currentContext!);
     var body = json.encode({
       "serviceID":model!.data![currentOperatorIndex].serviceID,
-      "billersCode": "ATU480ER",
+      "billersCode": controller1.text,
+      // "ATU480ER",
       "variation_code": "1",
       "amount": amountController.text,
-      "phone": "08011111111",
+      "phone": "234${numberController.text}",
       "Insured_Name": controller2.text,
       "Engine_Number": controller3.text,
       "Chasis_Number": controller4.text,
@@ -208,10 +210,10 @@ class InsuranceProvider extends ChangeNotifier{
     showLoader(navigatorKey.currentContext!);
     var body = json.encode({
       "serviceID": model!.data![currentOperatorIndex].serviceID,
-      "billersCode": "Testimetri Adams",
+      "billersCode": controller1.text,
       "variation_code": "individual-monthly",
       "amount": amountController.text,
-      "phone": controller2.text,
+      "phone": "234${controller2.text}",
       "full_name":controller1.text,
       "address": controller3.text,
       "selected_hospital": controller4.text,
@@ -246,11 +248,11 @@ class InsuranceProvider extends ChangeNotifier{
     showLoader(navigatorKey.currentContext!);
     var body = json.encode({
       "serviceID": model!.data![currentOperatorIndex].serviceID,
-      "billersCode": "Testimetri Adams",
+      "billersCode": controller1.text,
       "variation_code": "option-a",
       "amount": amountController.text,
       "full_name": controller1.text,
-      "phone": controller2.text,
+      "phone": "234${controller2.text}",
       "address": controller3.text,
       "dob": controller5.text,
       "next_kin_name": controller1.text,
@@ -348,6 +350,8 @@ class InsuranceProvider extends ChangeNotifier{
         rowColumnForConfirmationWidget('Vehicle Number', controller1.text),
         ScreenSize.height(16),
         rowColumnForConfirmationWidget('Owner Name', controller2.text),
+        ScreenSize.height(16),
+        rowColumnForConfirmationWidget('Phone Number', numberController.text),
         ScreenSize.height(16),
         rowColumnForConfirmationWidget('Engine Number', controller3.text),
         ScreenSize.height(16),

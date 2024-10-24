@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:velvot_pay/helper/app_color.dart';
-import 'package:velvot_pay/helper/getText.dart';
 import 'package:velvot_pay/helper/images.dart';
 import 'package:velvot_pay/provider/splash_provider.dart';
-
-import '../utils/constants.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen();

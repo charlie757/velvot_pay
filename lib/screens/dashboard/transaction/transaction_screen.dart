@@ -8,6 +8,7 @@ import 'package:velvot_pay/helper/custom_search_bar.dart';
 import 'package:velvot_pay/helper/getText.dart';
 import 'package:velvot_pay/helper/images.dart';
 import 'package:velvot_pay/helper/screen_size.dart';
+import 'package:velvot_pay/helper/session_manager.dart';
 import 'package:velvot_pay/screens/dashboard/transaction/download_statement.dart';
 import 'package:velvot_pay/utils/constants.dart';
 import 'package:velvot_pay/widget/appBar.dart';
@@ -42,6 +43,7 @@ class _TransactionScreenState extends State<TransactionScreen> {
   }
   @override
   Widget build(BuildContext context) {
+    print(SessionManager.token);
     return Scaffold(
       // backgroundColor: AppColor.whiteF7Color,
       appBar: appBar(title: 'Transactions History', isShowArrow: false,

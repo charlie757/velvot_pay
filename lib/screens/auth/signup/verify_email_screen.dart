@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:velvot_pay/helper/custom_otp_textfield.dart';
-import 'package:velvot_pay/screens/auth/signup/set_transaction_pin_screen.dart';
 import 'package:velvot_pay/utils/enum.dart';
-
-import '../../../approutes/app_routes.dart';
 import '../../../helper/app_color.dart';
 import '../../../helper/custom_btn.dart';
 import '../../../helper/getText.dart';

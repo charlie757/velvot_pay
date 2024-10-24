@@ -6,7 +6,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:velvot_pay/helper/custom_btn.dart';
-import 'package:velvot_pay/screens/dashboard/home/home_screen.dart';
 import 'package:velvot_pay/widget/appBar.dart';
 
 import '../../../helper/app_color.dart';
@@ -111,7 +110,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   fillColor: AppColor.whiteColor,
                   inputFormatters: [ FilteringTextInputFormatter.deny(RegExp(Utils.regexToRemoveEmoji))],
                   validator: (val) {
-                    RegExp regExp = RegExp(Utils.emailPattern.trim());
+                    // RegExp regExp = RegExp(Utils.emailPattern.trim());
                     // if (val.isEmpty) {
                     //   return "Enter your email";
                     // } else if (!regExp.hasMatch(val)) {

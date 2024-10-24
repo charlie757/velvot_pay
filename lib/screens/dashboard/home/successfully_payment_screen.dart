@@ -9,13 +9,8 @@ import 'package:velvot_pay/helper/getText.dart';
 import 'package:velvot_pay/helper/images.dart';
 import 'package:velvot_pay/helper/screen_size.dart';
 import 'package:velvot_pay/provider/dashboard_provider.dart';
-import 'package:velvot_pay/screens/dashboard/dashboard_screen.dart';
 import 'package:velvot_pay/screens/dashboard/transaction/transcation_receipt_screen.dart';
 import 'package:velvot_pay/utils/Constants.dart';
-import 'package:velvot_pay/widget/bottom_image_button_widget.dart';
-import 'package:velvot_pay/widget/slider_widget.dart';
-
-import '../../../provider/transaction_provider.dart';
 
 class SuccessfullyPaymentScreen extends StatefulWidget {
   final String amount;

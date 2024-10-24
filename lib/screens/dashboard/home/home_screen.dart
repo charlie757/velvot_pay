@@ -11,7 +11,6 @@ import 'package:velvot_pay/helper/screen_size.dart';
 import 'package:velvot_pay/helper/session_manager.dart';
 import 'package:velvot_pay/provider/dashboard_provider.dart';
 import 'package:velvot_pay/provider/profile_provider.dart';
-import 'package:velvot_pay/provider/transaction_provider.dart';
 import 'package:velvot_pay/screens/dashboard/home/funds/fund_wallet_screen.dart';
 import 'package:velvot_pay/screens/dashboard/notification/notification_screen.dart';
 import 'package:velvot_pay/utils/constants.dart';
@@ -36,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   callInitFunction() {
     final provider = Provider.of<DashboardProvider>(context, listen: false);
-    final transactionProvider = Provider.of<TransactionProvider>(context,listen: false);
+    // final transactionProvider = Provider.of<TransactionProvider>(context,listen: false);
     Future.delayed(Duration.zero, () {
       provider.dashboardApiFunction();
       // transactionProvider.callTransactionApiFunction(false,'');

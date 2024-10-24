@@ -10,7 +10,6 @@ import 'package:velvot_pay/screens/dashboard/myprofile/edit_profile_screen.dart'
 import 'package:velvot_pay/screens/dashboard/myprofile/id_verification_screen.dart';
 import 'package:velvot_pay/screens/dashboard/myprofile/pages_screen.dart';
 import 'package:velvot_pay/utils/utils.dart';
-import 'package:velvot_pay/widget/appBar.dart';
 
 import '../../../apiconfig/api_url.dart';
 import '../../../helper/app_color.dart';
@@ -34,8 +33,9 @@ class _NewProfileScreenState extends State<NewProfileScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
-    callApiFunction();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      callApiFunction();
+    });
     super.initState();
   }
 

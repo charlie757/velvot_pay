@@ -16,8 +16,9 @@ class WalletProvider extends ChangeNotifier{
 final formKey = GlobalKey<FormState>();
 final amountController = TextEditingController();
 BankAccountModel? model;
-
+bool isCollapsed = false;
 resetValues(){
+  isCollapsed=false;
   amountController.clear();
 }
 
@@ -60,13 +61,15 @@ checkValidation(){
   }
   // test@gmail.com
   checkout(String accessCode,String reference,) async {
-    String email = Provider.of<ProfileProvider>(navigatorKey.currentContext!,listen: false).model!=null&&Provider.of<ProfileProvider>(navigatorKey.currentContext!,listen: false).model!.data!=null?Provider.of<ProfileProvider>(navigatorKey.currentContext!,listen: false).model!.data!.email:
+    final profileModel = Provider.of<ProfileProvider>(navigatorKey.currentContext!,listen: false).model;
+    String email = profileModel!=null&&profileModel.data!=null?profileModel.data!.email:
     'test@gmail.com';
     int price = (double.parse(amountController.text.toString())*100).round();
     Charge charge = Charge()
       ..amount = price
       ..reference = reference
-      ..email = email..card = _getTestCard()..accessCode=accessCode
+      ..email = email..accessCode = accessCode = accessCode
+      // email..card = _getTestCard()..accessCode=accessCode
       ..currency = "NGN";
     CheckoutResponse response = await plugin.checkout(
       navigatorKey.currentContext!,
@@ -128,6 +131,7 @@ checkValidation(){
         method: checkApiMethod(httpMethod.get));
     Navigator.pop(navigatorKey.currentContext!);
     if(response!=null){
+      Provider.of<ProfileProvider>(navigatorKey.currentContext!,listen: false).getProfileApiFunction();
       fetchBankApiFunction();
     }
   }
@@ -143,6 +147,8 @@ fetchBankApiFunction()async{
   model!=null?null:Navigator.pop(navigatorKey.currentContext!);
   if(response!=null){
     model = BankAccountModel.fromJson(response);
+    isCollapsed=true;
+    notifyListeners();
   }
   else{
     model = null;

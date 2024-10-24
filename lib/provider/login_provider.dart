@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:velvot_pay/apiconfig/api_service.dart';
 import 'package:velvot_pay/apiconfig/api_url.dart';
 import 'package:velvot_pay/approutes/app_routes.dart';
-import 'package:velvot_pay/screens/auth/profile_screen.dart';
 import 'package:velvot_pay/screens/auth/signup/verify_phone_screen.dart';
-import 'package:velvot_pay/screens/auth/veriy_otp_screen.dart';
 import 'package:velvot_pay/utils/utils.dart';
 
 import '../utils/Constants.dart';
@@ -48,7 +46,6 @@ class LoginProvider extends ChangeNotifier {
     upateLoading(false);
     if (response != null) {
       if(response['data']['isUser']){
-        // Utils.showToast(response['data']['otp'].toString());
         AppRoutes.pushNavigation(VerifyPhoneScreen(
           number: phoneController.text,
           otp: response['data']['otp'].toString(),

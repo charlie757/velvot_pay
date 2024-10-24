@@ -1,9 +1,6 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
-import 'package:velvot_pay/helper/custom_otp_textfield.dart';
 import 'package:velvot_pay/provider/singup_provider.dart';
 import 'package:velvot_pay/utils/utils.dart';
 

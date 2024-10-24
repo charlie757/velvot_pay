@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:velvot_pay/apiconfig/api_service.dart';
-import 'package:velvot_pay/apiconfig/api_url.dart';
 import 'package:velvot_pay/model/operator_model.dart';
 import 'package:velvot_pay/utils/show_loader.dart';
 import 'package:velvot_pay/utils/utils.dart';

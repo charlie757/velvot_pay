@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:velvot_pay/helper/custom_textfield.dart';
 import 'package:velvot_pay/model/saved_buy_subscription_transaction_model.dart';
 import 'package:velvot_pay/widget/appBar.dart';
-
 import '../../../../../helper/app_color.dart';
 import '../../../../../helper/custom_btn.dart';
 import '../../../../../helper/custom_search_bar.dart';
@@ -16,6 +14,7 @@ import '../../../../../utils/Constants.dart';
 import '../../../../../utils/utils.dart';
 import '../../../../../widget/custom_radio_button.dart';
 
+// ignore: must_be_immutable
 class BuySavedTransactionScreen extends StatefulWidget {
   SavedTransactionModel? model;
    BuySavedTransactionScreen({required this.model});

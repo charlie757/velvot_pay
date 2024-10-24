@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -21,7 +19,6 @@ import 'package:velvot_pay/widget/appBar.dart';
 import '../../../../../helper/network_image_helper.dart';
 import '../../../../../helper/session_manager.dart';
 import '../../../../../provider/service_provider.dart';
-import '../../../../../widget/custom_radio_button.dart';
 import '../../../../../widget/row_column_confirmation_widget.dart';
 
 class BuySubscriptionScreen extends StatefulWidget {
@@ -47,10 +44,8 @@ class _BuySubscriptionScreenState extends State<BuySubscriptionScreen> {
   void initState() {
     super.initState();
     callInitFunction();
-    for (int i = 0; i < pinLength; i++) {
-      controllers.add(TextEditingController());
-      focusNodes.add(FocusNode());
-    }
+    initMpinFunction();
+    
   }
 
   @override
@@ -63,6 +58,13 @@ class _BuySubscriptionScreenState extends State<BuySubscriptionScreen> {
     }
     super.dispose();
   }
+
+initMpinFunction(){
+  for (int i = 0; i < pinLength; i++) {
+      controllers.add(TextEditingController());
+      focusNodes.add(FocusNode());
+    }
+}
 
   void onNumberSelected(String number) {
     if (currentIndex < pinLength) {
@@ -137,7 +139,7 @@ class _BuySubscriptionScreenState extends State<BuySubscriptionScreen> {
             child: CustomBtn(title: "Proceed to Payment", onTap: (){
               if(formKey.currentState!.validate()){
                 if(myProvider.currentSelectedData!=-1){
-                  SessionManager.setSavedDataNumber = myProvider.numberController.text;
+                  // SessionManager.setSavedDataNumber = myProvider.numberController.text;
                   confirmationBottomSheet(myProvider);
                 }
                 else{
@@ -573,7 +575,7 @@ class _BuySubscriptionScreenState extends State<BuySubscriptionScreen> {
                            onTap: (){
                              provider.currentOperatorIndex=index;
                              Navigator.pop(context);
-                            provider.getDataSubscriptionPlanApiFunction(model!.serviceID);
+                            provider.getDataSubscriptionPlanApiFunction(model.serviceID);
                              state((){});
                              setState(() {
                              });
@@ -731,7 +733,7 @@ mPinBottomSheet(BuySubscriptionProvider provider){
                    color: const Color(0xff080B30), fontWeight: FontWeight.w500),
                ScreenSize.height(24),
                SizedBox(
-                 child:   Row(
+                 child: Row(
                    mainAxisAlignment: MainAxisAlignment.center,
                    children: List.generate(pinLength, (index) {
                      print(index);

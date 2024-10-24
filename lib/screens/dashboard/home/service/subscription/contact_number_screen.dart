@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_contacts/contact.dart';
 import 'package:provider/provider.dart';
 import 'package:velvot_pay/helper/custom_search_bar.dart';
 import 'package:velvot_pay/widget/appBar.dart';
-
 import '../../../../../helper/app_color.dart';
 import '../../../../../helper/getText.dart';
 import '../../../../../helper/screen_size.dart';

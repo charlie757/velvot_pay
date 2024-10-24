@@ -16,7 +16,6 @@ import '../helper/images.dart';
 import '../helper/screen_size.dart';
 import '../model/data_subscription_plan_model.dart';
 import '../model/operator_model.dart';
-import '../model/saved_buy_subscription_transaction_model.dart';
 import '../utils/Constants.dart';
 import '../utils/error_dialog_box.dart';
 import '../utils/show_loader.dart';
@@ -148,6 +147,8 @@ class BuySubscriptionProvider extends ChangeNotifier{
 
   getDataSubscriptionPlanApiFunction(String  plan)async{
     dataModel =null;
+     currentSelectedData = -1;
+    savedDataList.clear();
     notifyListeners();
     showLoader(navigatorKey.currentContext!);
     var body = json.encode({});
@@ -244,10 +245,10 @@ class BuySubscriptionProvider extends ChangeNotifier{
     showLoader(navigatorKey.currentContext!);
     var body = json.encode({
         "serviceID": dataModel!.data!.serviceID,
-        "billersCode": '08011111111',
+        "billersCode": '234${numberController.text}',
         "variation_code": savedDataList[0]['variation_code'].toString(),
         "amount": savedDataList[0]['price'].toString(),
-        "phone": '08011111111',
+        "phone": '234${numberController.text}',
         "plan_name":savedDataList[0]['name'],
         "operator": {
           "serviceID":model!.data![currentOperatorIndex].serviceID,
